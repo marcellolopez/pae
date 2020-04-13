@@ -95,6 +95,7 @@ class DatabaseSeeder extends Seeder
         $consulta->paciente_id = $paciente->id;
         $consulta->motivo_consulta_id = 1;
         $consulta->estado_id = 1;
+        $consulta->fecha_enviado = now();
         $consulta->comentario = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
         $consulta->save(); 
           
@@ -113,6 +114,7 @@ class DatabaseSeeder extends Seeder
         $consulta->paciente_id = $paciente->id;
         $consulta->motivo_consulta_id = 1;
         $consulta->estado_id = 1;
+        $consulta->fecha_enviado = now();
         $consulta->comentario = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
         $consulta->save(); 
 
@@ -131,6 +133,7 @@ class DatabaseSeeder extends Seeder
         $consulta->paciente_id = $paciente->id;
         $consulta->motivo_consulta_id = 1;
         $consulta->estado_id = 1;
+        $consulta->fecha_enviado = now();
         $consulta->comentario = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
         $consulta->save(); 
           
@@ -149,6 +152,7 @@ class DatabaseSeeder extends Seeder
         $consulta->paciente_id = $paciente->id;
         $consulta->motivo_consulta_id = 1;
         $consulta->estado_id = 1;
+        $consulta->fecha_enviado = now();
         $consulta->comentario = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
         $consulta->save(); 
                              
@@ -169,6 +173,7 @@ class DatabaseSeeder extends Seeder
         $consulta->paciente_id = $paciente->id;
         $consulta->motivo_consulta_id = 1;
         $consulta->estado_id = 1;
+        $consulta->fecha_enviado = now();
         $consulta->comentario = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
         $consulta->save(); 
           
@@ -188,6 +193,7 @@ class DatabaseSeeder extends Seeder
         $consulta->paciente_id = $paciente->id;
         $consulta->motivo_consulta_id = 1;
         $consulta->estado_id = 1;
+        $consulta->fecha_enviado = now();
         $consulta->comentario = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
         $consulta->save(); 
         
@@ -206,6 +212,7 @@ class DatabaseSeeder extends Seeder
         $consulta->paciente_id = $paciente->id;
         $consulta->motivo_consulta_id = 1;
         $consulta->estado_id = 1;
+        $consulta->fecha_enviado = now();
         $consulta->comentario = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
         $consulta->save(); 
         
@@ -224,6 +231,7 @@ class DatabaseSeeder extends Seeder
         $consulta->paciente_id = $paciente->id;
         $consulta->motivo_consulta_id = 1;
         $consulta->estado_id = 1;
+        $consulta->fecha_enviado = now();
         $consulta->comentario = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
         $consulta->save(); 
                  

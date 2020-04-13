@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 //use App\Role;
 use App\Entities\Paciente;
+use App\Entities\Consulta;
 use App\Entities\MotivoConsulta;
 use App\Notifications\ConfirmacionPaciente;
 use App\Notifications\ConfirmacionComercial;
@@ -42,7 +43,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        //$this->middleware('guest');
     }
 
 
@@ -126,6 +127,64 @@ class RegisterController extends Controller
         return $this->showInfo('Se ha registrado la consulta, será contactado por nuestro centro a la brevedad.');
     }
 
+    public function register_paciente_consulta(Request $request)
+    {
+
+        
+        $rut_sin_dv = substr($request->rut, 0, -2);
+        $paciente = Paciente::where('rut', $request->rut)->first();
+        dd($paciente);
+        if($paciente)
+        {
+            $data               = $this->validator_paciente($request->all())->validate();
+            $paciente->email    = $request->email;
+            $paciente->telefono = $request->telefono;
+            $paciente->celular  = $request->celular;
+            $paciente->save();
+
+
+
+        }
+        else
+        {
+            $paciente = Paciente::create([
+                'nombres'            => $request->nombres,
+                'apellidoPaterno'    => $request->apellidoPaterno,
+                'apellidoMaterno'    => $request->apellidoMaterno,
+                'rut'                => $request->rut,                
+                'email'              => $request->email,
+                'telefono'           => $request->telefono,
+                'celular'            => $request->celular,
+            ]);
+        }
+
+        $consulta                     = New Consulta();
+        $consulta->user_id            = Auth::user()->id;
+        $consulta->paciente_id        = $paciente->id;
+        $consulta->motivo_consulta_id = $request->motivo_consulta;
+        $consulta->estado_id          = 1;
+        $consulta->fecha_enviado      = now();
+        $consulta->comentario         = $request->comentario;
+        $consulta->save();
+
+
+        /*/
+        $paciente_array =[
+            'nombre'             => $paciente->nombres.' '.$paciente->apellidoPaterno.' '.$paciente->apellidoMaterno,
+            'rut'                => Rut::parse($request->rut)->fix()->format(),
+            'email'              => $paciente->email,
+            'telefono'           => $paciente->telefono,
+            'celular'            => $request->celular,
+            'motivo_consulta' => $paciente->motivo_consulta->motivo,
+            'comentario'         => $paciente->comentario,
+        ];
+        /*/
+        //$paciente->notify(new ConfirmacionPaciente($paciente_array));
+        //$paciente->notify(new ConfirmacionComercial($paciente_array));
+
+        return $this->showInfo('Se ha registrado la consulta con exito.');
+    }
+
     public function showRegistrationForm()
     {
         $motivo_consultas = MotivoConsulta::all();
@@ -134,7 +193,8 @@ class RegisterController extends Controller
 
     public function showInfo($info)
     {
-        return view('auth.info',compact('info'));
+        return redirect()->route('welcome')
+        ->with('success',$info);
     }
 
     protected function validator(array $data)
@@ -152,5 +212,17 @@ class RegisterController extends Controller
         ]);   
             
     }
+
+    protected function validator_paciente(array $data)
+    {
+
+        return Validator::make($data, [
+            'email'            => 'required|string|email|max:255',
+            'telefono'         => 'required_without:celular',
+            'celular'          => 'required_without:telefono',
+            'motivo_consulta'  => 'required'
+        ]);   
+            
+    }    
 
 }

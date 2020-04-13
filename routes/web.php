@@ -23,34 +23,41 @@ Route::group([
     Route::get('info', 'RegisterController@showInfo');
     Route::post('register', 'RegisterController@register');
 
+
 });
 // Fin
 
 Route::get('crear_usuario', 'Auth\LoginController@crearUsuario')->name('crear_usuario');
 
 Auth::routes();
-Route::get('/', 'Auth\LoginController@showLoginForm');
-Route::get('login', 'Auth\LoginController@showLoginForm');
-Route::post('login', 'Auth\LoginController@login');
 
-Auth::routes();
+Route::get('/', 'Auth\LoginController@showLoginForm');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login')->name('login');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('welcome', 'HomeController@welcome')
 	    ->name('welcome');
-        
+
 Route::post('cambio_estado','HomeController@cambio_estado');
-Route::post('consultar_paciente','HomeController@consultar_paciente');
+
 
 
 Route::group(['middleware' => ['auth']], function () {
+
+    
+
+    Route::post('consultar_paciente','HomeController@consultar_paciente')->name('consultar_paciente');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('welcome', 'HomeController@welcome')
             ->name('welcome');
     Route::get('comercial.enviado','HomeController@enviadoList')->name('comercial.enviado');
     Route::get('comercial.gestion','HomeController@gestionList')->name('comercial.gestion');
     Route::get('comercial.cerrado','HomeController@cerradoList')->name('comercial.cerrado');
-
+    Route::post('register_paciente_consulta', 'HomeController@register_paciente_consulta')->name('register_paciente_consulta');
+    Route::get('showRegistrarConsultaPaciente', 'HomeController@showRegistrarConsultaPaciente')->name('showRegistrarConsultaPaciente');
+    Route::post('showRegistrarConsultaPaciente', 'HomeController@register_paciente_consulta')->name('showRegistrarConsultaPaciente');
     Route::get('mi_historial', 'HomeController@mi_historial')
             ->name('mi_historial');
 	    //->middleware('auth:paciente');

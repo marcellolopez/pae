@@ -53,7 +53,7 @@
 
                                             <th>Motivo Consulta</th>
 
-                                            <th>Estado</th>
+                                            <th>Acción</th>
 
                                         </tr>
                                     </thead>
@@ -87,7 +87,7 @@
 
                                             <th>Motivo Consulta</th>
 
-                                            <th>Estado</th>
+                                            <th>Acción</th>
 
                                         </tr>
                                     </thead>
@@ -121,7 +121,7 @@
 
                                             <th>Motivo Consulta</th>
 
-                                            <th>Estado</th>
+                                            <th>Acción</th>
 
                                         </tr>
                                     </thead>
@@ -175,7 +175,15 @@
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="'+o.comentario+'">'+o.motivo+'</a>';
+                        if(o.comentario.length == 0)
+                        {
+                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="Sin comentarios">'+o.motivo+'</a>';
+                        }
+                        else
+                        {
+                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="'+o.comentario+'">'+o.motivo+'</a>';
+                        }
+                        
                     }
                 },
                 {
@@ -214,7 +222,15 @@
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="'+o.comentario+'">'+o.motivo+'</a>';
+                        if(o.comentario.length == 0)
+                        {
+                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="Sin comentarios">'+o.motivo+'</a>';
+                        }
+                        else
+                        {
+                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="'+o.comentario+'">'+o.motivo+'</a>';
+                        }
+                        
                     }
                 },
                 {
@@ -253,7 +269,15 @@
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="'+o.comentario+'">'+o.motivo+'</a>';
+                        if(o.comentario.length == 0)
+                        {
+                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="Sin comentarios">'+o.motivo+'</a>';
+                        }
+                        else
+                        {
+                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="'+o.comentario+'">'+o.motivo+'</a>';
+                        }
+                        
                     }
                 },
                 {
@@ -262,7 +286,7 @@
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        return '<a type="button" class="btn-small hover"  title="'+o.id+'" >Gestionar</a>';
+                        return '<a type="button" class="btn-small hover"  title="'+o.id+'" >Sin acciones</a>';
                     }
                 }
             ]
