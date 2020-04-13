@@ -1,0 +1,197 @@
+html{
+
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  /*width: 100%;*/
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
+.hover{
+        cursor: pointer;
+}
+header{
+    width: 100%;
+    height: 50px;
+    /*background: #2F8782;*/
+    background: #32918C;
+}
+
+header .desktopHeader{
+    display: none;
+}
+
+header .mobileHeader{
+    width: 90%;
+    margin: auto;
+}
+
+header .mobileHeader .navLogo{
+    margin: 0;
+    width: 35px;
+}
+
+header .mobileHeader .navLogo img{
+    width: 100%;
+}
+
+header .mobileHeader .btnNav{
+    color: white;
+    text-decoration: none;
+}
+
+header .mobileHeader h1{
+    margin: 0;
+    color: white;
+    line-height: 50px;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 1.4em;
+}
+
+header .mobileHeader nav.mobileNav{
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100vw;
+    background: #1D7874;
+    z-index: 11;
+}
+header .mobileHeader nav.mobileNav ul{
+    margin: 0;
+    padding: 10px 0px;
+    list-style: none;
+}
+
+header .mobileHeader nav.mobileNav ul li{
+    margin: 2px 0px;
+}
+
+header .mobileHeader nav.mobileNav ul li a{
+    text-decoration: none;
+    color: rgba(255, 255, 255, .5);
+    display: block;
+    padding: 10px 40px;
+}
+header .mobileHeader nav.mobileNav ul li a.active{
+    color: white;
+}
+
+.content{
+    width: 90%;
+    margin: auto;
+}
+
+#pageTitle{
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.8em;
+}
+
+@media screen and (min-width: 1024px) {
+    header .mobileHeader{
+        display: none !important;
+    }
+    header .desktopHeader{
+        display: initial;
+    }
+
+
+    header .desktopHeader .btnContent{
+        width: 100%;
+        text-align: right;
+    }
+
+    header .desktopHeader .headerContent{
+        position: absolute;
+        left: 15%;
+        top: 0;
+    }
+    header .desktopHeader .headerContent h2{
+        margin-left: 20px;
+        color: white;
+        font-size: 1.2em;
+        line-height: 50px;
+        font-weight: lighter;
+    }
+    header .desktopHeader .btnContent .btn-logout{
+        display: inline-block;
+        width: 120px;
+        height: 50px;
+        line-height: 35px;
+        background: #1D7874;
+        color: rgba(255,255,255,.7);
+        text-align: center;
+        font-size: .8em;
+        text-decoration: none;
+    }
+
+    header .desktopHeader .btnContent .btn-logout:hover{
+        color: white;
+    }
+    header .desktopHeader nav{
+        width: 15%;
+        height: 100vh;
+        background: #1D7874;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    header .desktopHeader nav .navHeader{
+        width: 100%;
+        text-align: center;
+        padding-top: 20px;
+    }
+    header .desktopHeader nav .navHeader .navLogo{
+        margin: 0;
+        padding: 0;
+        width: 100px;
+        margin: auto;
+    }
+    header .desktopHeader nav .navHeader .navLogo img{
+        width: 100%;
+    }
+    header .desktopHeader nav .navHeader h1{
+        margin-top: 10px;
+        color: white;
+        text-transform: uppercase;
+        font-weight: lighter;
+        font-size: 2em;
+    }
+    header .desktopHeader nav .navHeader ul{
+        margin: 0;
+        padding: 10px 0px;
+        list-style: none;
+        text-align: left;
+    }
+
+    header .desktopHeader nav .navHeader ul li{
+        margin: 2px 0px;
+    }
+
+    header .desktopHeader nav .navHeader ul li a{
+        text-decoration: none;
+        color: rgba(255, 255, 255, .5);
+        display: block;
+        padding: 10px 40px;
+    }
+    header .desktopHeader nav .navHeader ul li a.active{
+        color: white;
+    }
+    header .desktopHeader nav .navHeader ul li a:hover{
+        color: white;
+    }
+
+    div.content{
+        margin-left: 15%;
+        width: initial;
+        padding: 0px 20px;
+    }
+}

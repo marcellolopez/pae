@@ -1,0 +1,106 @@
+.content{
+    padding: 0 !important;
+}
+.informacionPaciente{
+    background: #32918C;
+    width: 100%;
+}
+.informacionPaciente hr{
+    margin: 0 auto;
+    border: 1px solid #1D7874;
+}
+.informacionPaciente .contenido{
+    padding: 10px 20px 10px 20px;
+}
+.informacionPaciente .contenido h3{
+    /*color: rgba(0,0,0,.5);*/
+    color: rgba(255,255,255,.8);
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+.informacionPaciente .contenido .dato{
+    padding: 2px 0px;
+}
+.informacionPaciente .contenido span{
+    font-weight: bold;
+    /*color: rgba(0,0,0,.4);*/
+    color: rgba(255,255,255,.8);
+}
+.informacionPaciente .contenido em{
+    font-style: normal;
+    color: rgba(255,255,255,.8);
+}
+.informacionPaciente .contenido .infoPrincipal{
+    margin-bottom: 10px;
+}
+.informacionPaciente .contenido .infoAdicional{
+    display: none;
+    margin-bottom: 10px;
+}
+.informacionPaciente .contenido .infoAdicional a{
+    padding: 5px 20px;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: .8em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: 2px solid white;
+    border-radius: 20px;
+    vertical-align: bottom;
+    display: inline-block;
+    transition: all 0.3s;
+}
+.informacionPaciente .contenido .infoAdicional a:hover{
+    color: #1D7874;
+    background: white;
+}
+.informacionPaciente .contenido .btnContent{
+    width: 100%;
+}
+.informacionPaciente .contenido .btnContent .expandirInfoPaciente{
+    display: block;
+    margin: auto;
+    width: 30px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    bottom: 0;
+    transition: bottom ease 0.2s,
+                transform ease 0.5s;
+}
+.informacionPaciente .contenido .btnContent .expandirInfoPaciente:hover{
+    bottom: -2px;
+}
+
+.informacionPaciente .contenido .btnContent .rotar{
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.contenedor{
+    padding: 20px 20px;
+}
+.contenedor .btn-link{
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.contenedor .btn-link:hover,
+.contenedor .btn-link:focus{
+    text-decoration: none;
+}
+
+#tableHorasReservadas tr td{
+    line-height: 30px;
+}
+#tableHorasReservadas tr td .btn{
+    height: 100%;
+    min-width: 120px;
+}
+a#btnAgendar{
+    text-transform: uppercase;
+    font-weight: lighter;
+    padding: 15px 0px;
+    text-align: center;
+    white-space: initial; /* CSS3 */
+}

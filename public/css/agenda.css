@@ -1,0 +1,39 @@
+.detallePre{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+    padding-top: 5%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.detalleContenedor{
+    padding-top: 5%;
+}
+
+.detalleTbl{
+    margin: 0 auto;
+    width: 35%;
+}
+
+.detalleTbl .td{
+     font-weight: bold;
+ }
+
+.detalleBtn{
+    height: 10%;
+    padding-top: 30%;
+    width: 100%;
+    /*border: 2px solid slateblue;*/
+}
+
+.detalleBtn td{
+    padding-top: 7%;
+    /*padding-left: 10%;*/
+    text-align: center;
+    /*border: 2px solid red;*/
+}
+.agendaBtn{
+    padding-top: 3%;
+
+}
+

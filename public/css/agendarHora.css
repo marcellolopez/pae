@@ -1,0 +1,77 @@
+
+div.steps{
+    margin: 10px 0px;
+}
+span.stepNumber{
+    display: inline-block;
+    vertical-align: middle;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: bold;
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+span.stepNumber em{
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    line-height: 26px;
+    background: white;
+    border-radius: 50%;
+    text-align: center;
+    font-style: normal;
+    color: #2ab27b;
+    border: 2px solid #2ab27b;
+}
+
+span.stepNumber em.active{
+    background: #2ab27b;
+    color: white;
+}
+
+.datepicker-container{
+    /*text-align:center;*/
+}
+#proxHoraDisponible{
+    display: block;
+    text-align: center;
+    min-width: 200px;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    margin-top: 10px;
+    font-size: .9em;
+}
+#proxHoraDisponible button.btnReservarProxHora{
+    display: block;
+    margin: auto;
+    width: 200px;
+    border-radius: 25px;
+    margin-top: 10px;
+}
+.datepicker-container #datepicker .ui-datepicker{
+    min-width: 200px;
+    width: 100%;
+    max-width: 400px;
+    min-height: 200px;
+    height: 100%;
+    max-height: 400px;
+    display: block;
+    margin: 0 auto;
+}
+
+.tableContent{
+    display: none;
+    overflow-y: scroll;
+}
+.tableContent #tableHoras tr td{
+    font-size: .8em;
+}
+.tableContent #tableHoras tr td.tdHoraSeleccion{
+    text-align: center;
+}
+.btnContentAgendar{
+    margin-top: 20px;
+    display: none;
+    text-align: right;
+}
