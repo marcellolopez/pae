@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Freshwork\ChileanBundle\Rut;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -44,6 +45,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         //$this->middleware('guest');
+
     }
 
 
@@ -58,41 +60,49 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
 
-        $data = $this->validator($request->all())->validate();
         $rut_sin_dv = substr($request->rut, 0, -2);
-        //$paciente = Paciente::where('rut', $rut_sin_dv)->first();
-        //$password = Hash::make($request->password);
+        $paciente = Paciente::where('rut', $rut_sin_dv)->first();
 
-        $paciente = Paciente::create([
-            'nombres'            => $request->nombres,
-            'apellidoPaterno'    => $request->apellidoPaterno,
-            'apellidoMaterno'    => $request->apellidoMaterno,
-            'rut'                => $rut_sin_dv,
-            'email'              => $request->email,
-            'telefono'           => $request->telefono,
-            'celular'            => $request->celular,
-            'motivo_consulta_id' => $request->motivo_consulta,
-            'comentario'         => $request->comentario,
-        ]);
+        if($paciente)
+        {
+            $data               = $this->validator_paciente($request->all())->validate();
+            $paciente->email    = $request->email;
+            $paciente->telefono = $request->telefono;
+            $paciente->celular  = $request->celular;
+            $paciente->save();
 
 
-        $paciente_array =[
-            'nombre'             => $paciente->nombres.' '.$paciente->apellidoPaterno.' '.$paciente->apellidoMaterno,
-            'rut'                => Rut::parse($request->rut)->fix()->format(),
-            'email'              => $paciente->email,
-            'telefono'           => $paciente->telefono,
-            'celular'            => $request->celular,
-            'motivo_consulta' => $paciente->motivo_consulta->motivo,
-            'comentario'         => $paciente->comentario,
-        ];
-        //$paciente->notify(new ConfirmacionPaciente($paciente_array));
-        //$paciente->notify(new ConfirmacionComercial($paciente_array));
 
-        return $this->showInfo('Se ha registrado la consulta, será contactado por nuestro centro a la brevedad.');
+        }
+        else
+        {
+            $paciente = Paciente::create([
+                'nombres'            => $request->nombres,
+                'apellidoPaterno'    => $request->apellidoPaterno,
+                'apellidoMaterno'    => $request->apellidoMaterno,
+                'rut'                => $rut_sin_dv,                
+                'email'              => $request->email,
+                'telefono'           => $request->telefono,
+                'celular'            => $request->celular,
+            ]);
+        }
+
+        $consulta                     = New Consulta();
+        $consulta->user_id            = null;
+        $consulta->paciente_id        = $paciente->id;
+        $consulta->motivo_consulta_id = $request->motivo_consulta;
+        $consulta->estado_id          = 1;
+        $consulta->fecha_enviado      = now();
+        $consulta->comentario         = $request->comentario;
+        $consulta->save();
+
+
+        return $this->showInfoGuest('La consulta se ha registrado, será contactado a la brevedad por nuestro centro.');
     }
 
     public function register_auth(Request $request)
     {
+
 
         $data = $this->validator($request->all())->validate();
         $rut_sin_dv = substr($request->rut, 0, -2);
@@ -196,7 +206,11 @@ class RegisterController extends Controller
         return redirect()->route('welcome')
         ->with('success',$info);
     }
-
+    public function showInfoGuest($info)
+    {
+        return redirect()->route('login')
+        ->with('success',$info);
+    }
     protected function validator(array $data)
     {
 

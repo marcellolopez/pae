@@ -59,7 +59,7 @@
 
 
                 @if(session()->has('success'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-success text-center">
                         <ul style="list-style: none; margin: 0; padding: 0">
                                     {{ session()->get('success') }}
                         </ul>            

@@ -22,8 +22,6 @@ Route::group([
     Route::get('register', 'RegisterController@showRegistrationForm');
     Route::get('info', 'RegisterController@showInfo');
     Route::post('register', 'RegisterController@register');
-
-
 });
 // Fin
 
