@@ -43,10 +43,9 @@
         <a href="javascript:void(0)" onclick="toggleMenu()" class="btnNav"><i class="fa fa-bars" aria-hidden="true"></i></a>
         <nav class="mobileNav">
             <ul>
-                <li><a href="{{ route('welcome') }}" class="menuInicio active">Inicio</a></li>
-                <li><a href="" class="menuMi_historial">Mi historial</a></li>
-                <li><a href="" class="menuMis_datos">Mis datos</a></li>
-                <li><a href="" class="menuAdministrar_perfil">Administrar perfil</a></li>
+                <li><a href="{{ route('welcome') }}" >Inicio</a></li>
+                <li><a href="{{ route('welcome') }}" >Mi historial</a></li>
+                <li><a href="{{ url('/mis_datos') }}" >Mis datos</a></li>
                 <li><a href="{{ route('logout') }}">Cerrar sesión</a></li>
             </ul>
         </nav>
@@ -63,8 +62,8 @@
 
                 <ul>
                     <li><a href="{{ route('welcome') }}" class="menuInicio ">Inicio</a></li>
-                    <li><a href="{{ route('mi_historial') }}" class="menuMi_historial active">Mi historial</a></li>
-                    <li><a href="" class="menuMis_datos">Mis datos</a></li>
+                    <li><a href="{{ route('welcome') }}" class="menuMi_historial active">Mi historial</a></li>
+                    <li><a href="{{ route('mis_datos') }}" class="menuMis_datos">Mis datos</a></li>
                     <li><a href="{{ route('logout') }}">Cerrar sesión</a></li>
                 </ul>
 
@@ -78,7 +77,7 @@
         </nav>
 
         <div class="headerContent">
-            <h2><strong>¡Hola, {{Auth::user()->nombres}} {{Auth::user()->apellido_paterno}} {{Auth::user()->apellido_materno}}! ({{Auth::user()->roles[0]->name}})</strong></h2>
+            <h2><strong>¡Hola, {{Auth::user()->nombres}} {{Auth::user()->apellido_paterno}} {{Auth::user()->apellido_materno}}! {{Auth::user()->roles[0]->name}}</strong></h2>
         </div>
         <div class="btnContent navbar-collapse">
             <ul class="navbar-nav mr-auto">

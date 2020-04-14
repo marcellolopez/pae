@@ -1,7 +1,9 @@
 html{
 
 }
-
+label{
+    text-align: justify !important;
+}
 .footer {
   position: fixed;
   left: 0;

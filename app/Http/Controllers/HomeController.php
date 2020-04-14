@@ -79,7 +79,7 @@ class HomeController extends Controller
         }
         else
         {
-            return redirect()->route('showRegistrarConsultaPaciente', compact('rut'));
+            return redirect()->route('showRegistrarConsultaPaciente', compact('rut'))->with('info', 'El paciente no se encuentra registrado, por favor ingrese los datos.');
         }
         
     }    
@@ -131,10 +131,10 @@ class HomeController extends Controller
         
         $rut_sin_dv = substr($request->rut, 0, -2);
         $paciente = Paciente::where('rut', $request->rut)->first();
+
         if($paciente)
         {
             $data               = $this->validator_paciente($request->all())->validate();
-            $paciente->email    = $request->email;
             $paciente->telefono = $request->telefono;
             $paciente->celular  = $request->celular;
             $paciente->save();
@@ -214,8 +214,12 @@ class HomeController extends Controller
         )
         ->join('motivo_consultas', 'consultas.motivo_consulta_id', '=', 'motivo_consultas.id')
         ->join('pacientes', 'consultas.paciente_id', '=', 'pacientes.id')
-        ->where('consultas.estado_id', $gestion)
-        ->get();      
+        ->where('consultas.estado_id', $gestion);
+        if(Auth::user()->roles[0]->id == 1)
+        {
+            $pacientes = $pacientes->where('consultas.user_id',Auth::user()->id);
+        }
+        $pacientes = $pacientes->get();      
 
         return $pacientes;  
     }
@@ -246,11 +250,15 @@ class HomeController extends Controller
     {
 
         return Validator::make($data, [
-            'email'            => 'required|string|email|max:255',
             'telefono'         => 'required_without:celular',
             'celular'          => 'required_without:telefono',
             'motivo_consulta'  => 'required'
         ]);   
             
     }  
+
+    public function mis_datos(Request $request)
+    {
+        return view('mis_datos');
+    }
 }

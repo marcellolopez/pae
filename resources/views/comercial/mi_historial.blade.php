@@ -175,7 +175,7 @@
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        if(o.comentario.length == 0)
+                        if(o.comentario == null)
                         {
                             return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="Sin comentarios">'+o.motivo+'</a>';
                         }
@@ -222,7 +222,7 @@
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        if(o.comentario.length == 0)
+                        if(o.comentario == null)
                         {
                             return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="Sin comentarios">'+o.motivo+'</a>';
                         }
@@ -269,7 +269,7 @@
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        if(o.comentario.length == 0)
+                        if(o.comentario == null)
                         {
                             return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="Sin comentarios">'+o.motivo+'</a>';
                         }

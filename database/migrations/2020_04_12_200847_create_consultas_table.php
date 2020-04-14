@@ -19,12 +19,11 @@ class CreateConsultasTable extends Migration
             $table->unsignedBigInteger('paciente_id');
             $table->unsignedBigInteger('motivo_consulta_id');
             $table->unsignedBigInteger('estado_id');
-            $table->date('fecha_enviado')->nullable();
-            $table->date('fecha_gestionado')->nullable();
-            $table->date('fecha_cerrado')->nullable();
-            $table->longText('comentario')->nullable();            
+            $table->dateTime('fecha_enviado', 0)->nullable();
+            $table->dateTime('fecha_gestionado', 0)->nullable();
+            $table->dateTime('fecha_cerrado', 0)->nullable();
+            $table->longText('comentario', 0)->nullable();            
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('paciente_id')->references('id')->on('pacientes');
             $table->foreign('motivo_consulta_id')->references('id')->on('motivo_consultas');

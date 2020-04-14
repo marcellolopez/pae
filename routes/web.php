@@ -58,8 +58,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('register_paciente_consulta', 'HomeController@register_paciente_consulta')->name('register_paciente_consulta');
     Route::get('showRegistrarConsultaPaciente', 'HomeController@showRegistrarConsultaPaciente')->name('showRegistrarConsultaPaciente');
     Route::post('showRegistrarConsultaPaciente', 'HomeController@register_paciente_consulta')->name('showRegistrarConsultaPaciente');
-    Route::get('mi_historial', 'HomeController@mi_historial')
-            ->name('mi_historial');
+    Route::get('mi_historial', 'HomeController@mi_historial')->name('mi_historial');
+    Route::get('mis_datos', 'HomeController@mis_datos')->name('mis_datos');
 	    //->middleware('auth:paciente');
 	Route::get('logout', 'Auth\LoginController@logout')
 	    ->name('logout');	    

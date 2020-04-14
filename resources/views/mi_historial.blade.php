@@ -33,7 +33,7 @@
                       <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                         <div class="row d-flex justify-content-center">
                             <div class="col-xs-12 col-lg-12">
-                                <a class=" pull-left hover" type="button" onclick="tableToExcel('enviado', 'Enviados')" value="Exportar a excel">Exportar a excel</a>
+                                <a class=" pull-left hover" type="button" onclick="tableToExcel('enviado', 'Enviados')" value="Exportar a excel">Exportar a excel <i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
                                 <table id="enviado" class="table  table-sm datatables  compact nowrap" style="width:100%">
                                     <thead>
                                         <tr class="table-primary">
@@ -68,7 +68,7 @@
                         <div class="row d-flex justify-content-center">
                             <div class="col-xs-12 col-lg-12">
 
-                                <a class=" pull-left hover" type="button" onclick="tableToExcel('gestion', 'Gestion')" value="Exportar a excel">Exportar a excel</a>
+                                <a class=" pull-left hover" type="button" onclick="tableToExcel('gestion', 'Gestion')" value="Exportar a excel">Exportar a excel <i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
                                 <table id="gestion" class="table  table-sm datatables compact nowrap" style="width:100%">
                                     <thead>
                                         <tr class="table-primary">
@@ -101,7 +101,7 @@
                       <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                         <div class="row d-flex justify-content-center">
                             <div class="col-xs-12 col-lg-12">
-                                <a class=" pull-left hover" type="button" onclick="tableToExcel('cerrado', 'Cerrado')" value="Exportar a excel">Exportar a excel</a>
+                                <a class=" pull-left hover" type="button" onclick="tableToExcel('cerrado', 'Cerrado')" value="Exportar a excel">Exportar a excel <i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
                                 <table id="cerrado" class="table  table-sm datatables compact nowrap" style="width:100%">
                                     <thead>
                                         <tr class="table-primary">
@@ -175,7 +175,7 @@
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        if(o.comentario.length == 0)
+                        if(o.comentario == null)
                         {
                             return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="Sin comentarios">'+o.motivo+'</a>';
                         }
@@ -213,7 +213,7 @@
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        if(o.comentario.length == 0)
+                        if(o.comentario == null)
                         {
                             return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="Sin comentarios">'+o.motivo+'</a>';
                         }
@@ -251,7 +251,7 @@
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        if(o.comentario.length == 0)
+                        if(o.comentario == null)
                         {
                             return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="Sin comentarios">'+o.motivo+'</a>';
                         }
