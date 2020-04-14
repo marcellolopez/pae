@@ -10,7 +10,10 @@
                     <h1 class="h3 mb-3 font-weight-normal text-center">"Mentalizados En Ti"</h1>
                     <div class="alert alert-info text-center">
                         <ul style="list-style: none; margin: 0; padding: 0">
-                            {{ $info }}
+                            <h5>{{ $info }}</h5>
+                        </ul>
+                        <ul style="list-style: none; margin: 0; padding: 0">
+                           <a href="{{ route('register') }}">Volver para ingresar una nueva soicitud</a> 
                         </ul>            
                     </div>
                     <legend></legend>

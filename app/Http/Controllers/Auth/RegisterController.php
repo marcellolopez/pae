@@ -208,8 +208,7 @@ class RegisterController extends Controller
     }
     public function showInfoGuest($info)
     {
-        return redirect()->route('login')
-        ->with('success',$info);
+        return view('auth.info', compact('info'));
     }
     protected function validator(array $data)
     {

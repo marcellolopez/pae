@@ -259,6 +259,14 @@ class HomeController extends Controller
 
     public function mis_datos(Request $request)
     {
-        return view('mis_datos');
+        if(Auth::user()->roles[0]->id == 1)
+        {
+            return view('mis_datos');
+        }
+        else
+        {
+            return view('comercial.mis_datos');
+        }
+        
     }
 }

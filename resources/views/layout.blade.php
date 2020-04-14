@@ -79,7 +79,7 @@
         </nav>
 
         <div class="headerContent">
-            <h2><strong>¡Hola, {{Auth::user()->nombres}} {{Auth::user()->apellido_paterno}} {{Auth::user()->apellido_materno}}! {{Auth::user()->roles[0]->name}}</strong></h2>
+            <h2><strong>¡Hola, {{Auth::user()->nombres}} {{Auth::user()->apellido_paterno}} {{Auth::user()->apellido_materno}}!</strong></h2>
         </div>
         <div class="btnContent navbar-collapse">
             <ul class="navbar-nav mr-auto">

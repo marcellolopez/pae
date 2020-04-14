@@ -13,8 +13,15 @@
                         <form method="POST" class="" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                             <div class="row">
                                 <div class="col-12">
+                            
 
                                     @csrf
+
+                                    <h1 class="mb-3 font-weight-normal text-center">MET</h1>
+                                    <h1 class="h3 mb-3 font-weight-normal text-center">"Mentalizados En Ti"</h1>
+
+                                                                
+
                                     @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <h5>¡Atención!</h5>
