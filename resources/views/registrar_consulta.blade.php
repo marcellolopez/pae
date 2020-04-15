@@ -61,20 +61,14 @@
                             <hr>
                             <div class="row">
 
-                                    <div class="col-4">                        
+                                    <div class="col-6">                        
                                         <div class="form-group ">
                                             <label class="control-label text-left" for="telefono">Teléfono 1 *</label>
                                             <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono',$paciente->telefono) }}" placeholder="Teléfono 1"  >
                                         </div>   
                                     </div>
-                                    <div class="col-4">   
-                                        <div class="form-group ">
-                                            <label class="control-label text-left" for="celular">Teléfono 2 </label>
-                                            <input id="celular" type="number" class=" form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" value="{{ old('celular',$paciente->celular) }}" placeholder="Teléfono 2"  >
 
-                                        </div>
-                                    </div>
-                                    <div class="col-4">   
+                                    <div class="col-6">   
                                         <div class="form-group ">
                                             <label class="control-label text-left" for="motivo_consulta">Motivo Consulta *</label>
                                             <select  class=" form-control{{ $errors->has('motivo_consulta') ? ' is-invalid' : '' }}" name="motivo_consulta" required>
