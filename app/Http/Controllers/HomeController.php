@@ -237,7 +237,7 @@ class HomeController extends Controller
             'nombres'          => 'required|string|max:255',
             //'apellidoPaterno'  => 'required|string|max:255',
             //'apellidoMaterno'  => 'required|string|max:255',
-            'rut'              => 'required|string|min:9|max:10|cl_rut',
+            'rut'              => 'required|string|min:7|max:8',//|cl_rut
             'email'            => 'required|string|email|max:255',
             'telefono'         => 'numeric|digits_between:1,10',
             //'celular'          => 'required_without:telefono',

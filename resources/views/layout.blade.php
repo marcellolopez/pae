@@ -39,7 +39,9 @@
 <header>
     <div class="d-flex justify-content-between align-items-center mobileHeader">
        
-        <h1>{{config('app.name')}}</h1>
+        <figure class="navLogo">
+            <img src="{{ asset('img/met-logo.png') }}" alt="">
+        </figure>
 
         <a href="javascript:void(0)" onclick="toggleMenu()" class="btnNav"><i class="fa fa-bars" aria-hidden="true"></i></a>
         <nav class="mobileNav">
@@ -59,8 +61,9 @@
                 
 
                 
-                <h1><strong>MET</strong></h1>
-                <p class="text-white">"Mentalizados En Ti"</p>
+                <figure class="navLogo">
+                    <img src="{{ asset('img/met-logo.png') }}" alt="">
+                </figure>
 
                 <ul>
                     <li><a href="{{ route('welcome') }}" class="menuInicio active">Inicio</a></li>

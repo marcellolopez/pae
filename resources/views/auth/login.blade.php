@@ -12,8 +12,11 @@
         @else
         <form class="form-signin" method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
         @endisset
-            <h1 class="mb-3 font-weight-normal text-center">MET</h1>
-            <h1 class="h3 mb-3 font-weight-normal text-center">"Mentalizados En Ti"</h1>
+      
+                <div class="col-md-12"> 
+                    <img class="mb-4 img-fluid" src="{{ asset('img/met-logo.png') }}" alt="">                   
+                </div>
+        
 
             <label for="rut" class="sr-only">Usuario</label>
             <input type="text" id="rut" name="rut" class="form-control" placeholder="Usuario" required autofocus value="{{ old('rut') }}">

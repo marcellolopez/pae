@@ -99,15 +99,15 @@
                                         </select>                            
                                     </div> 
                                 </div> 
-                                <div class="col-12">                              
+                                    <div class="col-12">                              
 
-                                    <div class="form-group ">
-                                        <label class="control-label" for="comentario">Comentario </label>
-                                        <textarea id="comentario"  class=" form-control{{ $errors->has('comentario') ? ' is-invalid' : '' }}" name="comentario" value="" placeholder="Escriba un comentario (Opcional) " rows="3" >{{ old('comentario') }}</textarea>
+                                        <div class="form-group ">
+                                            <label class="control-label" for="comentario">Comentario </label>
+                                            <textarea id="comentario"  class=" form-control{{ $errors->has('comentario') ? ' is-invalid' : '' }}" name="comentario" value="" placeholder="Escriba un comentario (Opcional) " rows="3" >{{ old('comentario') }}</textarea>
 
-                                    </div>                                           
+                                        </div>                                           
 
-                                </div>                                
+                                    </div>                                
 
                             </div>
 

@@ -10,6 +10,9 @@
                     
                 </div>
                 <div class="card-body">
+                <div class="col-6 offset-lg-3"> 
+                    <img class="mb-4 img-fluid" src="{{ asset('img/met-logo.png') }}" alt="">                   
+                </div>                    
                         <form method="POST" class="" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                             <div class="row">
                                 <div class="col-12">
@@ -17,8 +20,7 @@
 
                                     @csrf
 
-                                    <h1 class="mb-3 font-weight-normal text-center">MET</h1>
-                                    <h1 class="h3 mb-3 font-weight-normal text-center">"Mentalizados En Ti"</h1>
+
 
                                                                 
 
