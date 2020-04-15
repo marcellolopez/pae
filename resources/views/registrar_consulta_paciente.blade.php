@@ -69,7 +69,7 @@
                                 </div>  
                                 <div class="col-12">
                                     <div class="form-group ">
-                                        <label class="control-label"  for="nombres">Nombres *</label>
+                                        <label class="control-label"  for="nombres">Nombre Completo</label>
 
                                         <input id="nombres" type="text" class=" form-control{{ $errors->has('nombres') ? ' is-invalid' : '' }}" name="nombres" value="{{ old('nombres') }}" placeholder="Nombres" required >
 
@@ -78,7 +78,7 @@
 
                                 <div class="col-6">
                                     <div class="form-group ">
-                                        <label class="control-label" for="telefono">Teléfono 1 *</label>
+                                        <label class="control-label" for="telefono">Teléfono *</label>
                                         <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono 1"  >
 
                                     </div>   
