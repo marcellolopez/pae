@@ -60,30 +60,48 @@
                                 </div>
                                 <div class="col-6">                        
                                     <div class="form-group ">
-                                        <label class="control-label" for="email">Email *</label>
+                                        <label class="control-label" for="email">Email </label>
+   
+                                        <input id="email" type="email" class=" form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" >
+                                     </div> 
 
-                                        <input id="email" type="email" class=" form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required>
+                                </div>
+                                <div class="col-4">
 
-
-                                    </div>
-                                </div>  
-                                <div class="col-12">
                                     <div class="form-group ">
-                                        <label class="control-label"  for="nombres">Nombre Completo</label>
-
+                                        <label class="control-label"  for="nombres">Nombres *</label>
+                                        
                                         <input id="nombres" type="text" class=" form-control{{ $errors->has('nombres') ? ' is-invalid' : '' }}" name="nombres" value="{{ old('nombres') }}" placeholder="Nombres" required >
 
-                                    </div>                                    
-                                </div>  
-
-                                <div class="col-6">
+                                    </div>
+                                </div>
+                                <div class="col-4">                                    
                                     <div class="form-group ">
-                                        <label class="control-label" for="telefono">Teléfono *</label>
-                                        <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono 1"  >
+                                        <label class="control-label" for="apellidoPaterno">Apellido Paterno *</label>                                        
+                                        <input id="apellidoPaterno" type="text" class=" form-control{{ $errors->has('apellidoPaterno') ? ' is-invalid' : '' }}" name="apellidoPaterno" value="{{ old('apellidoPaterno') }}" placeholder="Apellido Paterno" required  >
+
+                                    </div>
+                                </div>
+                                <div class="col-4">                                    
+                                    <div class="form-group ">
+                                        <label class="control-label" for="apellidoMaterno">Apellido Materno *</label>  
+                                          
+                                        <input id="apellidoMaterno" type="text" class=" form-control{{ $errors->has('apellidoMaterno') ? ' is-invalid' : '' }}" name="apellidoMaterno" value="{{ old('apellidoMaterno') }}" placeholder="Apellido Materno" required  >
+                                        
+                                    </div>
+
+
+                                </div>
+  
+                                <div class="col-6">                                       
+                                    <div class="form-group ">
+                                        <label class="control-label" for="telefono">Teléfono Contacto *</label>
+                                        <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono"  >
 
                                     </div>   
+
                                 </div>
-                                <div class="col-6">
+                                <div class="col-6">   
                                     <div class="form-group ">
                                         <label class="control-label" for="motivo_consulta">Motivo Consulta *</label>
                                         <select  class=" form-control{{ $errors->has('motivo_consulta') ? ' is-invalid' : '' }}" name="motivo_consulta" required>
@@ -97,18 +115,17 @@
                                             @endforeach
 
                                         </select>                            
-                                    </div> 
-                                </div> 
-                                    <div class="col-12">                              
+                                    </div>                             
+                                </div>
+                                <div class="col-12">                              
 
-                                        <div class="form-group ">
-                                            <label class="control-label" for="comentario">Comentario </label>
-                                            <textarea id="comentario"  class=" form-control{{ $errors->has('comentario') ? ' is-invalid' : '' }}" name="comentario" value="" placeholder="Escriba un comentario (Opcional) " rows="3" >{{ old('comentario') }}</textarea>
+                                    <div class="form-group ">
+                                        <label class="control-label" for="comentario">Comentario </label>
+                                        <textarea id="comentario"  class=" form-control{{ $errors->has('comentario') ? ' is-invalid' : '' }}" name="comentario" value="" placeholder="Escriba un comentario (Opcional) " rows="3" >{{ old('comentario') }}</textarea>
 
-                                        </div>                                           
+                                    </div>                                           
 
-                                    </div>                                
-
+                                </div>
                             </div>
 
 

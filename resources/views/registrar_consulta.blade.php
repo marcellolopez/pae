@@ -63,8 +63,8 @@
 
                                     <div class="col-6">                        
                                         <div class="form-group ">
-                                            <label class="control-label text-left" for="telefono">Teléfono *</label>
-                                            <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono',$paciente->telefono) }}" placeholder="Teléfono 1"  >
+                                            <label class="control-label text-left" for="telefono">Teléfono Contacto *</label>
+                                            <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono',$paciente->telefono) }}" placeholder="Teléfono"  >
                                         </div>   
                                     </div>
 

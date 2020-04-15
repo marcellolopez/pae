@@ -147,9 +147,9 @@ class HomeController extends Controller
             $data               = $this->validator($request->all())->validate();
             $paciente = Paciente::create([
                 'nombres'            => $request->nombres,
-                //'apellidoPaterno'    => $request->apellidoPaterno,
-                //'apellidoMaterno'    => $request->apellidoMaterno,
-                'rut'                => $rut_sin_dv,                
+                'apellidoPaterno'    => $request->apellidoPaterno,
+                'apellidoMaterno'    => $request->apellidoMaterno,
+                'rut'                => $request->rut,                
                 'email'              => $request->email,
                 'telefono'           => $request->telefono,
                 //'celular'            => $request->celular
@@ -235,10 +235,10 @@ class HomeController extends Controller
 
         return Validator::make($data, [
             'nombres'          => 'required|string|max:255',
-            //'apellidoPaterno'  => 'required|string|max:255',
-            //'apellidoMaterno'  => 'required|string|max:255',
+            'apellidoPaterno'  => 'required|string|max:255',
+            'apellidoMaterno'  => 'required|string|max:255',
             'rut'              => 'required|string|min:7|max:8',//|cl_rut
-            'email'            => 'required|string|email|max:255',
+            'email'            => 'max:255',
             'telefono'         => 'numeric|digits_between:1,10',
             //'celular'          => 'required_without:telefono',
             'motivo_consulta'  => 'required'
