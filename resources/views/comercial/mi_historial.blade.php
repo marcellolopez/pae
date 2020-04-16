@@ -292,27 +292,6 @@
             ]
         });
 
-      $(".datatables").on("click", ".cambio_estado", function(){
-        if (confirm('¿Desea cambiar el estado de esta consulta?')) {
-          var val  = $(this).attr('id');
-          var id = $(this).attr('value');
-          $.ajax({
-            data: {'id':id, 'val':val, "_token": "{{ csrf_token() }}"},
-            url:'{{ url('/cambio_estado') }}',
-            type: "POST",
-            dataType: 'json',
-            success: function (response) {
-              console.log(response);
-                    enviado.ajax.reload();
-                    gestion.ajax.reload();
-                    cerrado.ajax.reload();
-                  },
-                  error: function (data) {
-                    console.log('Error:', data);
-                  }
-          });
-        }         
-      });
  
       var tableToExcel = (function() {
         var uri = 'data:application/vnd.ms-excel;base64,'
@@ -326,4 +305,6 @@
         }
       })()
     </script>
+
+    @include('assets.modal_acciones')
 @endsection

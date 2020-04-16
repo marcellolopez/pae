@@ -54,7 +54,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label class="control-label" for="rut">RUT *</label>
-                                        <input id="rut" type="rut" class="form-control{{ $errors->has('rut') ? ' is-invalid' : '' }}" name="rut" value="{{ old('rut', $rut) }}" placeholder="12345678-K"  required>
+                                        <input id="rut" type="rut" class="form-control{{ $errors->has('rut') ? ' is-invalid' : '' }}" name="rut" value="{{ old('rut', $rut) }}" placeholder="12345678"  required>
 
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                 <div class="col-6">                                       
                                     <div class="form-group ">
                                         <label class="control-label" for="telefono">Teléfono Contacto *</label>
-                                        <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono"  >
+                                        <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono"  required>
 
                                     </div>   
 

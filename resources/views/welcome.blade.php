@@ -15,18 +15,14 @@
                 <div class="card-header bg-primary text-white">
                    
                         Registrar consulta
-                    
+          
                 </div>
                 <div class="card-body">
                         <form method="POST" class="" action="{{ route('consultar_paciente') }}" aria-label="{{ __('Register') }}">
                             <div class="row">
-                                <div class="col-12">
-
+                                <div class="col-4 offset-4">
                                     @csrf
-
-                                    <h1 class="mb-3 font-weight-normal text-center">MET</h1>
-                                    <h1 class="h3 mb-3 font-weight-normal text-center">"Mentalizados En Ti"</h1>
-
+                                    <img class="mb-4 img-fluid" src="{{ asset('img/met-logo.png') }}" alt="">                   
                                 </div>
 
                             </div>
@@ -52,7 +48,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label class="control-label text-left" for="rut">RUT *</label>
-                                        <input id="rut" type="rut" class="form-control{{ $errors->has('rut') ? ' is-invalid' : '' }}" name="rut" value="{{ old('rut') }}" placeholder="12345678-K"  required>
+                                        <input id="rut" type="rut" class="form-control{{ $errors->has('rut') ? ' is-invalid' : '' }}" name="rut" value="{{ old('rut') }}" placeholder="12345678"  required>
                                     </div>
 
                                 </div>

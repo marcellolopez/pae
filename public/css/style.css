@@ -15,7 +15,15 @@ label{
 }
 
 .hover{
-        cursor: pointer;
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069 !important;
+  text-decoration: underline !important;
+  cursor: pointer;
 }
 header{
     width: 100%;

@@ -177,11 +177,11 @@
                     "render": function (o) {
                         if(o.comentario == null)
                         {
-                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="Sin comentarios">'+o.motivo+'</a>';
+                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="Comentario" data-content="Sin comentarios">'+o.motivo+'</a>';
                         }
                         else
                         {
-                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="'+o.comentario+'">'+o.motivo+'</a>';
+                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="Comentario" data-content="'+o.comentario+'">'+o.motivo+'</a>';
                         }
                         
                     }
@@ -215,11 +215,11 @@
                     "render": function (o) {
                         if(o.comentario == null)
                         {
-                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="Sin comentarios">'+o.motivo+'</a>';
+                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="Comentario" data-content="Sin comentarios">'+o.motivo+'</a>';
                         }
                         else
                         {
-                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="'+o.comentario+'">'+o.motivo+'</a>';
+                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="Comentario" data-content="'+o.comentario+'">'+o.motivo+'</a>';
                         }
                         
                     }
@@ -253,11 +253,11 @@
                     "render": function (o) {
                         if(o.comentario == null)
                         {
-                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="Sin comentarios">'+o.motivo+'</a>';
+                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="Comentario" data-content="Sin comentarios">'+o.motivo+'</a>';
                         }
                         else
                         {
-                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="'+o.comentario+'">'+o.motivo+'</a>';
+                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="Comentario" data-content="'+o.comentario+'">'+o.motivo+'</a>';
                         }
                         
                     }

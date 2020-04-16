@@ -21,7 +21,7 @@ class CreatePacientesTable extends Migration
             $table->string('rut');
             $table->string('telefono')->nullable();
             $table->string('celular')->nullable();      
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }
