@@ -11,7 +11,7 @@
                 </div>
                 <div class="card-body">
                 <div class="col-6 offset-lg-3"> 
-                    <img class="mb-4 img-fluid" src="{{ asset('img/met-logo.png') }}" alt="">                   
+                    <img class="mb-4 img-fluid" src="{{ asset('img/Logos_MET_V3_DTI_png.png') }}" alt="">                   
                 </div>                    
                         <form method="POST" class="" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                             <div class="row">
@@ -88,15 +88,17 @@
 
                                     </div>
                                     <div class="form-group ">
-                                        <label class="control-label" for="telefono">Teléfono 1 *</label>
-                                        <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono 1"  >
+                                        <label class="control-label" for="telefono">Teléfono 1*</label>
+                                        <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono"  >
 
                                     </div>   
+                                    
                                     <div class="form-group ">
                                         <label class="control-label" for="celular">Teléfono 2 </label>
                                         <input id="celular" type="number" class=" form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" value="{{ old('celular') }}" placeholder="Teléfono 2"  >
 
                                     </div>
+                                
 
                                     <div class="form-group ">
                                         <label class="control-label" for="motivo_consulta">Motivo Consulta *</label>
@@ -112,6 +114,25 @@
 
                                         </select>                            
                                     </div>                             
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">               
+                                        <div class="col-6">                        
+                                            <div class="form-group ">
+                                                <label class="control-label"  for="nombre_emergencia">Contacto de Emergencia *</label>
+                                                
+                                                <input id="nombre_emergencia" type="text" class=" form-control{{ $errors->has('nombre_emergencia') ? ' is-invalid' : '' }}" name="nombre_emergencia" value="{{ old('nombre_emergencia') }}" placeholder="Contacto de Emergencia" required >
+
+                                            </div> 
+                                        </div>                                         
+                                        <div class="col-6">                        
+                                            <div class="form-group ">
+                                                <label class="control-label" for="telefono_emergencia">Teléfono de Emergencia*</label>
+                                                <input id="telefono_emergencia" type="number" class=" form-control{{ $errors->has('telefono_emergencia') ? ' is-invalid' : '' }}" name="telefono_emergencia" value="{{ old('telefono_emergencia') }}" placeholder="Teléfono de Emergencia"  >
+
+                                            </div>    
+                                        </div> 
+                                    </div>                                    
                                 </div>
                                 <div class="col-12">                              
 

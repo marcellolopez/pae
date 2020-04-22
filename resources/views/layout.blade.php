@@ -40,7 +40,7 @@
     <div class="d-flex justify-content-between align-items-center mobileHeader">
        
         <figure class="navLogo">
-            <img src="{{ asset('img/met-logo.png') }}" alt="">
+            <img src="{{ asset('img/Logos_MET_V3_DTI_png_letras-blancas.png') }}" alt="">
         </figure>
 
         <a href="javascript:void(0)" onclick="toggleMenu()" class="btnNav"><i class="fa fa-bars" aria-hidden="true"></i></a>
@@ -62,7 +62,7 @@
 
                 
                 <figure class="navLogo">
-                    <img src="{{ asset('img/met-logo.png') }}" alt="">
+                    <img src="{{ asset('img/Logos_MET_V3_DTI_png_letras-blancas.png') }}" alt="">
                 </figure>
 
                 <ul>

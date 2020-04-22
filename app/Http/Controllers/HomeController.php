@@ -9,6 +9,7 @@ use Redirect,Response;
 use DB;
 use Illuminate\Support\Facades\Validator;
 Use \Carbon\Carbon;
+use Freshwork\ChileanBundle\Rut;
 
 class HomeController extends Controller
 {
@@ -50,17 +51,20 @@ class HomeController extends Controller
     {
 
         $consulta = Consulta::find($request->id);
-        
         switch ($request->val) {
             case 'gestionar':
                 $consulta->estado_id = 2;
                 $consulta->fecha_gestionado = date('Y-m-d H:i:s');
+                $consulta->responsable = $request->responsable;
                 break;
             
             case 'cerrar':
                 $consulta->estado_id = 3;
                 $consulta->fecha_cerrado = date('Y-m-d H:i:s');
-                break;
+                $consulta->estado_id = 3;
+                $consulta->comentario_cierre = $request->comentario_cierre;
+                $consulta->estado_cierre = $request->estado_cierre;
+                break; 
         }
         $consulta->save();
 
@@ -96,8 +100,12 @@ class HomeController extends Controller
         $pacientes_enviado = $this->lista(1);
         return DataTables()->of($pacientes_enviado)
             ->addColumn('fullname',
-                '{{$nombres}} {{$apellidoPaterno}} {{$apellidoMaterno}}'
+                '{{$nombres}} {{$apellidoPaterno}}'
             )
+            ->addColumn('rut', function($paciente) {
+                    return Rut::set($paciente->rut)->fix()->format() ;
+                }                
+            )          
             ->addIndexColumn()
             ->make(true);
     }
@@ -107,8 +115,12 @@ class HomeController extends Controller
         $pacientes_gestion = $this->lista(2);
         return DataTables()->of($pacientes_gestion)
             ->addColumn('fullname',
-                '{{$nombres}} {{$apellidoPaterno}} {{$apellidoMaterno}}'
+                '{{$nombres}} {{$apellidoPaterno}}'
             )
+            ->addColumn('rut', function($paciente) {
+                    return Rut::set($paciente->rut)->fix()->format() ;
+                }                
+            )          
             ->addIndexColumn()
             ->make(true);
     }
@@ -118,8 +130,12 @@ class HomeController extends Controller
         $pacientes_cerrado = $this->lista(3);
         return DataTables()->of($pacientes_cerrado)
             ->addColumn('fullname',
-                '{{$nombres}} {{$apellidoPaterno}} {{$apellidoMaterno}}'
+                '{{$nombres}} {{$apellidoPaterno}}'
             )
+            ->addColumn('rut', function($paciente) {
+                    return Rut::set($paciente->rut)->fix()->format() ;
+                }                
+            )            
             ->addIndexColumn()
             ->make(true);
     }
@@ -169,7 +185,7 @@ class HomeController extends Controller
         /*/
         $paciente_array =[
             'nombre'             => $paciente->nombres.' '.$paciente->apellidoPaterno.' '.$paciente->apellidoMaterno,
-            'rut'                => Rut::parse($request->rut)->fix()->format(),
+            'rut'                => Rut:sete($request->rut)->fix()->format(),
             'email'              => $paciente->email,
             'telefono'           => $paciente->telefono,
             'celular'            => $request->celular,
@@ -203,13 +219,17 @@ class HomeController extends Controller
             'pacientes.apellidoPaterno as apellidoPaterno',
             'pacientes.apellidoMaterno as apellidoMaterno',
             'pacientes.telefono as telefono',
+            'pacientes.activo as activo',
             DB::raw('DATE_FORMAT(consultas.fecha_'.$fecha.', "%d-%m-%Y") as fecha'),
             DB::raw('DATE_FORMAT(consultas.fecha_'.$fecha.', "%H:%i") as hora'),
             'pacientes.email as email',
             'pacientes.rut as rut',
             'motivo_consultas.motivo as motivo',
             'consultas.motivo_consulta_id as motivo_consulta_id',
-            'consultas.comentario as comentario'
+            'consultas.comentario as comentario',
+            'consultas.comentario_cierre as comentario_cierre',
+            'consultas.estado_cierre as estado_cierre',
+            'consultas.responsable as responsable'
 
         )
         ->join('motivo_consultas', 'consultas.motivo_consulta_id', '=', 'motivo_consultas.id')
@@ -239,7 +259,7 @@ class HomeController extends Controller
             'apellidoMaterno'  => 'required|string|max:255',
             'rut'              => 'required|string|min:7|max:8',//|cl_rut
             'email'            => 'max:255',
-            'telefono'         => 'numeric|digits_between:1,10',
+            'telefono'         => 'required|digits:9',
             //'celular'          => 'required_without:telefono',
             'motivo_consulta'  => 'required'
         ]);   
@@ -250,7 +270,7 @@ class HomeController extends Controller
     {
 
         return Validator::make($data, [
-            'telefono'         => 'numeric|digits_between:1,10',
+            'telefono'         => 'required|digits:9',
             //'celular'          => 'required_without:telefono',
             'motivo_consulta'  => 'required'
         ]);   

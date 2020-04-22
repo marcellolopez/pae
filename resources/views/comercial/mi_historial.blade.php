@@ -33,12 +33,14 @@
                       <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                         <div class="row d-flex justify-content-center">
                             <div class="col-xs-12 col-lg-12">
-                                <a class=" pull-left hover" type="button" onclick="tableToExcel('enviado', 'Enviados')" value="Exportar a excel">Exportar a excel</a>
+                                <a class=" pull-left hover" type="button" onclick="tableToExcel('enviado', 'Enviados')" value="Exportar a excel">Exportar a excel <i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
                                 <table id="enviado" class="table  table-sm datatables  compact nowrap" style="width:100%">
                                     <thead>
                                         <tr class="table-primary">
 
-                                            <th>Fecha</th>
+                                            
+
+                                            <th>Fecha</th>                                            
 
                                             <th>Hora</th>                                            
 
@@ -52,6 +54,8 @@
                                             <th>Teléfono</th>                                            
 
                                             <th>Motivo Consulta</th>
+
+                                            <th>Detalles</th>
 
                                             <th>Acción</th>
 
@@ -68,12 +72,14 @@
                         <div class="row d-flex justify-content-center">
                             <div class="col-xs-12 col-lg-12">
 
-                                <a class=" pull-left hover" type="button" onclick="tableToExcel('gestion', 'Gestion')" value="Exportar a excel">Exportar a excel</a>
+                                <a class=" pull-left hover" type="button" onclick="tableToExcel('gestion', 'Gestion')" value="Exportar a excel">Exportar a excel <i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
                                 <table id="gestion" class="table  table-sm datatables compact nowrap" style="width:100%">
                                     <thead>
                                         <tr class="table-primary">
 
-                                            <th>Fecha</th>
+                                            
+
+                                            <th>Fecha</th>                                            
 
                                             <th>Hora</th>                                            
 
@@ -86,6 +92,8 @@
                                             <th>Teléfono</th>                                            
 
                                             <th>Motivo Consulta</th>
+
+                                             <th>Detalles</th>
 
                                             <th>Acción</th>
 
@@ -101,12 +109,14 @@
                       <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                         <div class="row d-flex justify-content-center">
                             <div class="col-xs-12 col-lg-12">
-                                <a class=" pull-left hover" type="button" onclick="tableToExcel('cerrado', 'Cerrado')" value="Exportar a excel">Exportar a excel</a>
+                                <a class=" pull-left hover" type="button" onclick="tableToExcel('cerrado', 'Cerrado')" value="Exportar a excel">Exportar a excel <i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
                                 <table id="cerrado" class="table  table-sm datatables compact nowrap" style="width:100%">
                                     <thead>
                                         <tr class="table-primary">
 
-                                            <th>Fecha</th>
+                                            
+
+                                            <th>Fecha</th>                                            
 
                                             <th>Hora</th>                                            
 
@@ -120,6 +130,8 @@
                                             <th>Teléfono</th>                                            
 
                                             <th>Motivo Consulta</th>
+
+                                            <th>Detalles</th>
 
                                             <th>Acción</th>
 
@@ -152,6 +164,14 @@
 
    
         var enviado = $('#enviado').DataTable({
+            createdRow: function( row, data, dataIndex ) {
+                if ( data['activo'] != 1 ) {
+                    $(row).addClass( 'bg-danger' );
+                    $(row).addClass( 'text-white' );
+                }
+                
+            },   
+            autoWidth: false,
             processing: true,
             serverSide: true,
             bPaginate: true,
@@ -169,23 +189,17 @@
                 {data: 'fullname', name: 'fullname'},
                 {data: 'email', name: 'email'},
                 {data: 'telefono', name: 'telefono'},                    
+                {data: 'motivo', name: 'motivo'},  
                 {
                     "data": null,
                     "sortable": false,
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        if(o.comentario == null)
-                        {
-                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="Sin comentarios">'+o.motivo+'</a>';
-                        }
-                        else
-                        {
-                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="'+o.comentario+'">'+o.motivo+'</a>';
-                        }
-                        
+
+                            return '<a type="button" id="detalles" class="btn-small hover" comentario="'+o.comentario+'"><i class="fa fa-search" aria-hidden="true"  ></i></a>';    
                     }
-                },
+                },                                   
                 {
                     "data": null,
                     "sortable": false,
@@ -199,6 +213,13 @@
         });
 
         var gestion = $('#gestion').DataTable({
+            createdRow: function( row, data, dataIndex ) {
+                if ( data['activo'] != 1 ) {
+                    $(row).addClass( 'bg-danger' );
+                    $(row).addClass( 'text-white' );
+                }
+                
+            },               
             processing: true,
             serverSide: true,
             bPaginate: true,
@@ -216,23 +237,17 @@
                 {data: 'fullname', name: 'fullname'},
                 {data: 'email', name: 'email'},
                 {data: 'telefono', name: 'telefono'},                    
+                {data: 'motivo', name: 'motivo'},  
                 {
                     "data": null,
                     "sortable": false,
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        if(o.comentario == null)
-                        {
-                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="Sin comentarios">'+o.motivo+'</a>';
-                        }
-                        else
-                        {
-                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="'+o.comentario+'">'+o.motivo+'</a>';
-                        }
-                        
+
+                            return '<a type="button" id="detalles" class="btn-small hover" responsable="'+o.responsable+'" comentario="'+o.comentario+'"><i class="fa fa-search" aria-hidden="true"  ></i></a>';    
                     }
-                },
+                },                
                 {
                     "data": null,
                     "sortable": false,
@@ -246,6 +261,13 @@
         });
 
         var cerrado = $('#cerrado').DataTable({
+            createdRow: function( row, data, dataIndex ) {
+                if ( data['activo'] != 1 ) {
+                    $(row).addClass( 'bg-danger' );
+                    $(row).addClass( 'text-white' );
+                }
+                
+            },               
             processing: true,
             serverSide: true,
             bPaginate: true,
@@ -263,23 +285,17 @@
                 {data: 'fullname', name: 'fullname'},
                 {data: 'email', name: 'email'},
                 {data: 'telefono', name: 'telefono'},                    
+                {data: 'motivo', name: 'motivo'},  
                 {
                     "data": null,
                     "sortable": false,
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        if(o.comentario == null)
-                        {
-                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="Sin comentarios">'+o.motivo+'</a>';
-                        }
-                        else
-                        {
-                            return '<a type="button" class="btn-small hover" data-toggle="popover" title="'+o.motivo+'" data-content="'+o.comentario+'">'+o.motivo+'</a>';
-                        }
-                        
+
+                            return '<a type="button" id="detalles" class="btn-small hover" responsable="'+o.responsable+'" comentario="'+o.comentario+'" estado_cierre="'+o.estado_cierre+'" comentario_cierre="'+o.comentario_cierre+'"><i class="fa fa-search" aria-hidden="true"  ></i></a>';    
                     }
-                },
+                },    
                 {
                     "data": null,
                     "sortable": false,
@@ -292,6 +308,66 @@
             ]
         });
 
+    $(".datatables").on("click", "#detalles", function(){
+
+        $('.modal-body').empty();
+        $('.modal-footer').empty();
+         
+        var responsable   = $(this).attr('responsable'); 
+        var comentario   = $(this).attr('comentario'); 
+        var estado_cierre   = $(this).attr('estado_cierre'); 
+        var comentario_cierre   = $(this).attr('comentario_cierre'); 
+        if(responsable != null)
+        {
+             
+            $('.modal-body').append('<div class="form-group ">');
+            $('.modal-body').append('<label class="control-label  font-weight-bold"  for="">Responsable</label>');
+            $('.modal-body').append('</div>');
+            $('.modal-body').append('<div class="form-group ">');
+            $('.modal-body').append('<label class="control-label "  for="">'+responsable+'</label>');
+            $('.modal-body').append('</div>');            
+        }
+        if(comentario != null)
+        {
+            
+            $('.modal-body').append('<div class="form-group ">');
+            $('.modal-body').append('<label class="control-label  font-weight-bold"  for="">Comentario</label>');
+            $('.modal-body').append('</div>');
+            $('.modal-body').append('<div class="form-group ">');
+            $('.modal-body').append('<label class="control-label "  for="">'+comentario+'</label>');            
+
+        }         
+
+        if(estado_cierre != null)
+        {
+            
+            $('.modal-body').append('<div class="form-group ">');
+            $('.modal-body').append('<label class="control-label  font-weight-bold"  for="">Comentario estado</label>');
+            $('.modal-body').append('</div>');
+            $('.modal-body').append('<div class="form-group ">');
+            $('.modal-body').append('<label class="control-label "  for="">'+estado_cierre+'</label>');            
+
+        }  
+
+        if(comentario_cierre != null)
+        {
+            
+            $('.modal-body').append('<div class="form-group ">');
+            $('.modal-body').append('<label class="control-label  font-weight-bold"  for="">Comentario cierre</label>');
+            $('.modal-body').append('</div>');
+            $('.modal-body').append('<div class="form-group ">');
+            $('.modal-body').append('<label class="control-label "  for="">'+comentario_cierre+'</label>');            
+
+        }  
+
+
+
+        $('.modal-title').text('Detalles');
+
+        $('.modal-footer').append('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>');
+        $('#modal_acciones').modal('show'); // abrir
+
+    });
  
       var tableToExcel = (function() {
         var uri = 'data:application/vnd.ms-excel;base64,'

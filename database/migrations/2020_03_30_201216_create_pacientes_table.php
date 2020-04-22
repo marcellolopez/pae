@@ -22,6 +22,7 @@ class CreatePacientesTable extends Migration
             $table->string('telefono')->nullable();
             $table->string('celular')->nullable();      
             $table->string('email')->nullable();
+            $table->boolean('activo')->nullable();
             $table->timestamps();
         });
     }

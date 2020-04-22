@@ -14,7 +14,7 @@
         @endisset
       
                 <div class="col-md-12"> 
-                    <img class="mb-4 img-fluid" src="{{ asset('img/met-logo.png') }}" alt="">                   
+                    <img class="mb-4 img-fluid" src="{{ asset('img/Logos_MET_V3_DTI_png.png') }}" alt="">                   
                 </div>
         
 

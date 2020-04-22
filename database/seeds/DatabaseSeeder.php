@@ -82,11 +82,12 @@ class DatabaseSeeder extends Seeder
         $estado->save();     
 
         $paciente = new Paciente;
+        $paciente->activo = true;
         $paciente->nombres          = 'Claudio';
         $paciente->apellidoPaterno = 'Pinto';
         $paciente->apellidoMaterno = 'Villegas';
         $paciente->rut      = '16366326';
-        $paciente->telefono = '6585321';
+        $paciente->telefono = '695312522';
         $paciente->email    = 'Claudio@gmail.com';
         $paciente->save(); 
 
@@ -101,11 +102,12 @@ class DatabaseSeeder extends Seeder
           
 
         $paciente = new Paciente;
+        $paciente->activo = true;
         $paciente->nombres          = 'Marta María';
         $paciente->apellidoPaterno = 'Salgado';
         $paciente->apellidoMaterno = 'Cáceres';
         $paciente->rut      = '5548224';
-        $paciente->telefono = '5986532';
+        $paciente->telefono = '657851322';
         $paciente->email    = 'maratisalgado@hotmail.com';
         $paciente->save();  
 
@@ -120,11 +122,12 @@ class DatabaseSeeder extends Seeder
 
 
         $paciente = new Paciente;
+        $paciente->activo = true;
         $paciente->nombres          = 'Jorge';
         $paciente->apellidoPaterno = 'Prado';
         $paciente->apellidoMaterno = 'Fuentes';
         $paciente->rut      = '10523656';
-        $paciente->telefono = '8987678';
+        $paciente->telefono = '747785954';
         $paciente->email    = 'jorfe@gmail.com';
         $paciente->save(); 
 
@@ -139,11 +142,12 @@ class DatabaseSeeder extends Seeder
           
 
         $paciente = new Paciente;
+        $paciente->activo = true;
         $paciente->nombres          = 'Soledad';
         $paciente->apellidoPaterno = 'Pino';
         $paciente->apellidoMaterno = 'Contreras';
         $paciente->rut      = '9658745';
-        $paciente->telefono = '5953890897';
+        $paciente->telefono = '748574585';
         $paciente->email    = 'soledadpino@hotmail.com';
         $paciente->save();
 
@@ -160,11 +164,12 @@ class DatabaseSeeder extends Seeder
 
 
         $paciente = new Paciente;
+        $paciente->activo = true;
         $paciente->nombres          = 'Claudio';
         $paciente->apellidoPaterno = 'Pinto';
         $paciente->apellidoMaterno = 'Villegas';
         $paciente->rut      = '16366326';
-        $paciente->telefono = '6585321';
+        $paciente->telefono = '256986522';
         $paciente->email    = 'Claudio@gmail.com';
         $paciente->save(); 
 
@@ -179,11 +184,12 @@ class DatabaseSeeder extends Seeder
           
 
         $paciente = new Paciente;
+        $paciente->activo = true;
         $paciente->nombres          = 'Marta María';
         $paciente->apellidoPaterno = 'Salgado';
         $paciente->apellidoMaterno = 'Cáceres';
         $paciente->rut      = '5548224';
-        $paciente->telefono = '5986532';
+        $paciente->telefono = '658547215';
         $paciente->email    = 'maratisalgado@hotmail.com';
         $paciente->save();  
 
@@ -199,11 +205,12 @@ class DatabaseSeeder extends Seeder
         
 
         $paciente = new Paciente;
+        $paciente->activo = true;
         $paciente->nombres          = 'Jorge';
         $paciente->apellidoPaterno = 'Prado';
         $paciente->apellidoMaterno = 'Fuentes';
         $paciente->rut      = '10523656';
-        $paciente->telefono = '8987678';
+        $paciente->telefono = '875421578';
         $paciente->email    = 'jorfe@gmail.com';
         $paciente->save();   
 
@@ -218,11 +225,12 @@ class DatabaseSeeder extends Seeder
         
 
         $paciente = new Paciente;
+        $paciente->activo = true;
         $paciente->nombres          = 'Soledad';
         $paciente->apellidoPaterno = 'Pino';
         $paciente->apellidoMaterno = 'Contreras';
         $paciente->rut      = '9658745';
-        $paciente->telefono = '5953890897';
+        $paciente->telefono = '414578745';
         $paciente->email    = 'soledadpino@hotmail.com';
         $paciente->save(); 
 

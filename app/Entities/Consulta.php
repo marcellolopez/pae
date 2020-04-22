@@ -15,6 +15,11 @@ class Consulta extends Model
 		'fecha_enviado',
 		'fecha_gestionado',
 		'fecha_cerrado',
-		'comentario'
+		'comentario',
+		'responsable',
+		'comentario_cierre',
+		'estado_cierre',
+		'nombre_emergencia',
+        'telefono_emergencia'
     ];    
 }

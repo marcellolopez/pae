@@ -7,14 +7,14 @@
                 <div class="card-body">
 
                 <div class="col-6 offset-lg-3"> 
-                    <img class="mb-4 img-fluid" src="{{ asset('img/met-logo.png') }}" alt="">                   
+                    <img class="mb-4 img-fluid" src="{{ asset('img/Logos_MET_V3_DTI_png.png') }}" alt="">                   
                 </div>  
                     <div class="alert alert-info text-center">
                         <ul style="list-style: none; margin: 0; padding: 0">
                             <h5>{{ $info }}</h5>
                         </ul>
                         <ul style="list-style: none; margin: 0; padding: 0">
-                           <a href="{{ route('register') }}">Volver para ingresar una nueva soicitud</a> 
+                           <a href="{{ route('register') }}">Volver para ingresar una nueva solicitud</a> 
                         </ul>            
                     </div>
                     <legend></legend>

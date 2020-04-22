@@ -68,7 +68,10 @@ class RegisterController extends Controller
             $data               = $this->validator_paciente($request->all())->validate();
             $paciente->email    = $request->email;
             $paciente->telefono = $request->telefono;
-            $paciente->celular  = $request->celular;
+            if($request->celular)
+            {
+                $paciente->celular  = $request->celular;
+            }
             $paciente->save();
 
 
@@ -84,16 +87,19 @@ class RegisterController extends Controller
                 'email'              => $request->email,
                 'telefono'           => $request->telefono,
                 'celular'            => $request->celular,
+                'activo'             => false,
             ]);
         }
 
-        $consulta                     = New Consulta();
-        $consulta->user_id            = null;
-        $consulta->paciente_id        = $paciente->id;
-        $consulta->motivo_consulta_id = $request->motivo_consulta;
-        $consulta->estado_id          = 1;
-        $consulta->fecha_enviado      = now();
-        $consulta->comentario         = $request->comentario;
+        $consulta                      = New Consulta();
+        $consulta->user_id             = null;
+        $consulta->paciente_id         = $paciente->id;
+        $consulta->motivo_consulta_id  = $request->motivo_consulta;
+        $consulta->estado_id           = 1;
+        $consulta->fecha_enviado       = now();
+        $consulta->comentario          = $request->comentario;
+        $consulta->telefono_emergencia = $request->telefono_emergencia;
+        $consulta->nombre_emergencia   = $request->nombre_emergencia;
         $consulta->save();
 
 
@@ -166,6 +172,8 @@ class RegisterController extends Controller
                 'telefono'           => $request->telefono,
                 'celular'            => $request->celular,
             ]);
+
+
         }
 
         $consulta                     = New Consulta();
@@ -175,6 +183,8 @@ class RegisterController extends Controller
         $consulta->estado_id          = 1;
         $consulta->fecha_enviado      = now();
         $consulta->comentario         = $request->comentario;
+        $consulta->nombre_emergencia  = $request->nombre_emergencia;
+        $consulta->telefono_emergencia= $request->telefono_emergencia;
         $consulta->save();
 
 
@@ -214,14 +224,17 @@ class RegisterController extends Controller
     {
 
         return Validator::make($data, [
-            'nombres'          => 'required|string|max:255',
-            'apellidoPaterno'  => 'required|string|max:255',
-            'apellidoMaterno'  => 'required|string|max:255',
-            'rut'              => 'required|string|min:9|max:10|cl_rut',
-            'email'            => 'required|string|email|max:255',
-            'telefono'         => 'required_without:celular',
-            'celular'          => 'required_without:telefono',
-            'motivo_consulta'  => 'required'
+            'nombres'             => 'required|string|max:255',
+            'apellidoPaterno'     => 'required|string|max:255',
+            'apellidoMaterno'     => 'required|string|max:255',
+            'rut'                 => 'required|string|min:9|max:10|cl_rut',
+            'email'               => 'required|string|email|max:255',
+            'telefono'            => 'required|digits:9',
+            'celular'             => 'numeric',
+            'motivo_consulta'     => 'required',
+            'nombre_emergencia'   => 'required|string|max:255',
+            'telefono_emergencia' => 'required|digits:9',
+
         ]);   
             
     }
@@ -230,10 +243,12 @@ class RegisterController extends Controller
     {
 
         return Validator::make($data, [
-            'email'            => 'required|string|email|max:255',
-            'telefono'         => 'required_without:celular',
-            'celular'          => 'required_without:telefono',
-            'motivo_consulta'  => 'required'
+            'email'               => 'required|string|email|max:255',
+            'telefono'            => 'required|digits:9',
+            'celular'             => 'numeric',
+            'motivo_consulta'     => 'required',
+            'nombre_emergencia'   => 'required|string|max:255',
+            'telefono_emergencia' => 'required|digits:9',
         ]);   
             
     }    

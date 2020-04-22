@@ -23,8 +23,11 @@ class CreateConsultasTable extends Migration
             $table->dateTime('fecha_gestionado', 0)->nullable();
             $table->dateTime('fecha_cerrado', 0)->nullable();
             $table->longText('comentario', 0)->nullable();   
-            $table->longText('comentario_cerrado', 0)->nullable();  
-            $table->string('email_gestionado')->nullable();        
+            $table->longText('comentario_cierre', 0)->nullable();  
+            $table->longText('estado_cierre', 0)->nullable();  
+            $table->string('responsable')->nullable();    
+            $table->string('nombre_emergencia')->nullable();
+            $table->string('telefono_emergencia')->nullable();                    
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('paciente_id')->references('id')->on('pacientes');

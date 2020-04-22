@@ -19,7 +19,9 @@ class Paciente extends Model
         'telefono',
         'celular',
         'motivo_consulta_id',
-        'comentario'
+        'comentario',
+        'activo'
+
     ];    
     public function motivo_consulta()
     {
