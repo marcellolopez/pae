@@ -49,7 +49,7 @@
                                             <th>Nombre</th>
 
 
-                                            <th>Correo electrónico</th>
+                                            
 
                                             <th>Teléfono</th>                                            
 
@@ -87,7 +87,7 @@
 
                                             <th>Nombre</th>
 
-                                            <th>Correo electrónico</th>
+                                            
 
                                             <th>Teléfono</th>                                            
 
@@ -125,7 +125,7 @@
                                             <th>Nombre</th>
 
 
-                                            <th>Correo electrónico</th>
+                                            
 
                                             <th>Teléfono</th>                                            
 
@@ -187,7 +187,7 @@
                 {data: 'hora', name: 'hora'},
                 {data: 'rut', name: 'rut'},
                 {data: 'fullname', name: 'fullname'},
-                {data: 'email', name: 'email'},
+                
                 {data: 'telefono', name: 'telefono'},                    
                 {data: 'motivo', name: 'motivo'},  
                 {
@@ -235,7 +235,7 @@
                 {data: 'hora', name: 'hora'},
                 {data: 'rut', name: 'rut'},
                 {data: 'fullname', name: 'fullname'},
-                {data: 'email', name: 'email'},
+                
                 {data: 'telefono', name: 'telefono'},                    
                 {data: 'motivo', name: 'motivo'},  
                 {
@@ -283,7 +283,7 @@
                 {data: 'hora', name: 'hora'},
                 {data: 'rut', name: 'rut'},
                 {data: 'fullname', name: 'fullname'},
-                {data: 'email', name: 'email'},
+                
                 {data: 'telefono', name: 'telefono'},                    
                 {data: 'motivo', name: 'motivo'},  
                 {
