@@ -20,11 +20,15 @@ Route::group([
     Route::get('find/{token}', 'PasswordResetController@find');
     Route::post('reset', 'PasswordResetController@reset');
     Route::get('register', 'RegisterController@showRegistrationForm');
-    Route::get('registro', 'RegisterController@showRegistrationForm');
+
     Route::get('info', 'RegisterController@showInfo');
     Route::post('register', 'RegisterController@register');
 });
 // Fin
+
+Route::get('registro', function () {
+    return redirect()->route('register');
+});
 
 Route::get('crear_usuario', 'Auth\LoginController@crearUsuario')->name('crear_usuario');
 
