@@ -132,10 +132,28 @@ class HomeController extends Controller
             ->addColumn('fullname',
                 '{{$nombres}} {{$apellidoPaterno}}'
             )
-            ->addColumn('rut', function($paciente) {
-                    return Rut::set($paciente->rut)->fix()->format() ;
+            ->addColumn('rut', function($data) {
+                    return Rut::set($data->rut)->fix()->format() ;
                 }                
-            )            
+            )         
+            ->addColumn('diff_gestion', function($data) {
+                    $start  = new Carbon($data->fecha_enviado);
+                    $end    = new Carbon($data->fecha_gestionado);
+                    return $start->diff($end)->format('%H:%I');
+                }                
+            )             
+            ->addColumn('diff_cerrado', function($data) {
+                    $start  = new Carbon($data->fecha_gestionado);
+                    $end    = new Carbon($data->fecha_cerrado);
+                    return $start->diff($end)->format('%H:%I');
+                }                
+            )         
+            ->addColumn('diff_total', function($data) {
+                    $start  = new Carbon($data->fecha_enviado);
+                    $end    = new Carbon($data->fecha_cerrado);
+                    return $start->diff($end)->format('%H:%I');
+                }                
+            )                               
             ->addIndexColumn()
             ->make(true);
     }
@@ -229,7 +247,10 @@ class HomeController extends Controller
             'consultas.comentario as comentario',
             'consultas.comentario_cierre as comentario_cierre',
             'consultas.estado_cierre as estado_cierre',
-            'consultas.responsable as responsable'
+            'consultas.responsable as responsable',
+            'consultas.fecha_enviado',
+            'consultas.fecha_gestionado',
+            'consultas.fecha_cerrado'
 
         )
         ->join('motivo_consultas', 'consultas.motivo_consulta_id', '=', 'motivo_consultas.id')

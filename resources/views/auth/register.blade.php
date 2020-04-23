@@ -55,7 +55,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label class="control-label" for="rut">RUT *</label>
-                                        <input id="rut" type="rut" class="form-control{{ $errors->has('rut') ? ' is-invalid' : '' }}" name="rut" value="{{ old('rut') }}" placeholder="12345678-K"  required>
+                                        <input id="rut" type="rut" class="form-control{{ $errors->has('rut') ? ' is-invalid' : '' }}" name="rut" value="{{ old('rut') }}" placeholder="12345678-K" regexp="[0-9]{0,10}(\-([0-9kK]{0,1})){0,1}"   required>
 
                                     </div>
 
@@ -89,13 +89,13 @@
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label" for="telefono">Teléfono 1*</label>
-                                        <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono"  >
+                                        <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono"  regexp="[0-9]{0,9}" minlength="9" maxlength="9">
 
                                     </div>   
                                     
                                     <div class="form-group ">
                                         <label class="control-label" for="celular">Teléfono 2 </label>
-                                        <input id="celular" type="number" class=" form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" value="{{ old('celular') }}" placeholder="Teléfono 2"  >
+                                        <input id="celular" type="number" class=" form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" value="{{ old('celular') }}" placeholder="Teléfono 2"  regexp="[0-9]{0,9}" minlength="9" maxlength="9">
 
                                     </div>
                                 
@@ -128,7 +128,7 @@
                                         <div class="col-6">                        
                                             <div class="form-group ">
                                                 <label class="control-label" for="telefono_emergencia">Teléfono de Emergencia*</label>
-                                                <input id="telefono_emergencia" type="number" class=" form-control{{ $errors->has('telefono_emergencia') ? ' is-invalid' : '' }}" name="telefono_emergencia" value="{{ old('telefono_emergencia') }}" placeholder="Teléfono de Emergencia"  >
+                                                <input id="telefono_emergencia" type="number" class=" form-control{{ $errors->has('telefono_emergencia') ? ' is-invalid' : '' }}" name="telefono_emergencia" value="{{ old('telefono_emergencia') }}" placeholder="Teléfono de Emergencia"  regexp="[0-9]{0,9}" minlength="9" maxlength="9">
 
                                             </div>    
                                         </div> 

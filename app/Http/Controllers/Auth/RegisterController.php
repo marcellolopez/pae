@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Auth;
 use App\Entities\Paciente;
 use App\Entities\Consulta;
 use App\Entities\MotivoConsulta;
+use App\Entities\CargaIsapre;
+use App\Entities\RegistroIsapre;
 use App\Notifications\ConfirmacionPaciente;
 use App\Notifications\ConfirmacionComercial;
 use App\Http\Controllers\Controller;
@@ -61,24 +63,30 @@ class RegisterController extends Controller
     {
 
         $rut_sin_dv = substr($request->rut, 0, -2);
-        $paciente = Paciente::where('rut', $rut_sin_dv)->first();
+        $data       = $this->validator($request->all())->validate();
 
+        $paciente        = Paciente::where('rut', $rut_sin_dv)->first();
+        $registro_isapre = RegistroIsapre::where('RUT_AFILIADO', $rut_sin_dv)->first();
+        $carga_isapre    = CargaIsapre::where('RUT_CARGA', $rut_sin_dv)->first();
+
+        if($registro_isapre || $carga_isapre)
+        {
+            $activo = true;
+        }
+        else
+        {
+            $activo = false;
+        }
+
+        
         if($paciente)
         {
-            $data               = $this->validator_paciente($request->all())->validate();
-            $paciente->email    = $request->email;
-            $paciente->telefono = $request->telefono;
-            if($request->celular)
-            {
-                $paciente->celular  = $request->celular;
-            }
-            $paciente->save();
-
-
+            return $this->showInfoGuest('Usted ya registra una solicitud, por favor contactarse con su isapre.');
 
         }
         else
         {
+
             $paciente = Paciente::create([
                 'nombres'            => $request->nombres,
                 'apellidoPaterno'    => $request->apellidoPaterno,
@@ -87,7 +95,7 @@ class RegisterController extends Controller
                 'email'              => $request->email,
                 'telefono'           => $request->telefono,
                 'celular'            => $request->celular,
-                'activo'             => false,
+                'activo'             => $activo,
             ]);
         }
 
@@ -102,8 +110,15 @@ class RegisterController extends Controller
         $consulta->nombre_emergencia   = $request->nombre_emergencia;
         $consulta->save();
 
-
-        return $this->showInfoGuest('La consulta se ha registrado, será contactado a la brevedad por nuestro centro.');
+        if($activo == true)
+        {
+            return $this->showInfoGuest('Su solicitud ha sido registrada con éxito, será contactado a la brevedad por un psicólogo especialista de nuestro equipo.');
+        }
+        else
+        {
+            return $this->showInfoGuest('Su solicitud ha registrado un problema, nos contactaremos con su Isapre para aclarar su situación.');
+        }
+        
     }
 
     public function register_auth(Request $request)
@@ -140,7 +155,7 @@ class RegisterController extends Controller
         //$paciente->notify(new ConfirmacionPaciente($paciente_array));
         //$paciente->notify(new ConfirmacionComercial($paciente_array));
 
-        return $this->showInfo('Se ha registrado la consulta, será contactado por nuestro centro a la brevedad.');
+        return $this->showInfo('Su solicitud ha sido registrada con éxito, será contactado a la brevedad por un psicólogo especialista de nuestro equipo.');
     }
 
     public function register_paciente_consulta(Request $request)
@@ -149,7 +164,7 @@ class RegisterController extends Controller
         
         $rut_sin_dv = substr($request->rut, 0, -2);
         $paciente = Paciente::where('rut', $request->rut)->first();
-        dd($paciente);
+      
         if($paciente)
         {
             $data               = $this->validator_paciente($request->all())->validate();
@@ -230,7 +245,7 @@ class RegisterController extends Controller
             'rut'                 => 'required|string|min:9|max:10|cl_rut',
             'email'               => 'required|string|email|max:255',
             'telefono'            => 'required|digits:9',
-            'celular'             => 'numeric',
+            //'celular'             => 'numeric',
             'motivo_consulta'     => 'required',
             'nombre_emergencia'   => 'required|string|max:255',
             'telefono_emergencia' => 'required|digits:9',
@@ -245,7 +260,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'email'               => 'required|string|email|max:255',
             'telefono'            => 'required|digits:9',
-            'celular'             => 'numeric',
+            //'celular'             => 'numeric',
             'motivo_consulta'     => 'required',
             'nombre_emergencia'   => 'required|string|max:255',
             'telefono_emergencia' => 'required|digits:9',

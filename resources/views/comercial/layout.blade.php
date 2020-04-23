@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -85,8 +87,20 @@
         </nav>
 
         <div class="headerContent">
-            <h2><strong>¡Hola, {{Auth::user()->nombres}} {{Auth::user()->apellido_paterno}} {{Auth::user()->apellido_materno}}!</strong></h2>
+            <label>
+                <h2> 
+                    ¡Hola, {{Auth::user()->nombres}} {{Auth::user()->apellido_paterno}} {{Auth::user()->apellido_materno}}! 
+                </h2>
+            </label>
+                        <label class="pull-right float-right">
+                <h2> 
+                    (Consultas cerradas: {{\App\Http\Controllers\Helpers\MainHelper::cantidad_consultas_cerradas()}})
+                </h2>
+            </label>  
+
         </div>
+
+       
         <div class="btnContent navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
@@ -150,6 +164,7 @@
 <script src="{{asset('js/jquery-ui.min.js')}}"></script>
 {{-- Custom JS --}}
 <script src="{{ asset('js/menu.js') }}"></script>
+<script src="http://momentjs.com/downloads/moment.min.js"></script>
 @yield('jsScripts')
 <script type="text/javascript">
 $(function () {

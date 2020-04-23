@@ -12,10 +12,7 @@
                     <div class="alert alert-info text-center">
                         <ul style="list-style: none; margin: 0; padding: 0">
                             <h5>{{ $info }}</h5>
-                        </ul>
-                        <ul style="list-style: none; margin: 0; padding: 0">
-                           <a href="{{ route('register') }}">Volver para ingresar una nueva solicitud</a> 
-                        </ul>            
+                        </ul>          
                     </div>
                     <legend></legend>
                     <div class="row">

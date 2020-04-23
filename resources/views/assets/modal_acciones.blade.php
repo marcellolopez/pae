@@ -1,5 +1,5 @@
 <div id="modal_acciones" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title"></h5>
@@ -70,6 +70,7 @@
               $('#estado_cierre').append('<option value="Paciente rechaza atención">Paciente rechaza atención</option>');
               $('#estado_cierre').append('<option value="No contactabilidad">No contactabilidad</option>');
               $('#estado_cierre').append('<option value="Derivado">Derivado</option>');
+              $('#estado_cierre').append('<option value="Requiere segundo llamado">Derivado</option>');
       
           $('.modal-body').append('</div>');
           $('.modal-body').append('<div class="form-group ">');
@@ -79,6 +80,32 @@
           $('.modal-footer').append('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>');
           $('#modal_acciones').modal('show'); // abrir
         }
+      });
+
+      $(".datatables").on("click", "#trazabilidad", function(){
+          var fecha_enviado     = $(this).attr('fecha_enviado');
+          var diff_gestion      = $(this).attr('diff_gestion');      
+          var fecha_gestionado  = $(this).attr('fecha_gestionado');
+          var diff_cerrado      = $(this).attr('diff_cerrado');  
+          var fecha_cerrado     = $(this).attr('fecha_cerrado');   
+          var diff_total        = $(this).attr('diff_total');    
+          $('.modal-body').empty();
+          $('.modal-footer').empty();
+          $('.modal-title').text('Trazabilidad');
+          $('.modal-body').append('<table id="" class="table table-lg table-responsive datatables compact nowrap" style="width:100%"><thead>');
+          $('.modal-body').append('<tr class="table-primary"><th>Enviado</th><th>Tiempo entre fechas</th><th>Gestionado<th>Tiempo entre fechas</th><th>Cerrado</th><th>Tiempo Total</th>');
+          $('.modal-body').append('</tr></thead><tbody><tr></th>');
+          $('.modal-body').append('<td>'+fecha_enviado+'</td>');
+          $('.modal-body').append('<td>'+diff_gestion+'</td>');
+          $('.modal-body').append('<td>'+fecha_gestionado+'</td>');
+          $('.modal-body').append('<td>'+diff_cerrado+'</td>');
+          $('.modal-body').append('<td>'+fecha_cerrado+'</td>');
+          $('.modal-body').append('<td>'+diff_total+'</td>');
+          $('.modal-body').append('</tr></tbody></table>');                                    
+          $('.modal-body').append('<div class="form-group "></div>');
+
+          $('.modal-footer').append('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>');
+          $('#modal_acciones').modal('show'); // abrir
       });
 </script>
 

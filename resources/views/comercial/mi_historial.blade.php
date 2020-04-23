@@ -302,7 +302,7 @@
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        return '<a type="button" class="btn-small hover"  title="'+o.id+'" >Sin acciones</a>';
+                        return '<a type="button" class="btn-small hover"  id="trazabilidad" name="trazabilidad" diff_gestion="'+o.diff_gestion+'" diff_cerrado="'+o.diff_cerrado+'" diff_total="'+o.diff_total+'" fecha_enviado="'+o.fecha_enviado+'" fecha_gestionado="'+o.fecha_gestionado+'" fecha_cerrado="'+o.fecha_cerrado+'">Trazabilidad</a>';
                     }
                 }
             ]
@@ -331,7 +331,7 @@
         {
             
             $('.modal-body').append('<div class="form-group ">');
-            $('.modal-body').append('<label class="control-label  font-weight-bold"  for="">Comentario</label>');
+            $('.modal-body').append('<label class="control-label  font-weight-bold"  for="">Comentario paciente</label>');
             $('.modal-body').append('</div>');
             $('.modal-body').append('<div class="form-group ">');
             $('.modal-body').append('<label class="control-label "  for="">'+comentario+'</label>');            

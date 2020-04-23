@@ -19,7 +19,7 @@
         
 
             <label for="rut" class="sr-only">Usuario</label>
-            <input type="text" id="rut" name="rut" class="form-control" placeholder="Usuario" required autofocus value="{{ old('rut') }}">
+            <input type="text" id="rut" name="rut" class="form-control" placeholder="Usuario" required autofocus value="{{ old('rut') }}"  regexp="[0-9]{0,8}" minlength="7" maxlength="8">
 
             <label for="password" class="sr-only">Contraseña</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>
