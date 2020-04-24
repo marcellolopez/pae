@@ -21,5 +21,10 @@ class Consulta extends Model
 		'estado_cierre',
 		'nombre_emergencia',
         'telefono_emergencia'
-    ];    
+    ];   
+    public function motivo_consulta()
+    {
+        return $this->belongsTo(MotivoConsulta::class, 'motivo_consulta_id');
+    }      
+     
 }

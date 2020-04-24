@@ -49,8 +49,9 @@ class ConfirmacionComercial extends Notification implements ShouldQueue
     */
     public function toMail($notifiable)
     {
-        //$notifiable->email = 'mlopez@cetep.cl';
+        $notifiable->email = 'mlc74163322@gmail.com';
         return (new MailMessage)
+            ->cc(['mlopez@cetep.cl','ebecerra@cetep.cl','mfernandez@cetep.cl'])
             ->subject('Confirmación de registro')
             ->line('')
             ->markdown('vendor.notifications.confirmacion_comercial', ['paciente' => $this->paciente]);

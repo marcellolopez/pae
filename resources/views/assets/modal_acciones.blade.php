@@ -70,7 +70,7 @@
               $('#estado_cierre').append('<option value="Paciente rechaza atención">Paciente rechaza atención</option>');
               $('#estado_cierre').append('<option value="No contactabilidad">No contactabilidad</option>');
               $('#estado_cierre').append('<option value="Derivado">Derivado</option>');
-              $('#estado_cierre').append('<option value="Requiere segundo llamado">Derivado</option>');
+              $('#estado_cierre').append('<option value="Requiere segundo llamado">Requiere segundo llamado</option>');
       
           $('.modal-body').append('</div>');
           $('.modal-body').append('<div class="form-group ">');

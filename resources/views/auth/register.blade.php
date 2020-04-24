@@ -128,7 +128,7 @@
                                         <div class="col-6">                        
                                             <div class="form-group ">
                                                 <label class="control-label" for="telefono_emergencia">Teléfono de Emergencia*</label>
-                                                <input id="telefono_emergencia" type="number" class=" form-control{{ $errors->has('telefono_emergencia') ? ' is-invalid' : '' }}" name="telefono_emergencia" value="{{ old('telefono_emergencia') }}" placeholder="Teléfono de Emergencia"  regexp="[0-9]{0,9}" minlength="9" maxlength="9">
+                                                <input id="telefono_emergencia" type="number" class=" form-control{{ $errors->has('telefono_emergencia') ? ' is-invalid' : '' }}" name="telefono_emergencia" value="{{ old('telefono_emergencia') }}" placeholder="Teléfono de Emergencia"  regexp="[0-9]{0,9}" minlength="9" maxlength="9" required>
 
                                             </div>    
                                         </div> 
@@ -145,15 +145,18 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-sm-4 offset-sm-4">
-                                    <div class="form-group  ">
+                                <div class="col-lg-12 col-md-12  col-sm-12 ">
+                                    <div class="form-group  text-center">
+                                        <label class="text-center">
+                                          <input class="text-center" type="checkbox" id="chk_tyc" name="acept" required> He leído y acepto los <a href="#" id="tyc">términos y condiciones</a> de uso *
+                                        </label>                                            
                                         <button type="submit" class="btn btn-primary btn-block">
                                             Enviar
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            <legend></legend>
+                            <legend><br></legend>
                             <div class="row">
                                 <div class="col-lg-4 offset-lg-2 col-sm-4 offset-sm-2 col-xs-4 offset-xs-2"> 
                                     <img class="mb-4 img-fluid" src="{{ asset('img/banmedica-logo.png') }}" alt="">
@@ -175,5 +178,18 @@
 @endsection
 
 @section('jsScripts')
+    <script type="text/javascript">
+        $('#chk_tyc').click(function(){
+            if( $(this).prop('checked') ) {
+                $('#registrar').prop('disabled', false);
+            }
+            else
+            {
+                $('#registrar').prop('disabled', true   );
+            }
+        });
 
+
+    </script>
+    
 @endsection

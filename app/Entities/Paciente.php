@@ -18,13 +18,8 @@ class Paciente extends Model
         'email',
         'telefono',
         'celular',
-        'motivo_consulta_id',
-        'comentario',
         'activo'
 
     ];    
-    public function motivo_consulta()
-    {
-        return $this->belongsTo(MotivoConsulta::class, 'motivo_consulta_id');
-    }   
+ 
 }

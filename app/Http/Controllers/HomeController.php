@@ -250,7 +250,9 @@ class HomeController extends Controller
             'consultas.responsable as responsable',
             'consultas.fecha_enviado',
             'consultas.fecha_gestionado',
-            'consultas.fecha_cerrado'
+            'consultas.fecha_cerrado',
+            'consultas.nombre_emergencia as contacto_emergencia',
+            'consultas.telefono_emergencia as telefono_emergencia'
 
         )
         ->join('motivo_consultas', 'consultas.motivo_consulta_id', '=', 'motivo_consultas.id')
