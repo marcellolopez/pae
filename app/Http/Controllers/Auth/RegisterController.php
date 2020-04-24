@@ -61,7 +61,7 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        dd($request);
+       
         $rut_sin_dv = substr($request->rut, 0, -2);
         $data       = $this->validator($request->all())->validate();
 

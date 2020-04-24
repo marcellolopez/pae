@@ -19,7 +19,7 @@
         
 
             <label for="rut" class="sr-only">Usuario</label>
-            <input type="text" id="rut" name="rut" class="form-control" placeholder="Usuario" required autofocus value="{{ old('rut') }}"  regexp="[0-9]{0,8}" autocomplete="off" minlength="7" maxlength="8" data-toggle="popover" title="" data-content="Debe ingresar el RUT sin puntos, sin dígito verificador y sin guión">
+            <input type="text" id="rut" name="rut" class="form-control" placeholder="Usuario" required autofocus value="{{ old('rut') }}"  regexp="[0-9]{0,8}" autocomplete="off" minlength="7" maxlength="8" data-toggle="popover" title="" data-content="Debe ingresar el RUT sin puntos, sin dígito verificador y sin guion">
 
             <label for="password" class="sr-only">Contraseña</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>

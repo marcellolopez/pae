@@ -36,7 +36,7 @@
                                     <div class="form-group">
                                         <label class="control-label text-left" for="rut">RUT</label>
                                         <label id="" class="form-control text-label">{{ old('rut',$paciente->rut) }}</label>
-                                        <input id="rut" type="hidden" class="form-control{{ $errors->has('rut') ? ' is-invalid' : '' }}" name="rut" value="{{ old('rut', $paciente->rut) }}" >
+                                        <input id="rut" type="hidden" class="form-control{{ $errors->has('rut') ? ' is-invalid' : '' }}" name="rut" value="{{ old('rut', $paciente->rut) }}" data-content="Debe ingresar el RUT sin puntos, sin dígito verificador y con guion" title="">
 
                                     </div>                                    
                                 </div>

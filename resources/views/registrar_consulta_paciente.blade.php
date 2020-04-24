@@ -54,7 +54,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label class="control-label" for="rut">RUT *</label>
-                                        <input id="rut" type="rut" class="form-control{{ $errors->has('rut') ? ' is-invalid' : '' }}" name="rut" value="{{ old('rut', $rut) }}" placeholder="12345678"  required>
+                                        <input id="rut" type="rut" class="form-control{{ $errors->has('rut') ? ' is-invalid' : '' }}" name="rut" value="{{ old('rut', $rut) }}" placeholder="12345678" data-toggle="popover" title="" data-content="Debe ingresar el RUT sin puntos, sin dígito verificador y con guion"  required>
 
                                     </div>
                                 </div>
