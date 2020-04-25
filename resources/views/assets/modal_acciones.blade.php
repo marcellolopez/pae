@@ -66,11 +66,9 @@
             $('.modal-body').append('<div class="form-group">');
             $('.modal-body').append('<select class="form-control" id="estado_cierre"></select>');
             $('#estado_cierre').append('<option >Seleccione un motivo de cierre</option>');
-              $('#estado_cierre').append('<option value="Cerrado">Cerrado</option>');
-              $('#estado_cierre').append('<option value="Paciente rechaza atención">Paciente rechaza atención</option>');
-              $('#estado_cierre').append('<option value="No contactabilidad">No contactabilidad</option>');
-              $('#estado_cierre').append('<option value="Derivado">Derivado</option>');
-              $('#estado_cierre').append('<option value="Requiere segundo llamado">Requiere segundo llamado</option>');
+              @foreach($estados_cierres as $estado)
+              $('#estado_cierre').append('<option value="{{$estado->id}}">{{$estado->nombre_estado}}</option>');
+              @endforeach
       
           $('.modal-body').append('</div>');
           $('.modal-body').append('<div class="form-group ">');

@@ -8,6 +8,7 @@ use App\Estado;
 use App\Entities\Paciente;
 use App\Entities\Consulta;
 use App\Entities\MotivoConsulta;
+use App\Entities\EstadoCierre;
 
 class DatabaseSeeder extends Seeder
 {
@@ -81,6 +82,34 @@ class DatabaseSeeder extends Seeder
         $estado->estado          = 'Cerrado';
         $estado->save();     
 
+        $estado_cierre = new EstadoCierre;
+        $estado_cierre->nombre_estado = 'Abierto';
+        $estado_cierre->save(); 
+
+        $estado_cierre = new EstadoCierre;
+        $estado_cierre->nombre_estado = 'Cerrado';
+        $estado_cierre->save(); 
+
+        $estado_cierre = new EstadoCierre;
+        $estado_cierre->nombre_estado = 'Paciente rechaza atención';
+        $estado_cierre->save(); 
+        
+        $estado_cierre = new EstadoCierre;
+        $estado_cierre->nombre_estado = 'No contactabilidad';
+        $estado_cierre->save(); 
+        
+        $estado_cierre = new EstadoCierre;
+        $estado_cierre->nombre_estado = 'Derivado';
+        $estado_cierre->save(); 
+        
+        $estado_cierre = new EstadoCierre;
+        $estado_cierre->nombre_estado = 'Requiere segundo llamado';
+        $estado_cierre->save(); 
+        
+        $estado_cierre = new EstadoCierre;
+        $estado_cierre->nombre_estado = 'Consultante no pertenece a isapres';
+        $estado_cierre->save(); 
+
         $paciente = new Paciente;
         $paciente->activo = true;
         $paciente->nombres          = 'Claudio';
@@ -88,6 +117,7 @@ class DatabaseSeeder extends Seeder
         $paciente->apellidoMaterno = 'Villegas';
         $paciente->rut      = '16366326';
         $paciente->telefono = '695312522';
+        $paciente->celular = '978675654';
         $paciente->email    = 'Claudio@gmail.com';
         $paciente->save(); 
 
@@ -95,6 +125,7 @@ class DatabaseSeeder extends Seeder
         $consulta->user_id = 1;
         $consulta->paciente_id = $paciente->id;
         $consulta->motivo_consulta_id = 1;
+        $consulta->estado_cierre_id = 1;
         $consulta->estado_id = 1;
         $consulta->fecha_enviado = now();
         $consulta->comentario = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
@@ -108,6 +139,7 @@ class DatabaseSeeder extends Seeder
         $paciente->apellidoMaterno = 'Cáceres';
         $paciente->rut      = '5548224';
         $paciente->telefono = '657851322';
+        $paciente->celular = '978675654';
         $paciente->email    = 'maratisalgado@hotmail.com';
         $paciente->save();  
 
@@ -115,6 +147,7 @@ class DatabaseSeeder extends Seeder
         $consulta->user_id = 1;
         $consulta->paciente_id = $paciente->id;
         $consulta->motivo_consulta_id = 1;
+        $consulta->estado_cierre_id = 1;
         $consulta->estado_id = 1;
         $consulta->fecha_enviado = now();
         $consulta->comentario = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
@@ -128,6 +161,7 @@ class DatabaseSeeder extends Seeder
         $paciente->apellidoMaterno = 'Fuentes';
         $paciente->rut      = '10523656';
         $paciente->telefono = '747785954';
+        $paciente->celular = '978675654';
         $paciente->email    = 'jorfe@gmail.com';
         $paciente->save(); 
 
@@ -135,6 +169,7 @@ class DatabaseSeeder extends Seeder
         $consulta->user_id = 1;
         $consulta->paciente_id = $paciente->id;
         $consulta->motivo_consulta_id = 1;
+        $consulta->estado_cierre_id = 1;
         $consulta->estado_id = 1;
         $consulta->fecha_enviado = now();
         $consulta->comentario = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
@@ -148,6 +183,7 @@ class DatabaseSeeder extends Seeder
         $paciente->apellidoMaterno = 'Contreras';
         $paciente->rut      = '9658745';
         $paciente->telefono = '748574585';
+        $paciente->celular = '978675654';
         $paciente->email    = 'soledadpino@hotmail.com';
         $paciente->save();
 
@@ -155,6 +191,7 @@ class DatabaseSeeder extends Seeder
         $consulta->user_id = 1;
         $consulta->paciente_id = $paciente->id;
         $consulta->motivo_consulta_id = 1;
+        $consulta->estado_cierre_id = 1;
         $consulta->estado_id = 1;
         $consulta->fecha_enviado = now();
         $consulta->comentario = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
@@ -170,6 +207,7 @@ class DatabaseSeeder extends Seeder
         $paciente->apellidoMaterno = 'Villegas';
         $paciente->rut      = '16366326';
         $paciente->telefono = '256986522';
+        $paciente->celular = '978675654';
         $paciente->email    = 'Claudio@gmail.com';
         $paciente->save(); 
 
@@ -177,6 +215,7 @@ class DatabaseSeeder extends Seeder
         $consulta->user_id = 1;
         $consulta->paciente_id = $paciente->id;
         $consulta->motivo_consulta_id = 1;
+        $consulta->estado_cierre_id = 1;
         $consulta->estado_id = 1;
         $consulta->fecha_enviado = now();
         $consulta->comentario = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
@@ -190,6 +229,7 @@ class DatabaseSeeder extends Seeder
         $paciente->apellidoMaterno = 'Cáceres';
         $paciente->rut      = '5548224';
         $paciente->telefono = '658547215';
+        $paciente->celular = '978675654';
         $paciente->email    = 'maratisalgado@hotmail.com';
         $paciente->save();  
 
@@ -198,6 +238,7 @@ class DatabaseSeeder extends Seeder
         $consulta->user_id = 1;
         $consulta->paciente_id = $paciente->id;
         $consulta->motivo_consulta_id = 1;
+        $consulta->estado_cierre_id = 1;
         $consulta->estado_id = 1;
         $consulta->fecha_enviado = now();
         $consulta->comentario = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
@@ -211,6 +252,7 @@ class DatabaseSeeder extends Seeder
         $paciente->apellidoMaterno = 'Fuentes';
         $paciente->rut      = '10523656';
         $paciente->telefono = '875421578';
+        $paciente->celular = '978675654';
         $paciente->email    = 'jorfe@gmail.com';
         $paciente->save();   
 
@@ -218,6 +260,7 @@ class DatabaseSeeder extends Seeder
         $consulta->user_id = 1;
         $consulta->paciente_id = $paciente->id;
         $consulta->motivo_consulta_id = 1;
+        $consulta->estado_cierre_id = 1;
         $consulta->estado_id = 1;
         $consulta->fecha_enviado = now();
         $consulta->comentario = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
@@ -231,6 +274,7 @@ class DatabaseSeeder extends Seeder
         $paciente->apellidoMaterno = 'Contreras';
         $paciente->rut      = '9658745';
         $paciente->telefono = '414578745';
+        $paciente->celular = '978675654';
         $paciente->email    = 'soledadpino@hotmail.com';
         $paciente->save(); 
 
@@ -238,10 +282,12 @@ class DatabaseSeeder extends Seeder
         $consulta->user_id = 1;
         $consulta->paciente_id = $paciente->id;
         $consulta->motivo_consulta_id = 1;
+        $consulta->estado_cierre_id = 1;
         $consulta->estado_id = 1;
         $consulta->fecha_enviado = now();
         $consulta->comentario = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
         $consulta->save(); 
-                 
+
+
 	}
 }

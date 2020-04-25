@@ -24,7 +24,7 @@ class CreateConsultasTable extends Migration
             $table->dateTime('fecha_cerrado', 0)->nullable();
             $table->longText('comentario', 0)->nullable();   
             $table->longText('comentario_cierre', 0)->nullable();  
-            $table->longText('estado_cierre', 0)->nullable();  
+            $table->unsignedBigInteger('estado_cierre_id')->nullable();  
             $table->string('responsable')->nullable();    
             $table->string('nombre_emergencia')->nullable();
             $table->string('telefono_emergencia')->nullable();                    
@@ -32,7 +32,8 @@ class CreateConsultasTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('paciente_id')->references('id')->on('pacientes');
             $table->foreign('motivo_consulta_id')->references('id')->on('motivo_consultas');
-            $table->foreign('estado_id')->references('id')->on('estados');            
+            $table->foreign('estado_id')->references('id')->on('estados'); 
+            $table->foreign('estado_cierre_id')->references('id')->on('estados_cierres');           
         });
     }
 

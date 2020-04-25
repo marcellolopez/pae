@@ -4,12 +4,14 @@ use Illuminate\Http\Request;
 use App\Entities\Paciente;
 use App\Entities\MotivoConsulta;
 use App\Entities\Consulta;
+use App\Entities\EstadoCierre;
 use Illuminate\Support\Facades\Auth;
 use Redirect,Response;
 use DB;
 use Illuminate\Support\Facades\Validator;
 Use \Carbon\Carbon;
 use Freshwork\ChileanBundle\Rut;
+use \Yajra\Datatables\Datatables;
 
 class HomeController extends Controller
 {
@@ -31,8 +33,9 @@ class HomeController extends Controller
                 return view('welcome', compact('pacientes', 'motivo_consultas'));
                 break;
             case 2:
+                $estados_cierres = EstadoCierre::all();
                 $motivo_consultas = MotivoConsulta::all();
-                return view('comercial/mi_historial', compact('motivo_consultas'));      
+                return view('comercial/mi_historial', compact('motivo_consultas', 'estados_cierres'));      
                 break;
         }            
 
@@ -44,7 +47,8 @@ class HomeController extends Controller
     {
         $pacientes = Paciente::with('motivo_consulta')->paginate(10);
         $motivo_consultas = MotivoConsulta::all();
-        return view('mi_historial', compact('pacientes', 'motivo_consultas'));
+        $estados_cierres = EstadoCierre::all();
+        return view('mi_historial', compact('pacientes', 'motivo_consultas','estados_cierres'));
     }
 
     public function cambio_estado(Request $request)
@@ -63,7 +67,7 @@ class HomeController extends Controller
                 $consulta->fecha_cerrado = date('Y-m-d H:i:s');
                 $consulta->estado_id = 3;
                 $consulta->comentario_cierre = $request->comentario_cierre;
-                $consulta->estado_cierre = $request->estado_cierre;
+                $consulta->estado_cierre_id = $request->estado_cierre;
                 break; 
         }
         $consulta->save();
@@ -129,8 +133,9 @@ class HomeController extends Controller
     {
         $pacientes_cerrado = $this->lista(3);
         return DataTables()->of($pacientes_cerrado)
-            ->addColumn('fullname',
-                '{{$nombres}} {{$apellidoPaterno}}'
+            ->addColumn('fullname', function($data) {
+                    return strtoupper($data->nombres.' '.$data->apellidoPaterno);
+                }       
             )
             ->addColumn('rut', function($data) {
                     return Rut::set($data->rut)->fix()->format() ;
@@ -237,6 +242,7 @@ class HomeController extends Controller
             'pacientes.apellidoPaterno as apellidoPaterno',
             'pacientes.apellidoMaterno as apellidoMaterno',
             'pacientes.telefono as telefono',
+            'pacientes.celular as celular',
             'pacientes.activo as activo',
             DB::raw('DATE_FORMAT(consultas.fecha_'.$fecha.', "%d-%m-%Y") as fecha'),
             DB::raw('DATE_FORMAT(consultas.fecha_'.$fecha.', "%H:%i") as hora'),
@@ -246,7 +252,7 @@ class HomeController extends Controller
             'consultas.motivo_consulta_id as motivo_consulta_id',
             'consultas.comentario as comentario',
             'consultas.comentario_cierre as comentario_cierre',
-            'consultas.estado_cierre as estado_cierre',
+            'estados_cierres.nombre_estado as estado_cierre',
             'consultas.responsable as responsable',
             'consultas.fecha_enviado',
             'consultas.fecha_gestionado',
@@ -256,6 +262,7 @@ class HomeController extends Controller
 
         )
         ->join('motivo_consultas', 'consultas.motivo_consulta_id', '=', 'motivo_consultas.id')
+        ->join('estados_cierres', 'consultas.estado_cierre_id', '=', 'estados_cierres.id')
         ->join('pacientes', 'consultas.paciente_id', '=', 'pacientes.id')
         ->where('consultas.estado_id', $gestion);
         if(Auth::user()->roles[0]->id == 1)

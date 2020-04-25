@@ -16,14 +16,7 @@
                         <form method="POST" class="" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                             <div class="row">
                                 <div class="col-12">
-                            
-
                                     @csrf
-
-
-
-                                                                
-
                                     @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <h5>¡Atención!</h5>
@@ -36,34 +29,27 @@
                                     @endif
 
                                     @if (session('info'))
-                                        
                                         <div class="alert  alert-info alert-dismissible fade show" role="alert">
                                             {{ session('info') }}
                                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                         </div>
-                                    
                                     @endif
                                 </div>
 
                             </div>
-
-
- 
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label class="control-label" for="rut">RUT *</label>
-                                        <input id="rut" type="rut" class="form-control{{ $errors->has('rut') ? ' is-invalid' : '' }}" name="rut" value="{{ old('rut') }}" placeholder="12345678-K" regexp="[0-9]{0,10}(\-([0-9kK]{0,1})){0,1}"   required>
-
+                                        <input id="rut" type="rut" class="form-control{{ $errors->has('rut') ? ' is-invalid' : '' }}" name="rut" value="{{ old('rut') }}" placeholder="12345678-K" regexp="[0-9]{0,10}(\-([0-9kK]{0,1})){0,1}" data-toggle="popover" title="" data-content="Debe ingresar el RUT sin puntos, con dígito verificador y con guion"  required>
                                     </div>
 
                                     <div class="form-group ">
                                         <label class="control-label"  for="nombres">Nombres *</label>
                                         
                                         <input id="nombres" type="text" class=" form-control{{ $errors->has('nombres') ? ' is-invalid' : '' }}" name="nombres" value="{{ old('nombres') }}" placeholder="Nombres" required >
-
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label" for="apellidoPaterno">Apellido Paterno *</label>                                        
@@ -74,11 +60,9 @@
                                         <label class="control-label" for="apellidoMaterno">Apellido Materno *</label>  
                                           
                                         <input id="apellidoMaterno" type="text" class=" form-control{{ $errors->has('apellidoMaterno') ? ' is-invalid' : '' }}" name="apellidoMaterno" value="{{ old('apellidoMaterno') }}" placeholder="Apellido Materno" required  >
-                                        
                                     </div>
-
-
                                 </div>
+
                                 <div class="col-6">                        
                                     <div class="form-group ">
                                         <label class="control-label" for="email">Email *</label>
@@ -89,13 +73,13 @@
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label" for="telefono">Teléfono 1*</label>
-                                        <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono"  regexp="[0-9]{0,9}" minlength="9" maxlength="9">
+                                        <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono"  regexp="[0-9]{0,9}" minlength="9" maxlength="9" data-toggle="popover" title="" data-content="El télefono 1 debe contener 9 caracteres">
 
                                     </div>   
                                     
                                     <div class="form-group ">
                                         <label class="control-label" for="celular">Teléfono 2 </label>
-                                        <input id="celular" type="number" class=" form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" value="{{ old('celular') }}" placeholder="Teléfono 2"  regexp="[0-9]{0,9}" minlength="9" maxlength="9">
+                                        <input id="celular" type="number" class=" form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" value="{{ old('celular') }}" placeholder="Teléfono 2"  regexp="[0-9]{0,9}" minlength="9" maxlength="9" data-toggle="popover" title="" data-content="El télefono 2 debe contener 9 caracteres">
 
                                     </div>
                                 
@@ -128,7 +112,7 @@
                                         <div class="col-6">                        
                                             <div class="form-group ">
                                                 <label class="control-label" for="telefono_emergencia">Teléfono de Emergencia*</label>
-                                                <input id="telefono_emergencia" type="number" class=" form-control{{ $errors->has('telefono_emergencia') ? ' is-invalid' : '' }}" name="telefono_emergencia" value="{{ old('telefono_emergencia') }}" placeholder="Teléfono de Emergencia"  regexp="[0-9]{0,9}" minlength="9" maxlength="9" required>
+                                                <input id="telefono_emergencia" type="number" class=" form-control{{ $errors->has('telefono_emergencia') ? ' is-invalid' : '' }}" name="telefono_emergencia" value="{{ old('telefono_emergencia') }}" placeholder="Teléfono de Emergencia"  regexp="[0-9]{0,9}" minlength="9" maxlength="9" required data-toggle="popover" title="" data-content="El télefono de emergencia debe contener 9 caracteres">
 
                                             </div>    
                                         </div> 
@@ -150,7 +134,7 @@
                                         <label class="text-center">
                                           <input class="text-center" type="checkbox" id="chk_tyc" name="acept" required> He leído y acepto los <a href="#" id="tyc">términos y condiciones</a> de uso *
                                         </label>                                            
-                                        <button type="submit" class="btn btn-primary btn-block">
+                                        <button id="registrar" type="submit" class="btn btn-primary btn-block" disabled>
                                             Enviar
                                         </button>
                                     </div>
@@ -179,17 +163,21 @@
 
 @section('jsScripts')
     <script type="text/javascript">
-        $('#chk_tyc').click(function(){
-            if( $(this).prop('checked') ) {
-                $('#registrar').prop('disabled', false);
-            }
-            else
-            {
-                $('#registrar').prop('disabled', true   );
-            }
-        });
 
+        $(function () {
+            $('#chk_tyc').click(function(){
+                if($("#chk_tyc").is(':checked')) {  
+                    
+                    $("#registrar").attr('disabled', false);  
+                } else {  
+                    $("#registrar").attr('disabled', true);
+                }  
+
+            });
+            $('[data-toggle="popover"]').popover({trigger: 'focus', placement: 'top'}); 
+        });
 
     </script>
     
 @endsection
+
