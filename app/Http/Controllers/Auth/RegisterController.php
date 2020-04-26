@@ -78,15 +78,17 @@ class RegisterController extends Controller
             $activo = false;
         }
 
-        
+     
         if($paciente)
         {
+           
             return $this->showInfoGuest('Usted ya registra una solicitud, por favor contactarse con su isapre.');
+        
 
         }
         else
         {
-
+          
             $paciente = Paciente::create([
                 'nombres'            => $request->nombres,
                 'apellidoPaterno'    => $request->apellidoPaterno,
@@ -110,6 +112,8 @@ class RegisterController extends Controller
         $consulta->comentario          = $request->comentario;
         $consulta->telefono_emergencia = $request->telefono_emergencia;
         $consulta->nombre_emergencia   = $request->nombre_emergencia;
+        $consulta->comentario_cierre   = 'Sin comentario';
+        $consulta->estado_cierre_id       = 1;        
         $consulta->save();
 
         //$consulta = Consulta::where('id', $consulta->id)->with('motivo_consulta')->first();
