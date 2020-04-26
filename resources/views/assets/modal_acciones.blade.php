@@ -67,7 +67,9 @@
             $('.modal-body').append('<select class="form-control" id="estado_cierre"></select>');
             $('#estado_cierre').append('<option >Seleccione un motivo de cierre</option>');
               @foreach($estados_cierres as $estado)
-              $('#estado_cierre').append('<option value="{{$estado->id}}">{{$estado->nombre_estado}}</option>');
+              @if($estado->id !- 1)
+              $('#estado_cierre').append('<option value="{{$estado->id}}">{{$estado->nombre_estado}}</option>');}
+              @endif
               @endforeach
       
           $('.modal-body').append('</div>');
