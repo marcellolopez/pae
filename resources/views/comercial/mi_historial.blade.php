@@ -215,7 +215,7 @@
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        return '<a type="button" class="btn-small hover cambio_estado" id="gestionar" value="'+o.id+'" >Gestionar</a>';
+                        return '<a type="button" class="btn-small hover cambio_estado" id="gestionar" value="'+o.consulta_id+'" >Gestionar</a>';
                     }
                 }
             ]
@@ -272,7 +272,7 @@
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        return '<a type="button" class="btn-small hover cambio_estado" id="cerrar" value="'+o.id+'" >Cerrar</a>';
+                        return '<a type="button" class="btn-small hover cambio_estado" id="cerrar" value="'+o.consulta_id+'" >Cerrar</a>';
                     }
                 }
             ]

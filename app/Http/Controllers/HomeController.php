@@ -55,6 +55,7 @@ class HomeController extends Controller
     {
 
         $consulta = Consulta::find($request->id);
+
         switch ($request->val) {
             case 'gestionar':
                 $consulta->estado_id = 2;
@@ -238,6 +239,7 @@ class HomeController extends Controller
         }
         $pacientes = Consulta::select(
             'pacientes.id as id',
+            'consultas.id as consulta_id',
             'pacientes.nombres as nombres',
             'pacientes.apellidoPaterno as apellidoPaterno',
             'pacientes.apellidoMaterno as apellidoMaterno',
