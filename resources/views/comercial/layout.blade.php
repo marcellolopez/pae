@@ -127,10 +127,10 @@
 <div class="content">
     <footer id="sticky-footer" class="py-4 bg-black">
         <div class="container text-center"  >
-            <small class="text-center text-white">Gestionado por Grupo Cetep </small>
-                <img class="img-fluid" src="{{asset('grupo_cetep.png')}}" alt="Logo de GrupoCetep" style="
+            
+                <img class="img-fluid" src="{{asset('img/Una_Empresa_GC_Fondo_Claro.png')}}" alt="Logo de GrupoCetep" style="
         max-width: 100%;
-        height: 50px;">
+        height: 80px;">
 
         </div>
     </footer>    

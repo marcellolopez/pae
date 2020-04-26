@@ -13,12 +13,18 @@
 {{-- Intro Lines --}}
 @foreach ($introLines as $line)
 {{ $line }}
-<strong>Estimado equipo, tenemos la siguiente solicitud de atención para el programa “MET – Banmédica”</strong>
+<strong>Estimado equipo, tenemos la siguiente solicitud de atención para el programa "MET"</strong>
 <legend></legend>
 <table style="border-collapse: collapse; width: 100%;">
     <tr>
-        <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Beneficiario en B.D:</th>
-        <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Activo</td>
+        <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Estado:</th>
+        <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">
+            @if($paciente->activo == true)
+                Activo
+            @else
+                Inactivo
+            @endif
+        </td>
     </tr>
 
     <tr>

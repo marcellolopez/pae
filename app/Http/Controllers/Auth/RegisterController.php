@@ -122,15 +122,18 @@ class RegisterController extends Controller
             'celular'            => $request->celular,
             'motivo_consulta'    => $consulta->motivo_consulta->motivo,
             'comentario'         => $consulta->comentario,
+            'activo'             => $activo,
         ];
 
         if($activo == true)
         {
             $paciente->notify(new ConfirmacionComercial($paciente_array));
+            $paciente->notify(new ConfirmacionPaciente($paciente_array));
             return $this->showInfoGuest('Su solicitud ha sido registrada con éxito, será contactado a la brevedad por un psicólogo especialista de nuestro equipo.');
         }
         else
         {
+            $paciente->notify(new ConfirmacionComercial($paciente_array));
             return $this->showInfoGuest('Su solicitud ha registrado un problema, nos contactaremos con su Isapre para aclarar su situación.');
         }
         

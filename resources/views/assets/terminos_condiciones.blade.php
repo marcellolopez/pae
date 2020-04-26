@@ -31,13 +31,13 @@
           <div class="col-md-12">
 
             <div class="body">
-              <p><strong>Centro Médico Cetep</strong> busca implementar atención médica y de otros profesionales de salud mediante teleconsulta con el objetivo de facilitar la provisión de servicios a distancia desde el ámbito de la promoción, diagnóstico, prevención, tratamiento y rehabilitación, a través del uso de Tecnologías de la información y comunicaciones.</p>
+              <h2 class="text-center"><strong>Consentimiento Informado</strong></h2>
 
               <span class="subTitleUp">
                 I.  DESCRIPCIÓN DEL SERVICIO
               </span>
 
-              <p>Centro Médico Cetep pone a disposición de sus pacientes, la plataforma electrónica de atenciones clínicas online Telecetep, operada por Centro Médico, donde profesionales pertenecientes a la Centro Médico Cetep- acreditados por ésta y en el Registro de Prestadores Acreditados de la Superintendencia de Salud-, ofrecen el servicio de atención clínica online (teleconsulta), que incluye las siguientes prestaciones: </p>
+              <p><strong>"Mentalizados en Ti"</strong> es una plataforma que ofrece servicios de “Orientación Telefónica por parte de Psicólogos Expertos” en el contexto de Pandemia de Coronavirus, con el objetivo de facilitar la provisión de servicios a distancia desde el ámbito de la promoción y prevención de Salud Mental.</p>
 
               <span class="subTitleLow">Consulta Médica de Psiquiatría y Psicología: </span>
               <p>Los principales objetivos de la Teleconsulta de psiquiatría y psicología son evaluar síntomas actuales, proponer un diagnóstico y establecer plan de tratamiento, mediante estrategias de telemedicina para la entrega de prestaciones de salud mental a distancia. </p>

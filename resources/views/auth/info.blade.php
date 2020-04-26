@@ -24,8 +24,9 @@
                         </div>
                     </div>
                     <p class="mt-2 text-muted text-center">           
-                        <small class="text-center">Gestionado por Grupo Cetep &copy; {{date('Y')}} </small>
-                        <img class="img-fluid" src="{{asset('grupo_cetep.png')}}" alt="Logo de GrupoCetep" style="max-width: 100%; height: 50px;">
+                        <img class="img-fluid" src="{{asset('img/Una_Empresa_GC_Fondo_Claro.png')}}" alt="Logo de GrupoCetep" style="
+        max-width: 100%;
+        height: 80px;">
                     </p>
                 </div>
             </div>
