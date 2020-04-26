@@ -73,13 +73,13 @@
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label" for="telefono">Teléfono 1*</label>
-                                        <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono"  regexp="[0-9]{0,9}" minlength="9" maxlength="9" data-toggle="popover" title="" data-content="El télefono 1 debe contener 9 caracteres">
+                                        <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono"  regexp="[0-9]{0,9}" minlength="9" maxlength="9" data-toggle="popover" title="" data-content="El télefono 1 debe contener 9 números">
 
                                     </div>   
                                     
                                     <div class="form-group ">
                                         <label class="control-label" for="celular">Teléfono 2 </label>
-                                        <input id="celular" type="number" class=" form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" value="{{ old('celular') }}" placeholder="Teléfono 2"  regexp="[0-9]{0,9}" minlength="9" maxlength="9" data-toggle="popover" title="" data-content="El télefono 2 debe contener 9 caracteres">
+                                        <input id="celular" type="number" class=" form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" value="{{ old('celular') }}" placeholder="Teléfono 2"  regexp="[0-9]{0,9}" minlength="9" maxlength="9" data-toggle="popover" title="" data-content="El télefono 2 debe contener 9 números">
 
                                     </div>
                                 
@@ -105,14 +105,14 @@
                                             <div class="form-group ">
                                                 <label class="control-label"  for="nombre_emergencia">Contacto de Emergencia *</label>
                                                 
-                                                <input id="nombre_emergencia" type="text" class=" form-control{{ $errors->has('nombre_emergencia') ? ' is-invalid' : '' }}" name="nombre_emergencia" value="{{ old('nombre_emergencia') }}" placeholder="Contacto de Emergencia" required >
+                                                <input id="nombre_emergencia" type="text" class=" form-control{{ $errors->has('nombre_emergencia') ? ' is-invalid' : '' }}" name="nombre_emergencia" value="{{ old('nombre_emergencia') }}" placeholder="Nombre de contacto" required >
 
                                             </div> 
                                         </div>                                         
                                         <div class="col-6">                        
                                             <div class="form-group ">
                                                 <label class="control-label" for="telefono_emergencia">Teléfono de Emergencia*</label>
-                                                <input id="telefono_emergencia" type="number" class=" form-control{{ $errors->has('telefono_emergencia') ? ' is-invalid' : '' }}" name="telefono_emergencia" value="{{ old('telefono_emergencia') }}" placeholder="Teléfono de Emergencia"  regexp="[0-9]{0,9}" minlength="9" maxlength="9" required data-toggle="popover" title="" data-content="El télefono de emergencia debe contener 9 caracteres">
+                                                <input id="telefono_emergencia" type="number" class=" form-control{{ $errors->has('telefono_emergencia') ? ' is-invalid' : '' }}" name="telefono_emergencia" value="{{ old('telefono_emergencia') }}" placeholder="Teléfono de Emergencia"  regexp="[0-9]{0,9}" minlength="9" maxlength="9" required data-toggle="popover" title="" data-content="El télefono de emergencia debe contener 9 números">
 
                                             </div>    
                                         </div> 
