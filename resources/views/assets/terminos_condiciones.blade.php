@@ -64,8 +64,6 @@
               <p>&nbsp;</p>
               <p>Nuestro prop&oacute;sito es prestar un servicio serio, eficaz y &uacute;til. Le rogamos que contribuya con su colaboraci&oacute;n a lograr este objetivo.&nbsp;</p>
               <p>&nbsp;</p>
-              <p><strong>Si usted est&aacute; de acuerdo con el presente consentimiento, por favor completar con sus datos a continuaci&oacute;n y enviar documento v&iacute;a email a </strong><a href="mailto:met@cetep.cl"><strong>met@cetep.cl</strong></a><strong> .</strong></p>
-              <p>&nbsp;</p>
               <p>Muchas gracias.&nbsp;</p>
             </div>
           </div>
