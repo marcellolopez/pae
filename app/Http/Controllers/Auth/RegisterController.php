@@ -61,7 +61,16 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-       
+
+        if(strpos($request->rut, '-'))
+        {
+            
+        }
+        else
+        {
+            $request->rut = Rut::parse($request->rut)->format(Rut::FORMAT_WITH_DASH);
+        }
+
         $rut_sin_dv = substr($request->rut, 0, -2);
         $data       = $this->validator($request->all())->validate();
 
@@ -276,7 +285,7 @@ class RegisterController extends Controller
         [
             'rut.cl_rut' => 'El campo RUT debe contener guion y digito verificador, ejemplo : 1234567-8'
         ]);   
-            
+    
     }
 
     protected function validator_paciente(array $data)
@@ -290,6 +299,8 @@ class RegisterController extends Controller
             'nombre_emergencia'   => 'required|string|max:255',
             'telefono_emergencia' => 'required|digits:9',
         ]);   
+
+
             
     }    
 
