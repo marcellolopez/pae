@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
     
 
     Route::post('consultar_paciente','HomeController@consultar_paciente')->name('consultar_paciente');
+    Route::post('consultar_detalles','HomeController@consultar_detalles')->name('consultar_detalles');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('welcome', 'HomeController@welcome')
             ->name('welcome');

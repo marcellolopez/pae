@@ -321,4 +321,43 @@ class HomeController extends Controller
         }
         
     }
+
+    public function consultar_detalles(Request $request)
+    {
+
+        $paciente = Consulta::select(
+            'pacientes.id as id',
+            'consultas.id as consulta_id',
+            'pacientes.nombres as nombres',
+            'pacientes.apellidoPaterno as apellidoPaterno',
+            'pacientes.apellidoMaterno as apellidoMaterno',
+            'pacientes.telefono as telefono',
+            'pacientes.celular as celular',
+            'pacientes.activo as activo',
+             DB::raw('DATE_FORMAT(consultas.fecha_'.$fecha.', "%d-%m-%Y") as fecha'),
+             DB::raw('DATE_FORMAT(consultas.fecha_'.$fecha.', "%H:%i") as hora'),
+            'pacientes.email as email',
+            'pacientes.rut as rut',
+            'motivo_consultas.motivo as motivo',
+            'consultas.motivo_consulta_id as motivo_consulta_id',
+            'consultas.comentario as comentario',
+            'consultas.comentario_cierre as comentario_cierre',
+            'estados_cierres.nombre_estado as estado_cierre',
+            'consultas.responsable as responsable',
+            'consultas.fecha_enviado',
+            'consultas.fecha_gestionado',
+            'consultas.fecha_cerrado',
+            'consultas.nombre_emergencia as contacto_emergencia',
+            'consultas.telefono_emergencia as telefono_emergencia'
+
+        )
+        ->join('motivo_consultas', 'consultas.motivo_consulta_id', '=', 'motivo_consultas.id')
+        ->join('estados_cierres', 'consultas.estado_cierre_id', '=', 'estados_cierres.id')
+        ->join('pacientes', 'consultas.paciente_id', '=', 'pacientes.id')
+        ->where('consultas.id', $request->id);
+
+        $paciente = $paciente->first();      
+
+        return view('assets.detalles',compact('paciente'));
+    }
 }
