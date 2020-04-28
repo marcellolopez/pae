@@ -334,8 +334,6 @@ class HomeController extends Controller
             'pacientes.telefono as telefono',
             'pacientes.celular as celular',
             'pacientes.activo as activo',
-             DB::raw('DATE_FORMAT(consultas.fecha_'.$fecha.', "%d-%m-%Y") as fecha'),
-             DB::raw('DATE_FORMAT(consultas.fecha_'.$fecha.', "%H:%i") as hora'),
             'pacientes.email as email',
             'pacientes.rut as rut',
             'motivo_consultas.motivo as motivo',
@@ -354,10 +352,11 @@ class HomeController extends Controller
         ->join('motivo_consultas', 'consultas.motivo_consulta_id', '=', 'motivo_consultas.id')
         ->join('estados_cierres', 'consultas.estado_cierre_id', '=', 'estados_cierres.id')
         ->join('pacientes', 'consultas.paciente_id', '=', 'pacientes.id')
-        ->where('consultas.id', $request->id);
+        ->where('consultas.id', $request->consulta_id);
 
         $paciente = $paciente->first();      
 
+        dd($request->all());
         return view('assets.detalles',compact('paciente'));
     }
 }

@@ -206,7 +206,7 @@
                     "searchable": false,                        
                     "render": function (o) {
 
-                            return '<a type="button" id="detalles" class="btn-small hover" celular="'+o.celular+'" contacto_emergencia="'+o.contacto_emergencia+'" telefono_emergencia="'+o.telefono_emergencia+'"  email="'+o.email+'" comentario="'+o.comentario+'"><i class="fa fa-search" aria-hidden="true"  ></i></a>';    
+                            return '<a type="button" id="detalles" class="btn-small hover" value="'+o.consulta_id+'"><i class="fa fa-search" aria-hidden="true"  ></i></a>';     
                     }
                 },                                   
                 {
@@ -263,7 +263,7 @@
                     "searchable": false,                        
                     "render": function (o) {
 
-                            return '<a type="button" id="detalles" class="btn-small hover" responsable="'+o.responsable+'" celular="'+o.celular+'" contacto_emergencia="'+o.contacto_emergencia+'" telefono_emergencia="'+o.telefono_emergencia+'"  email="'+o.email+'" comentario="'+o.comentario+'"><i class="fa fa-search" aria-hidden="true"  ></i></a>';    
+                            return '<a type="button" id="detalles" class="btn-small hover" value="'+o.consulta_id+'"><i class="fa fa-search" aria-hidden="true"  ></i></a>';    
                     }
                 },                
                 {
@@ -320,7 +320,8 @@
                     "searchable": false,                        
                     "render": function (o) {
 
-                            return '<a type="button" id="detalles" class="btn-small hover" responsable="'+o.responsable+'" celular="'+o.celular+'" contacto_emergencia="'+o.contacto_emergencia+'" telefono_emergencia="'+o.telefono_emergencia+'"  email="'+o.email+'" comentario="'+o.comentario+'" estado_cierre="'+o.estado_cierre+'" comentario_cierre="'+o.comentario_cierre+'"><i class="fa fa-search" aria-hidden="true"  ></i></a>';    
+
+                            return '<a type="button" id="detalles" class="btn-small hover" value="'+o.consulta_id+'"><i class="fa fa-search" aria-hidden="true"  ></i></a>';   
                     }
                 },    
                 {
@@ -337,99 +338,19 @@
 
     $(".datatables").on("click", "#detalles", function(){
 
+        var consulta_id   = $(this).attr('value'); 
         $('.modal-body').empty();
         $('.modal-footer').empty();
          
-        var responsable   = $(this).attr('responsable'); 
-        var comentario   = $(this).attr('comentario'); 
-        var estado_cierre   = $(this).attr('estado_cierre'); 
-        var comentario_cierre   = $(this).attr('comentario_cierre'); 
-        var email   = $(this).attr('email'); 
-        var celular   = $(this).attr('celular'); 
-        var contacto_emergencia   = $(this).attr('contacto_emergencia'); 
-        var telefono_emergencia   = $(this).attr('telefono_emergencia'); 
-
-        $('.modal-body').append('<div class="form-group ">');
-        $('.modal-body').append('<label class="control-label  font-weight-bold"  for="">Email paciente</label>');
-        $('.modal-body').append('</div>'); 
-        $('.modal-body').append('<div class="form-group ">');
-        $('.modal-body').append('<label class="control-label "  for="">'+email+'</label>'); 
-        $('.modal-body').append('</div>');   
-
-        $('.modal-body').append('<div class="form-group ">');
-        $('.modal-body').append('<label class="control-label  font-weight-bold"  for="">Contacto Emergencia</label>');
-        $('.modal-body').append('</div>'); 
-        $('.modal-body').append('<div class="form-group ">');
-        $('.modal-body').append('<label class="control-label "  for="">'+contacto_emergencia+'</label>'); 
-        $('.modal-body').append('</div>');    
-
-        $('.modal-body').append('<div class="form-group ">');
-        $('.modal-body').append('<label class="control-label  font-weight-bold"  for="">Telefono Emergencia</label>');
-        $('.modal-body').append('</div>'); 
-        $('.modal-body').append('<div class="form-group ">');
-        $('.modal-body').append('<label class="control-label "  for="">'+telefono_emergencia+'</label>'); 
-        $('.modal-body').append('</div>');                        
-        if(celular != null && celular != 'undefined')
-        {
-             
-            $('.modal-body').append('<div class="form-group ">');
-            $('.modal-body').append('<label class="control-label  font-weight-bold"  for="">Telefono 2</label>');
-            $('.modal-body').append('</div>');
-            $('.modal-body').append('<div class="form-group ">');
-            $('.modal-body').append('<label class="control-label "  for="">'+celular+'</label>');
-            $('.modal-body').append('</div>');            
-        }         
-        if(responsable != null)
-        {
-             
-            $('.modal-body').append('<div class="form-group ">');
-            $('.modal-body').append('<label class="control-label  font-weight-bold"  for="">Responsable</label>');
-            $('.modal-body').append('</div>');
-            $('.modal-body').append('<div class="form-group ">');
-            $('.modal-body').append('<label class="control-label "  for="">'+responsable+'</label>');
-            $('.modal-body').append('</div>');            
-        }
- 
-            
-        $('.modal-body').append('<div class="form-group ">');
-        $('.modal-body').append('<label class="control-label  font-weight-bold"  for="">Comentario paciente</label>');
-        $('.modal-body').append('</div>');
-        $('.modal-body').append('<div class="form-group ">');
-        if(comentario != null && comentario != 'null')
-        {            
-            $('.modal-body').append('<label class="control-label "  for="">'+comentario+'</label>'); 
-        }   
-        else
-        {
-            $('.modal-body').append('<label class="control-label "  for="">Sin comentarios</label>'); 
-        }
-
-        $('.modal-body').append('</div>');             
-
-              
-
-        if(estado_cierre != null)
-        {
-            
-            $('.modal-body').append('<div class="form-group ">');
-            $('.modal-body').append('<label class="control-label  font-weight-bold"  for="">Motivo cierre</label>');
-            $('.modal-body').append('</div>');
-            $('.modal-body').append('<div class="form-group ">');
-            $('.modal-body').append('<label class="control-label "  for="">'+estado_cierre+'</label>');            
-
-        }  
-
-        if(comentario_cierre != null)
-        {
-            
-            $('.modal-body').append('<div class="form-group ">');
-            $('.modal-body').append('<label class="control-label  font-weight-bold"  for="">Comentario cierre</label>');
-            $('.modal-body').append('</div>');
-            $('.modal-body').append('<div class="form-group ">');
-            $('.modal-body').append('<label class="control-label "  for="">'+comentario_cierre+'</label>');            
-
-        }  
-
+        $.ajax({
+            type: "POST",
+            url: 'consultar_detalles',
+            data: {"consulta_id": consulta_id, "_token": "{{ csrf_token() }}",} ,
+            success: function(response)
+            {
+                $('.modal-body').append(response);
+            }
+        });
 
 
         $('.modal-title').text('Detalles');
