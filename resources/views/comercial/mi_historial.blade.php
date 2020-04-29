@@ -186,16 +186,7 @@
                 {data: 'fecha', name: 'fecha'},
                 {data: 'hora', name: 'hora'},
                 {data: 'rut', name: 'rut'},
-                {
-                    "data": null,
-                    "sortable": false,
-                    "className": "text-center",
-                    "searchable": false,                        
-                    "render": function (o) {
-
-                            return o.fullname.toUpperCase();    
-                    }
-                }, 
+                {data: 'fullname', name: 'fullname'}, 
                 
                 {data: 'telefono', name: 'telefono'},                    
                 {data: 'motivo', name: 'motivo'},  
@@ -243,16 +234,7 @@
                 {data: 'fecha', name: 'fecha'},
                 {data: 'hora', name: 'hora'},
                 {data: 'rut', name: 'rut'},
-                {
-                    "data": null,
-                    "sortable": false,
-                    "className": "text-center",
-                    "searchable": false,                        
-                    "render": function (o) {
-
-                            return o.fullname.toUpperCase();    
-                    }
-                }, 
+                {data: 'fullname', name: 'fullname'}, 
                 
                 {data: 'telefono', name: 'telefono'},                    
                 {data: 'motivo', name: 'motivo'},  
@@ -300,16 +282,7 @@
                 {data: 'fecha', name: 'fecha'},
                 {data: 'hora', name: 'hora'},
                 {data: 'rut', name: 'rut'},
-                {
-                    "data": null,
-                    "sortable": false,
-                    "className": "text-center",
-                    "searchable": false,                        
-                    "render": function (o) {
-
-                            return o.fullname.toUpperCase();    
-                    }
-                }, 
+                {data: 'fullname', name: 'fullname'}, 
                 
                 {data: 'telefono', name: 'telefono'},                    
                 {data: 'motivo', name: 'motivo'},  
@@ -339,8 +312,7 @@
     $(".datatables").on("click", "#detalles", function(){
 
         var consulta_id   = $(this).attr('value'); 
-        $('.modal-body').empty();
-        $('.modal-footer').empty();
+
          
         $.ajax({
             type: "POST",
@@ -348,8 +320,15 @@
             data: {"consulta_id": consulta_id, "_token": "{{ csrf_token() }}",} ,
             success: function(response)
             {
+               $('.modal-body').empty();
+                $('.modal-footer').empty();
                 $('.modal-body').append(response);
-            }
+            },
+            beforeSend: function(){
+                $('.modal-body').empty();
+                $('.modal-footer').empty();
+                $('.modal-body').html('<center><div class="loader text-center center-block"></div></center>');
+            },
         });
 
 
