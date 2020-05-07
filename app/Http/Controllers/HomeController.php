@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Entities\Paciente;
 use App\Entities\MotivoConsulta;
 use App\Entities\Consulta;
+use App\Entities\Responsable;
 use App\Entities\EstadoCierre;
 use Illuminate\Support\Facades\Auth;
 use Redirect,Response;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 Use \Carbon\Carbon;
 use Freshwork\ChileanBundle\Rut;
 use \Yajra\Datatables\Datatables;
+
 
 class HomeController extends Controller
 {
@@ -35,7 +37,8 @@ class HomeController extends Controller
             case 2:
                 $estados_cierres = EstadoCierre::all();
                 $motivo_consultas = MotivoConsulta::all();
-                return view('comercial/mi_historial', compact('motivo_consultas', 'estados_cierres'));      
+                $responsables = Responsable::all();
+                return view('comercial/mi_historial', compact('motivo_consultas', 'estados_cierres', 'responsables'));      
                 break;
         }            
 
@@ -48,7 +51,8 @@ class HomeController extends Controller
         $pacientes = Paciente::with('motivo_consulta')->paginate(10);
         $motivo_consultas = MotivoConsulta::all();
         $estados_cierres = EstadoCierre::all();
-        return view('mi_historial', compact('pacientes', 'motivo_consultas','estados_cierres'));
+        $responsables = Responsable::all();
+        return view('mi_historial', compact('pacientes', 'motivo_consultas','estados_cierres', 'responsables'));
     }
 
     public function cambio_estado(Request $request)
@@ -60,7 +64,7 @@ class HomeController extends Controller
             case 'gestionar':
                 $consulta->estado_id = 2;
                 $consulta->fecha_gestionado = date('Y-m-d H:i:s');
-                $consulta->responsable = $request->responsable;
+                $consulta->responsable_id = $request->responsable;
                 break;
             
             case 'cerrar':
@@ -327,7 +331,7 @@ class HomeController extends Controller
     public function consultar_detalles(Request $request)
     {
 
-        $paciente = Consulta::select(
+        $consulta = Consulta::select(
             'pacientes.id as id',
             'consultas.id as consulta_id',
             'pacientes.nombres as nombres',
@@ -345,9 +349,11 @@ class HomeController extends Controller
             'estados_cierres.nombre_estado as estado_cierre',
             'estados_cierres.id as estado_cierre_id',
             'consultas.responsable as responsable',
+            'consultas.responsable_id as responsable_id',
             'consultas.fecha_enviado',
             'consultas.fecha_gestionado',
             'consultas.fecha_cerrado',
+            'consultas.estado_id',
             'consultas.nombre_emergencia as contacto_emergencia',
             'consultas.telefono_emergencia as telefono_emergencia'
 
@@ -357,7 +363,46 @@ class HomeController extends Controller
         ->join('pacientes', 'consultas.paciente_id', '=', 'pacientes.id')
         ->where('consultas.id', $request->consulta_id);
 
-        $paciente = $paciente->first();      
+        $paciente = $consulta->first();  
+        if($paciente->responsable_id != null) 
+        {
+        $consulta = Consulta::select(
+            'pacientes.id as id',
+            'consultas.id as consulta_id',
+            'pacientes.nombres as nombres',
+            'pacientes.apellidoPaterno as apellidoPaterno',
+            'pacientes.apellidoMaterno as apellidoMaterno',
+            'pacientes.telefono as telefono',
+            'pacientes.celular as celular',
+            'pacientes.activo as activo',
+            'pacientes.email as email',
+            'pacientes.rut as rut',
+            'motivo_consultas.motivo as motivo',
+            'consultas.motivo_consulta_id as motivo_consulta_id',
+            'consultas.comentario as comentario',
+            'consultas.comentario_cierre as comentario_cierre',
+            'estados_cierres.nombre_estado as estado_cierre',
+            'estados_cierres.id as estado_cierre_id',
+            'consultas.responsable as responsable',
+            'consultas.responsable_id as responsable_id',
+            'consultas.fecha_enviado',
+            'consultas.fecha_gestionado',
+            'consultas.fecha_cerrado',
+            'consultas.estado_id',
+            'consultas.nombre_emergencia as contacto_emergencia',
+            'consultas.telefono_emergencia as telefono_emergencia',
+            'responsables.responsable as nombre_responsable')
+        ->join('motivo_consultas', 'consultas.motivo_consulta_id', '=', 'motivo_consultas.id')
+        ->join('estados_cierres', 'consultas.estado_cierre_id', '=', 'estados_cierres.id')
+        ->join('pacientes', 'consultas.paciente_id', '=', 'pacientes.id')
+        ->join('responsables', 'consultas.responsable_id', '=', 'responsables.id')
+        ->where('consultas.id', $request->consulta_id);
+        $paciente = $consulta->first();            
+
+        
+
+          
+        }
         return view('assets.detalles',compact('paciente'));
     }
 

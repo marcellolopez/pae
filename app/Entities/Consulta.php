@@ -20,7 +20,8 @@ class Consulta extends Model
 		'comentario_cierre',
 		'estado_cierre',
 		'nombre_emergencia',
-        'telefono_emergencia'
+        'telefono_emergencia',
+        'responsable_id'
     ];   
     public function motivo_consulta()
     {

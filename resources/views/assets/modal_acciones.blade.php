@@ -52,7 +52,16 @@
           $('.modal-footer').empty();
           $('.modal-title').text('Cambiar estado consulta');
           $('.modal-body').append('<div class="row-fluid">');
-          $('.modal-body').append('<div class="form-group "><input id="responsable" type="text" class=" form-control" name="responsable" value="" placeholder="Nombre del Responsable" ></div>');
+            $('.modal-body').append('<div class="form-group">');
+            $('.modal-body').append('<select class="form-control" id="responsable" name="responsable"></select>');
+            $('#responsable').append('<option >Seleccione un responsable</option>');
+              @foreach($responsables as $responsable)
+              $('#responsable').append('<option value="{{$responsable->id}}">{{$responsable->responsable}}</option>');
+ 
+              @endforeach
+      
+          $('.modal-body').append('</div>');
+
           $('.modal-footer').append('<button class="btn btn-primary ajax_cambio_estado" id="'+ $(this).attr('id')+'" value="'+$(this).attr('value')+'" >Cambiar estado</button>');
           $('.modal-footer').append('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>');
           $('#modal_acciones').modal('show'); // abrir

@@ -1,6 +1,6 @@
 <div class="container">
   <!--<h2>Basic Table</h2>-->
-  <table class="table table-borderless table-sm table-responsive">
+  <table class="table table-borderless table-sm ">
     <thead>
       <tr>
         <th>Nombre Completo</th>
@@ -47,6 +47,21 @@
         </td>
       </tr>
     </tbody> 
+    @if($paciente->estado_id == 2)
+    <thead>
+      <tr>
+        <th colspan="3">Ficha</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr>
+        <td colspan="3">
+          <a type="button" href="{{url('ficha_met', $paciente->consulta_id)}}" class="btn-small hover" id="cerrar" >Ficha del paciente</a>   
+        </td>
+      </tr>
+    </tbody>  
+    @endif
     @if($paciente->responsable != null)
     <thead>
       <tr>
@@ -59,15 +74,28 @@
       </tr>
     </tbody> 
     @endif
-    @if($paciente->estado_cierre_id != 1)
+    @if($paciente->responsable_id != null)
     <thead>
       <tr>
-        
+        <th colspan="3">Responsable</th>
       </tr>
     </thead>
     <tbody>
       <tr>
+        <td colspan="3">{{strtoupper($paciente->nombre_responsable)}}</td>
+      </tr>
+    </tbody> 
+    @endif
+
+    @if($paciente->estado_cierre_id > 1)
+    <thead>
+      <tr>
         <th>Motivo Cierre</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        
         <td colspan="2">{{$paciente->estado_cierre}}</td>
       </tr>
     </tbody>

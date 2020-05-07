@@ -254,7 +254,7 @@
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
-                        return '<a type="button" class="btn-small hover cambio_estado" id="cerrar" value="'+o.consulta_id+'" >Cerrar</a>';
+                        return '<a type="button" class="btn-small hover cambio_estado" id="cerrar" value="'+o.consulta_id+'" >Cerrar</a> ';
                     }
                 }
             ]

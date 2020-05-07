@@ -54,7 +54,7 @@
             <ul>
                 <li><a href="{{ route('welcome') }}" >Inicio</a></li>
                 <li><a href="{{ route('welcome') }}" >Mi historial</a></li>
-                <li><a href="{{ url('/mis_datos') }}" >Mis datos</a></li>
+                <li style="display: none"><a href="{{ url('/mis_datos') }}" >Mis datos</a></li>
                 <li><a href="{{ route('logout') }}">Cerrar sesión</a></li>
             </ul>
         </nav>
@@ -73,7 +73,7 @@
                 <ul>
                     <li><a href="{{ route('welcome') }}" class="menuInicio ">Inicio</a></li>
                     <li><a href="{{ route('welcome') }}" class="menuMi_historial active">Mi historial</a></li>
-                    <li><a href="{{ route('mis_datos') }}" class="menuMis_datos">Mis datos</a></li>
+                    <li style="display: none"><a href="{{ route('mis_datos') }}" class="menuMis_datos">Mis datos</a></li>
                     <li><a href="{{ route('logout') }}">Cerrar sesión</a></li>
                 </ul>
 
@@ -106,8 +106,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle btn-logout" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> Mi perfil</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="">Cambiar contraseña</a>
-                        <div class="dropdown-divider"></div>
+                        <a style="display: none" class="dropdown-item" href="">Cambiar contraseña</a>
+                        <div style="display: none" class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesión</a>
                     </div>
                 </li>

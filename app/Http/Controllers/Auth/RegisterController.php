@@ -61,9 +61,18 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-       
-        $rut_sin_dv = substr($request->rut, 0, -2);
+        if(strpos($request->rut, '-'))
+        {
+            
+        }
+        else
+        {
+            $request->rut = Rut::parse($request->rut)->format(Rut::FORMAT_WITH_DASH);
+        }
+
         $data       = $this->validator($request->all())->validate();
+        $rut_sin_dv = substr($request->rut, 0, -2);
+        
 
         $paciente        = Paciente::where('rut', $rut_sin_dv)->first();
         $registro_isapre = RegistroIsapre::where('RUT_AFILIADO', $rut_sin_dv)->first();
@@ -113,7 +122,8 @@ class RegisterController extends Controller
         $consulta->telefono_emergencia = $request->telefono_emergencia;
         $consulta->nombre_emergencia   = $request->nombre_emergencia;
         $consulta->comentario_cierre   = 'Sin comentario';
-        $consulta->estado_cierre_id       = 1;        
+        $consulta->estado_cierre_id    = 1;   
+        $consulta->responsable_id      = null;        
         $consulta->save();
 
         //$consulta = Consulta::where('id', $consulta->id)->with('motivo_consulta')->first();

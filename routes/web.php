@@ -26,6 +26,8 @@ Route::group([
 });
 // Fin
 
+
+Route::get('export/{estado}', 'ExcelController@export');
 Route::get('registro', function () {
     return redirect()->route('register');
 });
@@ -49,7 +51,7 @@ Route::post('cambio_estado','HomeController@cambio_estado');
 
 Route::group(['middleware' => ['auth']], function () {
 
-    
+    Route::get('ficha_met/{id}', 'FichaController@index')->name('ficha_met');
 
     Route::post('consultar_paciente','HomeController@consultar_paciente')->name('consultar_paciente');
     Route::post('consultar_detalles','HomeController@consultar_detalles')->name('consultar_detalles');
