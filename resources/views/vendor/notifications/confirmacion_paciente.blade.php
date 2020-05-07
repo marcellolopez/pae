@@ -13,7 +13,7 @@
 {{-- Intro Lines --}}
 @foreach ($introLines as $line)
 {{ $line }}
-<p>Estimada(o) {{$paciente->nombre}}, junto con saludarle y darle la más cordial bienvenida a “Mentalizados en Ti (MET) de Isapres Banmédica y Vida Tres”, le informamos que su solicitud ya ha sido cursada. Dentro de los próximos 30 a 60 minutos será contactada(o) por un psicóloga(o) experta(o) al teléfono de contacto que nos indicó:{{$paciente->telefono}}. Por favor, si este no es el número, indicarnos el correcto a través de esta vía, así como también cualquier inconveniente que pueda presentar.</p>
+<p>Estimada(o) {{$paciente->nombre}}, junto con saludarle y darle la más cordial bienvenida a “Mentalizados en Ti (MET) de Isapres Banmédica y Vida Tres”, le informamos que su solicitud ya ha sido cursada. Será contactada(o) por un psicóloga(o) experta(o) al teléfono de contacto que nos indicó:{{$paciente->telefono}}. Por favor, si este no es el número, indicarnos el correcto a través de esta vía, así como también cualquier inconveniente que pueda presentar.</p>
 <br>
 <p>Cordialmente,</p>
 @endforeach
