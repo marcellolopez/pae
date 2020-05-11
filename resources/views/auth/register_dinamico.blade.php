@@ -13,7 +13,7 @@
                 <div class="col-6 offset-lg-3"> 
                     <img class="mb-4 img-fluid" src="{{ asset('img/Logos_MET_V3_DTI_png.png') }}" alt="">                   
                 </div>                    
-                        <form method="POST" class="" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+                        <form method="POST" class="" action="{{ url('register/'.$logo) }}" aria-label="{{ __('Register') }}">
                             <div class="row">
                                 <div class="col-12">
                                     @csrf
@@ -142,12 +142,11 @@
                             </div>
                             <legend><br></legend>
                             <div class="row">
-                                <div class="col-lg-4 offset-lg-2 col-sm-4 offset-sm-2 col-xs-4 offset-xs-2"> 
-                                    <img class="mb-4 img-fluid" src="{{ asset('img/banmedica-logo.png') }}" alt="">
+                                @if($img != null)
+                                <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3">
+                                    <img class="mb-4 img-fluid" src="{{ asset('img/'.$img) }}" alt="">
                                 </div>
-                                <div class="col-lg-4 col-sm-4 col-xs-4 pull-right">
-                                    <img class="mb-4 img-fluid" src="{{ asset('img/vidatres-logo.png') }}" alt="">
-                                </div>
+                                @endif
                             </div>
 
                      
@@ -176,31 +175,6 @@
             });
             $('[data-toggle="popover"]').popover({trigger: 'focus', placement: 'top'}); 
         });
-          $(document).on('click', '.ajax_cambio_estado', function(){
-            
-                  var val  = $(this).attr('id');
-                  var id   = $(this).attr('value');
-                  var responsable   = $('#responsable').val();
-                  var comentario_cierre   = $('#comentario_cierre').val();
-                  var estado_cierre   = $('#estado_cierre').val();
-                  $.ajax({
-                    data: {'id':id, 'val':val, 'responsable':responsable, 'comentario_cierre':comentario_cierre, 'estado_cierre':estado_cierre, "_token": "{{ csrf_token() }}"},
-                    url:'{{ url('/cambio_estado') }}',
-                    type: "POST",
-                    dataType: 'json',
-                    success: function (response) {
-                      console.log(response);
-                            enviado.ajax.reload();
-                            gestion.ajax.reload();
-                            cerrado.ajax.reload();
-                            $('#modal_acciones').modal('hide');
-                          },
-                          error: function (data) {
-                            console.log('Error:', data);
-                          }
-                  });
-                }  
-          });        
 
     </script>
     
