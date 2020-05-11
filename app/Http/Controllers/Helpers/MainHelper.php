@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Helpers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Entities\Consulta;
+use App\Entities\Isapre;
 use DB;
+use Carbon\Carbon;
 
 class MainHelper extends Controller
 {
@@ -52,5 +54,49 @@ class MainHelper extends Controller
         ->first();      
 
         return $consulta;  
+    }   
+
+    public static function isapres()
+    {
+        $consulta = Isapre::all();
+        return $consulta;  
+    }       
+
+    public static function horarios()
+    {
+        $actual = Carbon::now();
+        $cont = 0;
+        while ( $cont < 7) {
+
+            $dia = $actual->isoFormat('dddd');
+            if($dia != 'domingo')
+            {
+                $array[$cont]['value'] = $actual->toDateString();
+                $array[$cont]['fecha'] = ucfirst($dia).', '.$actual->day.' de '.$actual->isoFormat('MMMM');
+                $cont++;
+            }     
+            $actual = $actual->add(1, 'day');   
+        }
+        return ($array);        
+    }
+
+    public static function bloques($fecha)
+    {
+        $fecha = new Carbon($fecha);  
+        if($fecha->isoFormat('dddd') != 'sábado' || $fecha == null)
+        {
+            $array[1] = "8:00  a 11:00 Hrs (20 cupos restantes)";
+            $array[2] = "11:00 a 14:00 Hrs (20 cupos restantes)";
+            $array[3] = "14:00 a 17:00 Hrs (20 cupos restantes)";
+            $array[4] = "17:00 a 20:00 Hrs (20 cupos restantes)";
+
+        }
+        else
+        {
+            $array[1] = "9:00  a 14:00 Hrs (20 cupos restantes)";
+
+        }        
+
+        return ((object) $array);        
     }    
 }

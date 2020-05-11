@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use Freshwork\ChileanBundle\Rut;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Helpers\MainHelper;
 
 class RegisterController extends Controller
 {
@@ -255,7 +256,10 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $motivo_consultas = MotivoConsulta::all();
-        return view('auth.register',compact('motivo_consultas'));
+        $horarios = MainHelper::horarios();
+        $bloques = MainHelper::bloques(null);
+    
+        return view('auth.register',compact('motivo_consultas','horarios','bloques'));
     }
 
     public function showInfo($info)
