@@ -29,7 +29,7 @@ Route::group([
 // Fin
 
 Route::get('register/{logo}', 'Auth\RegisterController@showRegistrationDinamicoForm');
-Route::post('register/{logo}', 'Auth\RegisterController@@register_dinamico');
+Route::post('register/{logo}', 'Auth\RegisterController@register_dinamico');
 
 Route::get('registro', function () {
     return redirect()->route('register');

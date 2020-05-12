@@ -152,98 +152,7 @@ class RegisterController extends Controller
         
     }
 
-    public function register_dinamico(Request $request)
-    {
-        dd($request);
-        if(strpos($request->rut, '-'))
-        {
-            
-        }
-        else
-        {
-            $request->rut = Rut::parse($request->rut)->format(Rut::FORMAT_WITH_DASH);
-        }
 
-        $rut_sin_dv = substr($request->rut, 0, -2);
-        $data       = $this->validator($request->all())->validate();
-
-        $paciente        = Paciente::where('rut', $rut_sin_dv)->first();
-        $registro_isapre = RegistroIsapre::where('RUT_AFILIADO', $rut_sin_dv)->first();
-        $carga_isapre    = CargaIsapre::where('RUT_CARGA', $rut_sin_dv)->first();
-
-        if($registro_isapre || $carga_isapre)
-        {
-            $activo = true;
-        }
-        else
-        {
-            $activo = false;
-        }
-
-     
-        if($paciente)
-        {
-           
-            return $this->showInfoGuest('Usted ya registra una solicitud, por favor contactarse con su isapre.');
-        
-
-        }
-        else
-        {
-          
-            $paciente = Paciente::create([
-                'nombres'            => $request->nombres,
-                'apellidoPaterno'    => $request->apellidoPaterno,
-                'apellidoMaterno'    => $request->apellidoMaterno,
-                'rut'                => $rut_sin_dv,                
-                'email'              => $request->email,
-                'telefono'           => $request->telefono,
-                'celular'            => $request->celular,
-                'activo'             => $activo,
-            ]);
-        }
-        
-
-
-        $consulta                      = New Consulta();
-        $consulta->user_id             = null;
-        $consulta->paciente_id         = $paciente->id;
-        $consulta->motivo_consulta_id  = $request->motivo_consulta;
-        $consulta->estado_id           = 1;
-        $consulta->fecha_enviado       = now();
-        $consulta->comentario          = $request->comentario;
-        $consulta->telefono_emergencia = $request->telefono_emergencia;
-        $consulta->nombre_emergencia   = $request->nombre_emergencia;
-        $consulta->comentario_cierre   = 'Sin comentario';
-        $consulta->estado_cierre_id       = 1;        
-        $consulta->save();
-
-        //$consulta = Consulta::where('id', $consulta->id)->with('motivo_consulta')->first();
-                
-        $paciente_array =[
-            'nombre'             => $paciente->nombres.' '.$paciente->apellidoPaterno.' '.$paciente->apellidoMaterno,
-            'rut'                => Rut::parse($request->rut)->fix()->format(),
-            'email'              => $paciente->email,
-            'telefono'           => $paciente->telefono,
-            'celular'            => $request->celular,
-            'motivo_consulta'    => $consulta->motivo_consulta->motivo,
-            'comentario'         => $consulta->comentario,
-            'activo'             => $activo,
-        ];
-
-        if($activo == true)
-        {
-            $paciente->notify(new ConfirmacionComercial($paciente_array));
-            $paciente->notify(new ConfirmacionPaciente($paciente_array));
-            return $this->showInfoGuest('Su solicitud ha sido registrada con éxito, será contactado a la brevedad por un psicólogo especialista de nuestro equipo.');
-        }
-        else
-        {
-            $paciente->notify(new ConfirmacionComercial($paciente_array));
-            return $this->showInfoGuest('Su solicitud ha registrado un problema, nos contactaremos con su Isapre para aclarar su situación.');
-        }
-        
-    }
 
     public function register_paciente_consulta(Request $request)
     {
@@ -307,22 +216,7 @@ class RegisterController extends Controller
         return $this->showInfo('Se ha registrado la consulta con exito.');
     }
 
-    public function showRegistrationDinamicoForm($logo = null)
-    {
-        switch ($logo) {
-            case 'banmedica':
-                $img = 'banmedica-logo.png';
-                break;
-            case 'vidatres':
-                $img = 'vidatres-logo.png';
-                break;            
-            default:
-                $img = null;
-                break;
-        }
-        $motivo_consultas = MotivoConsulta::all();
-        return view('auth.register_dinamico',compact('motivo_consultas', 'logo', 'img'));
-    }
+
 
     public function showRegistrationForm()
     {
@@ -339,6 +233,131 @@ class RegisterController extends Controller
     {
         return view('auth.info', compact('info'));
     }
+    public function showRegistrationDinamicoForm($logo = null)
+    {
+        switch ($logo) {
+            case 'banmedica':
+                $img = 'banmedica-logo.png';
+                break;
+            case 'vidatres':
+                $img = 'vidatres-logo.png';
+                break;            
+            default:
+                $img = null;
+                break;
+        }
+        $motivo_consultas = MotivoConsulta::all();
+        return view('auth.register_dinamico',compact('motivo_consultas', 'logo', 'img'));
+    }    
+    public function register_dinamico(Request $request)
+    {
+
+        if(strpos($request->rut, '-'))
+        {
+            
+        }
+        else
+        {
+            $request->rut = Rut::parse($request->rut)->format(Rut::FORMAT_WITH_DASH);
+        }
+
+        $rut_sin_dv = substr($request->rut, 0, -2);
+        $data       = $this->validator($request->all())->validate();
+
+        $paciente        = Paciente::where('rut', $rut_sin_dv)->first();
+        $registro_isapre = RegistroIsapre::where('RUT_AFILIADO', $rut_sin_dv)->first();
+        $carga_isapre    = CargaIsapre::where('RUT_CARGA', $rut_sin_dv)->first();
+
+        if($registro_isapre || $carga_isapre)
+        {
+            $activo = true;
+        }
+        else
+        {
+            $activo = false;
+        }
+
+     
+        if($paciente)
+        {
+           
+            return $this->showInfoGuestDinamico('Usted ya registra una solicitud, por favor contactarse con su isapre.');
+        
+
+        }
+        else
+        {
+          
+            $paciente = Paciente::create([
+                'nombres'            => $request->nombres,
+                'apellidoPaterno'    => $request->apellidoPaterno,
+                'apellidoMaterno'    => $request->apellidoMaterno,
+                'rut'                => $rut_sin_dv,                
+                'email'              => $request->email,
+                'telefono'           => $request->telefono,
+                'celular'            => $request->celular,
+                'activo'             => $activo,
+            ]);
+        }
+        
+
+
+        $consulta                      = New Consulta();
+        $consulta->user_id             = null;
+        $consulta->paciente_id         = $paciente->id;
+        $consulta->motivo_consulta_id  = $request->motivo_consulta;
+        $consulta->estado_id           = 1;
+        $consulta->fecha_enviado       = now();
+        $consulta->comentario          = $request->comentario;
+        $consulta->telefono_emergencia = $request->telefono_emergencia;
+        $consulta->nombre_emergencia   = $request->nombre_emergencia;
+        $consulta->comentario_cierre   = 'Sin comentario';
+        $consulta->estado_cierre_id       = 1;        
+        $consulta->save();
+
+        //$consulta = Consulta::where('id', $consulta->id)->with('motivo_consulta')->first();
+                
+        $paciente_array =[
+            'nombre'             => $paciente->nombres.' '.$paciente->apellidoPaterno.' '.$paciente->apellidoMaterno,
+            'rut'                => Rut::parse($request->rut)->fix()->format(),
+            'email'              => $paciente->email,
+            'telefono'           => $paciente->telefono,
+            'celular'            => $request->celular,
+            'motivo_consulta'    => $consulta->motivo_consulta->motivo,
+            'comentario'         => $consulta->comentario,
+            'activo'             => $activo,
+        ];
+
+        if($activo == true)
+        {
+            $paciente->notify(new ConfirmacionComercial($paciente_array));
+            $paciente->notify(new ConfirmacionPaciente($paciente_array));
+            return $this->showInfoGuestDinamico('Su solicitud ha sido registrada con éxito, será contactado a la brevedad por un psicólogo especialista de nuestro equipo.');
+        }
+        else
+        {
+            $paciente->notify(new ConfirmacionComercial($paciente_array));
+            return $this->showInfoGuestDinamico('Su solicitud ha registrado un problema, nos contactaremos con su Isapre para aclarar su situación.');
+        }
+        
+    }
+    public function showInfoGuestDinamico($info)
+    {
+        $logo = request()->segment(count(request()->segments()));
+
+        switch ($logo) {
+            case 'banmedica':
+                $img = 'banmedica-logo.png';
+                break;
+            case 'vidatres':
+                $img = 'vidatres-logo.png';
+                break;            
+            default:
+                $img = null;
+                break;
+        }
+        return view('auth.info_dinamico', compact('info','logo', 'img'));
+    }    
     protected function validator(array $data)
     {
 
