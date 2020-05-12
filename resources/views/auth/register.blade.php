@@ -99,7 +99,7 @@
                                         </select>                            
                                     </div>                             
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 bg-light border border-danger">
                                     <div class="row">               
                                         <div class="col-6">                        
                                             <div class="form-group ">
@@ -118,7 +118,7 @@
                                         </div> 
                                     </div>                                    
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 border border-success">
                                     <div class="row">               
                                         <div class="col-6">                        
                                             <div class="form-group ">
