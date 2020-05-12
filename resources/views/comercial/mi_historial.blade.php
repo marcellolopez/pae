@@ -186,16 +186,7 @@
                 {data: 'fecha', name: 'fecha'},
                 {data: 'hora', name: 'hora'},
                 {data: 'rut', name: 'rut'},
-                {
-                    "data": null,
-                    "sortable": false,
-                    "className": "text-center",
-                    "searchable": false,                        
-                    "render": function (o) {
-
-                            return o.fullname.toUpperCase();    
-                    }
-                }, 
+                {data: "fullname", name: "fullname"},
                 
                 {data: 'telefono', name: 'telefono'},                    
                 {data: 'motivo', name: 'motivo'},  
@@ -243,16 +234,7 @@
                 {data: 'fecha', name: 'fecha'},
                 {data: 'hora', name: 'hora'},
                 {data: 'rut', name: 'rut'},
-                {
-                    "data": null,
-                    "sortable": false,
-                    "className": "text-center",
-                    "searchable": false,                        
-                    "render": function (o) {
-
-                            return o.fullname.toUpperCase();    
-                    }
-                }, 
+                {data: "fullname", name: "fullname"},
                 
                 {data: 'telefono', name: 'telefono'},                    
                 {data: 'motivo', name: 'motivo'},  
@@ -300,16 +282,7 @@
                 {data: 'fecha', name: 'fecha'},
                 {data: 'hora', name: 'hora'},
                 {data: 'rut', name: 'rut'},
-                {
-                    "data": null,
-                    "sortable": false,
-                    "className": "text-center",
-                    "searchable": false,                        
-                    "render": function (o) {
-
-                            return o.fullname.toUpperCase();    
-                    }
-                }, 
+                {data: "fullname", name: "fullname"},
                 
                 {data: 'telefono', name: 'telefono'},                    
                 {data: 'motivo', name: 'motivo'},  

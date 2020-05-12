@@ -104,8 +104,9 @@ class HomeController extends Controller
     {
         $pacientes_enviado = $this->lista(1);
         return DataTables()->of($pacientes_enviado)
-            ->addColumn('fullname',
-                '{{$nombres}} {{$apellidoPaterno}}'
+            ->addColumn('fullname', function($data) {
+                    return mb_strtoupper($data->nombres.' '.$data->apellidoPaterno);
+                }       
             )
             ->addColumn('rut', function($paciente) {
                     return Rut::set($paciente->rut)->fix()->format() ;
@@ -119,8 +120,9 @@ class HomeController extends Controller
     {
         $pacientes_gestion = $this->lista(2);
         return DataTables()->of($pacientes_gestion)
-            ->addColumn('fullname',
-                '{{$nombres}} {{$apellidoPaterno}}'
+            ->addColumn('fullname', function($data) {
+                    return mb_strtoupper($data->nombres.' '.$data->apellidoPaterno);
+                }       
             )
             ->addColumn('rut', function($paciente) {
                     return Rut::set($paciente->rut)->fix()->format() ;
@@ -135,7 +137,7 @@ class HomeController extends Controller
         $pacientes_cerrado = $this->lista(3);
         return DataTables()->of($pacientes_cerrado)
             ->addColumn('fullname', function($data) {
-                    return strtoupper($data->nombres.' '.$data->apellidoPaterno);
+                    return mb_strtoupper($data->nombres.' '.$data->apellidoPaterno);
                 }       
             )
             ->addColumn('rut', function($data) {
