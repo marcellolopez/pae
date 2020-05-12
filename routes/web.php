@@ -52,7 +52,7 @@ Route::get('welcome', 'HomeController@welcome')
 
 Route::post('cambio_estado','HomeController@cambio_estado');
 
-
+Route::post('cargar_bloques','HorarioBloqueController@cargar_bloques')->name('cargar_bloques');
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -61,6 +61,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('consultar_paciente','HomeController@consultar_paciente')->name('consultar_paciente');
     Route::post('consultar_detalles','HomeController@consultar_detalles')->name('consultar_detalles');
     Route::post('lista_responsables','HomeController@lista_responsables')->name('lista_responsables');
+
+    
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('welcome', 'HomeController@welcome')

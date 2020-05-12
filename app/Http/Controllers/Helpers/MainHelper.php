@@ -82,20 +82,49 @@ class MainHelper extends Controller
 
     public static function bloques($fecha)
     {
-        $fecha = new Carbon($fecha);  
-        if($fecha->isoFormat('dddd') != 'sábado' || $fecha == null)
+        $dia = new Carbon($fecha);  
+        $actual = now()->format('Y-m-d');
+        $hora = now()->format('H');
+        $hoy = ($fecha == $actual);
+        $cont = 0;
+     
+        if($hoy == true)
         {
-            $array[1] = "8:00  a 11:00 Hrs (20 cupos restantes)";
-            $array[2] = "11:00 a 14:00 Hrs (20 cupos restantes)";
-            $array[3] = "14:00 a 17:00 Hrs (20 cupos restantes)";
-            $array[4] = "17:00 a 20:00 Hrs (20 cupos restantes)";
 
-        }
+            if($dia->isoFormat('dddd') != 'sábado' || $fecha == null)
+            {
+
+                if($hora < 11){$array[$cont] = "8:00  a 11:00 Hrs (20 cupos restantes)"; $cont++;}
+                if($hora < 14){$array[$cont] = "11:00 a 14:00 Hrs (20 cupos restantes)"; $cont++;}
+                if($hora < 17){$array[$cont] = "14:00 a 17:00 Hrs (20 cupos restantes)"; $cont++;}
+                if($hora < 20){$array[$cont] = "17:00 a 20:00 Hrs (20 cupos restantes)"; $cont++;}
+
+            }
+            else
+            {
+                if($hora < 14){$array[$cont] = "9:00  a 14:00 Hrs (20 cupos restantes)";}
+
+            } 
+   
+        }  
         else
         {
-            $array[1] = "9:00  a 14:00 Hrs (20 cupos restantes)";
 
-        }        
+            if($dia->isoFormat('dddd') != 'sábado' || $fecha == null)
+            {
+                
+                $array[1] = "8:00  a 11:00 Hrs (20 cupos restantes)";
+                $array[2] = "11:00 a 14:00 Hrs (20 cupos restantes)";
+                $array[3] = "14:00 a 17:00 Hrs (20 cupos restantes)";
+                $array[4] = "17:00 a 20:00 Hrs (20 cupos restantes)";
+
+            }
+            else
+            {
+                $array[1] = "9:00  a 14:00 Hrs (20 cupos restantes)";
+
+            }      
+        }  
 
         return ((object) $array);        
     }    

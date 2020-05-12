@@ -122,10 +122,10 @@
                                     <div class="row">               
                                         <div class="col-6">                        
                                             <div class="form-group ">
-                                                <label class="control-label"  for="nombre_emergencia">Día de agendamiento *</label>
+                                                <label class="control-label"  for="nombre_emergencia">Día de Agendamiento *</label>
                                                 
-                                                <select  class=" form-control{{ $errors->has('horario') ? ' is-invalid' : '' }}" name="horario" required>
-                                                    <option value="">Seleccione</option>
+                                                <select  class=" form-control{{ $errors->has('horario') ? ' is-invalid' : '' }}" id="horario" name="horario" required>
+                                                    <option value="">Seleccione día de agendamiento</option>
                                                     @foreach($horarios as $horario)
                                                     @if (old('horario') == $horario['value'])
                                                     <option value="{{ $horario['value'] }}" selected>{{ $horario['fecha'] }}</option>
@@ -140,10 +140,10 @@
                                         </div>                                         
                                         <div class="col-6">                        
                                             <div class="form-group ">
-                                                <label class="control-label"  for="nombre_emergencia">Bloque *</label>
+                                                <label class="control-label"  for="bloque">Bloque de Agendamiento*</label>
                                                 
-                                                <select  class=" form-control{{ $errors->has('bloque') ? ' is-invalid' : '' }}" name="bloque" required>
-                                                    <option value="">Seleccione</option>
+                                                <select  class=" form-control{{ $errors->has('bloque') ? ' is-invalid' : '' }}" id="bloque" name="bloque" required>
+                                                    <option value="">Seleccione día de agendamiento</option>
                                                     @foreach($bloques as $bloque)
                                                     @if (old('bloque') == $bloque)
                                                     <option value="{{ $bloque }}" selected>{{ $bloque }}</option>
@@ -216,7 +216,34 @@
             });
             $('[data-toggle="popover"]').popover({trigger: 'focus', placement: 'top'}); 
         });
+        $(document).on('change', '#horario', function(){
+            var val  = $(this).val();
 
+            $.ajax({
+                data: {'val':val, "_token": "{{ csrf_token() }}"},
+                url:'{{ url('cargar_bloques') }}',
+                type: "POST",
+                dataType: 'json',
+                success: function (response) {
+                console.log(response);
+                $('#bloque').empty();
+                $('#bloque').append('<option value="">Seleccione Bloque</option>')
+                $.each(response,function(key, value) {
+                    
+                    $('#bloque')
+                     .append($("<option></option>")
+                                .attr("value",key)
+                                .text(value)); 
+            });
+
+              },
+              error: function (data) {
+                console.log('Error:', data);
+                $('#bloque').empty();
+                $('#bloque').append('<option value="">Seleccione día de agendamiento</option>')
+              }
+            });
+        });
     </script>
     
 @endsection
