@@ -99,7 +99,8 @@
                                         </select>                            
                                     </div>                             
                                 </div>
-                                <div class="col-12 bg-light border border-danger">
+                                <legend class="text-center">Datos de Emergencia</legend>
+                                <div class="col-12 ">
                                     <div class="row">               
                                         <div class="col-6">                        
                                             <div class="form-group ">
@@ -118,11 +119,12 @@
                                         </div> 
                                     </div>                                    
                                 </div>
-                                <div class="col-12 border border-success">
+                                <legend class="text-center">Agendamiento de Contacto</legend>
+                                <div class="col-12 ">
                                     <div class="row">               
                                         <div class="col-6">                        
                                             <div class="form-group ">
-                                                <label class="control-label"  for="nombre_emergencia">Día de Agendamiento *</label>
+                                                <label class="control-label"  for="horario">Día de Agendamiento *</label>
                                                 
                                                 <select  class=" form-control{{ $errors->has('horario') ? ' is-invalid' : '' }}" id="horario" name="horario" required>
                                                     <option value="">Seleccione día de agendamiento</option>

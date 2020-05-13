@@ -62,6 +62,7 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+        dd($request->all());
         if(strpos($request->rut, '-'))
         {
             
@@ -110,8 +111,6 @@ class RegisterController extends Controller
                 'activo'             => $activo,
             ]);
         }
-        
-
 
         $consulta                      = New Consulta();
         $consulta->user_id             = null;
@@ -126,8 +125,6 @@ class RegisterController extends Controller
         $consulta->estado_cierre_id    = 1;   
         $consulta->responsable_id      = null;        
         $consulta->save();
-
-        //$consulta = Consulta::where('id', $consulta->id)->with('motivo_consulta')->first();
                 
         $paciente_array =[
             'nombre'             => $paciente->nombres.' '.$paciente->apellidoPaterno.' '.$paciente->apellidoMaterno,
@@ -153,14 +150,11 @@ class RegisterController extends Controller
         }
         
     }
-
+    /*/
     public function register_auth(Request $request)
     {
-
-
         $data = $this->validator($request->all())->validate();
-        $rut_sin_dv = substr($request->rut, 0, -2);
-        //$paciente = Paciente::where('rut', $rut_sin_dv)->first();
+        $rut_sin_dv = substr($request->rut, 0, -2);>first();
         //$password = Hash::make($request->password);
 
         $paciente = Paciente::create([
@@ -190,6 +184,7 @@ class RegisterController extends Controller
 
         return $this->showInfo('Su solicitud ha sido registrada con éxito, será contactado a la brevedad por un psicólogo especialista de nuestro equipo.');
     }
+    /*/
 
     public function register_paciente_consulta(Request $request)
     {
@@ -235,21 +230,6 @@ class RegisterController extends Controller
         $consulta->telefono_emergencia= $request->telefono_emergencia;
         $consulta->save();
 
-
-        /*/
-        $paciente_array =[
-            'nombre'             => $paciente->nombres.' '.$paciente->apellidoPaterno.' '.$paciente->apellidoMaterno,
-            'rut'                => Rut::parse($request->rut)->fix()->format(),
-            'email'              => $paciente->email,
-            'telefono'           => $paciente->telefono,
-            'celular'            => $request->celular,
-            'motivo_consulta' => $paciente->motivo_consulta->motivo,
-            'comentario'         => $paciente->comentario,
-        ];
-        /*/
-        //$paciente->notify(new ConfirmacionPaciente($paciente_array));
-        //$paciente->notify(new ConfirmacionComercial($paciente_array));
-
         return $this->showInfo('Se ha registrado la consulta con exito.');
     }
 
@@ -273,7 +253,6 @@ class RegisterController extends Controller
     }
     protected function validator(array $data)
     {
-
         return Validator::make($data, [
             'nombres'             => 'required|string|max:255',
             'apellidoPaterno'     => 'required|string|max:255',
@@ -285,12 +264,12 @@ class RegisterController extends Controller
             'motivo_consulta'     => 'required',
             'nombre_emergencia'   => 'required|string|max:255',
             'telefono_emergencia' => 'required|digits:9',
-
+            'horario'             => 'required',
+            'bloque'              => 'required',
         ],
         [
             'rut.cl_rut' => 'El campo RUT debe contener guion y digito verificador, ejemplo : 1234567-8'
-        ]);   
-            
+        ]);     
     }
 
     protected function validator_paciente(array $data)
@@ -303,6 +282,8 @@ class RegisterController extends Controller
             'motivo_consulta'     => 'required',
             'nombre_emergencia'   => 'required|string|max:255',
             'telefono_emergencia' => 'required|digits:9',
+            'horario'             => 'required',
+            'bloque'              => 'required',
         ]);   
             
     }    
