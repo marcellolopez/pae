@@ -56,13 +56,13 @@ Route::post('cargar_bloques','HorarioBloqueController@cargar_bloques')->name('ca
 
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::post('cargar_comunas','FichaController@cargar_comunas')->name('cargar_comunas');
     Route::get('ficha_met/{id}', 'FichaController@index')->name('ficha_met');
     Route::resource('ficha_met', 'FichaController');
+
     Route::post('consultar_paciente','HomeController@consultar_paciente')->name('consultar_paciente');
     Route::post('consultar_detalles','HomeController@consultar_detalles')->name('consultar_detalles');
     Route::post('lista_responsables','HomeController@lista_responsables')->name('lista_responsables');
-
-    
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('welcome', 'HomeController@welcome')

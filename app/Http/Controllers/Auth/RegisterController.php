@@ -8,6 +8,7 @@ use App\Entities\Consulta;
 use App\Entities\MotivoConsulta;
 use App\Entities\CargaIsapre;
 use App\Entities\RegistroIsapre;
+use App\Entities\AgendamientoPaciente;
 use App\Notifications\ConfirmacionPaciente;
 use App\Notifications\ConfirmacionComercial;
 use App\Http\Controllers\Controller;
@@ -62,7 +63,7 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        dd($request->all());
+  
         if(strpos($request->rut, '-'))
         {
             
@@ -89,13 +90,9 @@ class RegisterController extends Controller
             $activo = false;
         }
 
-     
         if($paciente)
         {
-           
             return $this->showInfoGuest('Usted ya registra una solicitud, por favor contactarse con su isapre.');
-        
-
         }
         else
         {
@@ -136,6 +133,15 @@ class RegisterController extends Controller
             'comentario'         => $consulta->comentario,
             'activo'             => $activo,
         ];
+
+
+        $agendamiento = AgendamientoPaciente::create([
+            'consulta_id'      => $consulta->id,
+            'bloque_id'        => $request->bloque,
+            'fecha'            => $request->horario
+ 
+        ]);
+
 
         if($activo == true)
         {

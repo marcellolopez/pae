@@ -37,7 +37,6 @@
                                         </div>
                                     @endif
                                 </div>
-
                             </div>
                             <div class="row">
                                 <div class="col-6">
@@ -45,45 +44,35 @@
                                         <label class="control-label" for="rut">RUT *</label>
                                         <input id="rut" type="rut" class="form-control{{ $errors->has('rut') ? ' is-invalid' : '' }}" name="rut" value="{{ old('rut') }}" placeholder="12345678-K" regexp="[0-9]{0,10}(\-([0-9kK]{0,1})){0,1}" data-toggle="popover" title="" data-content="Debe ingresar el RUT sin puntos, con dígito verificador y con guion"  required>
                                     </div>
-
                                     <div class="form-group ">
                                         <label class="control-label"  for="nombres">Nombres *</label>
                                         
-                                        <input id="nombres" type="text" class=" form-control{{ $errors->has('nombres') ? ' is-invalid' : '' }}" name="nombres" value="{{ old('nombres') }}" placeholder="Nombres" required >
+                                        <input id="nombres" regexp="[ A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙ.-]+" type="text" class=" form-control{{ $errors->has('nombres') ? ' is-invalid' : '' }}" name="nombres" value="{{ old('nombres') }}" placeholder="Nombres" required >
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label" for="apellidoPaterno">Apellido Paterno *</label>                                        
-                                        <input id="apellidoPaterno" type="text" class=" form-control{{ $errors->has('apellidoPaterno') ? ' is-invalid' : '' }}" name="apellidoPaterno" value="{{ old('apellidoPaterno') }}" placeholder="Apellido Paterno" required  >
-
+                                        <input id="apellidoPaterno" regexp="[ A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙ.-]+" type="text" class=" form-control{{ $errors->has('apellidoPaterno') ? ' is-invalid' : '' }}" name="apellidoPaterno" value="{{ old('apellidoPaterno') }}" placeholder="Apellido Paterno" required  >
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label" for="apellidoMaterno">Apellido Materno *</label>  
                                           
-                                        <input id="apellidoMaterno" type="text" class=" form-control{{ $errors->has('apellidoMaterno') ? ' is-invalid' : '' }}" name="apellidoMaterno" value="{{ old('apellidoMaterno') }}" placeholder="Apellido Materno" required  >
+                                        <input id="apellidoMaterno" regexp="[ A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙ.-]+" type="text" class=" form-control{{ $errors->has('apellidoMaterno') ? ' is-invalid' : '' }}" name="apellidoMaterno" value="{{ old('apellidoMaterno') }}" placeholder="Apellido Materno" required  >
                                     </div>
                                 </div>
-
                                 <div class="col-6">                        
                                     <div class="form-group ">
                                         <label class="control-label" for="email">Email *</label>
    
                                         <input id="email" type="email" class=" form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required>
-                                        
-
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label" for="telefono">Teléfono 1*</label>
                                         <input id="telefono" type="number" class=" form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono"  regexp="[0-9]{0,9}" minlength="9" maxlength="9" data-toggle="popover" title="" data-content="El télefono 1 debe contener 9 números">
-
                                     </div>   
-                                    
                                     <div class="form-group ">
                                         <label class="control-label" for="celular">Teléfono 2 </label>
                                         <input id="celular" type="number" class=" form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" value="{{ old('celular') }}" placeholder="Teléfono 2"  regexp="[0-9]{0,9}" minlength="9" maxlength="9" data-toggle="popover" title="" data-content="El télefono 2 debe contener 9 números">
-
                                     </div>
-                                
-
                                     <div class="form-group ">
                                         <label class="control-label" for="motivo_consulta">Motivo Consulta *</label>
                                         <select  class=" form-control{{ $errors->has('motivo_consulta') ? ' is-invalid' : '' }}" name="motivo_consulta" required>
@@ -99,14 +88,13 @@
                                         </select>                            
                                     </div>                             
                                 </div>
-                                <legend class="text-center">Datos de Emergencia</legend>
-                                <div class="col-12 ">
+                                <div class="col-12 border border-orange">
                                     <div class="row">               
                                         <div class="col-6">                        
                                             <div class="form-group ">
                                                 <label class="control-label"  for="nombre_emergencia">Contacto de Emergencia *</label>
                                                 
-                                                <input id="nombre_emergencia" type="text" class=" form-control{{ $errors->has('nombre_emergencia') ? ' is-invalid' : '' }}" name="nombre_emergencia" value="{{ old('nombre_emergencia') }}" placeholder="Nombre de contacto" required >
+                                                <input id="nombre_emergencia" regexp="[ A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙ.-]+" type="text" class=" form-control{{ $errors->has('nombre_emergencia') ? ' is-invalid' : '' }}" name="nombre_emergencia" value="{{ old('nombre_emergencia') }}" placeholder="Nombre de contacto" required >
 
                                             </div> 
                                         </div>                                         
@@ -119,15 +107,14 @@
                                         </div> 
                                     </div>                                    
                                 </div>
-                                <legend class="text-center">Agendamiento de Contacto</legend>
-                                <div class="col-12 ">
+                                <legend></legend>
+                                <div class="col-12 border border-primary" >
                                     <div class="row">               
                                         <div class="col-6">                        
                                             <div class="form-group ">
-                                                <label class="control-label"  for="horario">Día de Agendamiento *</label>
-                                                
+                                                <label class="control-label"  for="horario">Agende su día *</label>
                                                 <select  class=" form-control{{ $errors->has('horario') ? ' is-invalid' : '' }}" id="horario" name="horario" required>
-                                                    <option value="">Seleccione día de agendamiento</option>
+                                                    <option value="">Seleccione día</option>
                                                     @foreach($horarios as $horario)
                                                     @if (old('horario') == $horario['value'])
                                                     <option value="{{ $horario['value'] }}" selected>{{ $horario['fecha'] }}</option>
@@ -142,25 +129,17 @@
                                         </div>                                         
                                         <div class="col-6">                        
                                             <div class="form-group ">
-                                                <label class="control-label"  for="bloque">Bloque de Agendamiento*</label>
+                                                <label class="control-label"  for="bloque">Seleccione su rango horario *</label>
                                                 
                                                 <select  class=" form-control{{ $errors->has('bloque') ? ' is-invalid' : '' }}" id="bloque" name="bloque" required>
-                                                    <option value="">Seleccione día de agendamiento</option>
-                                                    @foreach($bloques as $bloque)
-                                                    @if (old('bloque') == $bloque)
-                                                    <option value="{{ $bloque }}" selected>{{ $bloque }}</option>
-                                                    @else
-                                                    <option value="{{ $bloque }}">{{ $bloque }}</option>
-                                                    @endif
-                                                    @endforeach
-
+                                                    <option value="">Seleccione día</option>
                                                 </select>  
 
                                             </div>    
                                         </div> 
                                     </div>                                    
                                 </div>                                
-                                <div class="col-12">                              
+                                <div class="col-12" >                              
 
                                     <div class="form-group ">
                                         <label class="control-label" for="comentario">Comentario </label>
@@ -203,6 +182,18 @@
 </div>
 @endsection
 
+@section('cssCustom')
+<style type="text/css">
+.border-orange {
+    border-color: orange !important;
+}    
+.tachado {
+    text-decoration-line: line-through !important;
+    color: LightGray;
+    text-decoration-style: dashed;
+}
+</style>
+@endsection
 @section('jsScripts')
     <script type="text/javascript">
 
@@ -227,22 +218,30 @@
                 type: "POST",
                 dataType: 'json',
                 success: function (response) {
-                console.log(response);
                 $('#bloque').empty();
-                $('#bloque').append('<option value="">Seleccione Bloque</option>')
-                $.each(response,function(key, value) {
-                    
-                    $('#bloque')
-                     .append($("<option></option>")
-                                .attr("value",key)
-                                .text(value)); 
+                $('#bloque').append('<option value="">Seleccione rango</option>')
+                $.each(response,function(id, data) {
+                    console.log(data['tachado']);
+                    if(data['tachado'] == true)
+                    {
+          
+                        $('#bloque').append('<option  disabled class="tachado"><strike>'+data['bloque']+'</strike></option>');
+                                 
+                    }
+                    else
+                    {
+                        $('#bloque')
+                         .append($("<option></option>")
+                                    .attr("value",id)
+                                    .text(data['bloque'])); 
+                    }
             });
 
               },
               error: function (data) {
                 console.log('Error:', data);
                 $('#bloque').empty();
-                $('#bloque').append('<option value="">Seleccione día de agendamiento</option>')
+                $('#bloque').append('<option value="">Seleccione día</option>')
               }
             });
         });

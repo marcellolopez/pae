@@ -6,9 +6,6 @@
         <th>Nombre Completo</th>
         <th>Teléfono 1</th>
         <th>Teléfono 2</th>
-        @if($paciente->estado_cierre_id > 1 && $paciente->activo)
- 
-        @endif
       </tr>
     </thead>
     <tbody>
@@ -16,9 +13,6 @@
         <td style="text-transform: uppercase;">{{strtoupper($paciente->nombres)}} {{strtoupper($paciente->apellidoPaterno)}} {{strtoupper($paciente->apellidoMaterno)}}</td>
         <td>{{$paciente->telefono}}</td>
         <td>{{$paciente->celular}}</td>
-        @if($paciente->estado_cierre_id > 1 && $paciente->activo)
-       
-        @endif
 
       </tr>
     </tbody>  
@@ -120,6 +114,7 @@
       </tr>
     </tbody> 
     @endif
+
   </table>
 </div>
 

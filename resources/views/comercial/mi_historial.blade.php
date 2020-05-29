@@ -36,7 +36,7 @@
                                 <a class=" pull-left hover" type="button" onclick="tableToExcel('enviado', 'Enviados')" value="Exportar a excel">Exportar a excel <i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
                                 <table id="enviado" class="table  table-sm datatables  compact nowrap" style="width:100%">
                                     <thead>
-                                        <tr class="table-primary">
+                                        <tr class="table-primary small">
 
                                             
 
@@ -51,13 +51,15 @@
 
                                             
 
-                                            <th>Teléfono</th>                                            
+                                            <th>Teléfono</th> 
+
+                                            <th>Agendamiento</th>                                           
 
                                             <th>Motivo Consulta</th>
 
                                             <th>Detalles</th>
 
-                                            <th>Acción</th>
+                                            <th><i class="fa fa-cog" aria-hidden="true" data-toggle="tooltip" title="Acciones"></i></th>
 
                                         </tr>
                                     </thead>
@@ -75,27 +77,25 @@
                                 <a class=" pull-left hover" type="button" onclick="tableToExcel('gestion', 'Gestion')" value="Exportar a excel">Exportar a excel <i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
                                 <table id="gestion" class="table  table-sm datatables compact nowrap" style="width:100%">
                                     <thead>
-                                        <tr class="table-primary">
-
+                                        <tr class="table-primary small">
                                             
-
                                             <th>Fecha</th>                                            
 
                                             <th>Hora</th>                                            
 
                                             <th>Rut</th>
 
-                                            <th>Nombre</th>
+                                            <th>Nombre</th>                                            
 
-                                            
+                                            <th>Teléfono</th> 
 
-                                            <th>Teléfono</th>                                            
+                                            <th>Agendamiento</th>                                    
 
                                             <th>Motivo Consulta</th>
 
                                              <th>Detalles</th>
 
-                                            <th>Acción</th>
+                                            <th><i class="fa fa-cog" aria-hidden="true" data-toggle="tooltip" title="Acciones"></i></th>
 
                                         </tr>
                                     </thead>
@@ -112,7 +112,7 @@
                                 <a class=" pull-left hover" type="button" onclick="tableToExcel('cerrado', 'Cerrado')" value="Exportar a excel">Exportar a excel <i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
                                 <table id="cerrado" class="table  table-sm datatables compact nowrap" style="width:100%">
                                     <thead>
-                                        <tr class="table-primary">
+                                        <tr class="table-primary small">
 
                                             
 
@@ -127,13 +127,15 @@
 
                                             
 
-                                            <th>Teléfono</th>                                            
+                                            <th>Teléfono</th> 
+
+                                                                                   
 
                                             <th>Motivo Consulta</th>
 
                                             <th>Detalles</th>
 
-                                            <th>Acción</th>
+                                            <th><i class="fa fa-cog" aria-hidden="true"></i></th>
 
                                         </tr>
                                     </thead>
@@ -169,6 +171,8 @@
                     $(row).addClass( 'bg-danger' );
                     $(row).addClass( 'text-white' );
                 }
+
+                $(row).addClass( 'small' );
                 
             },   
             autoWidth: false,
@@ -188,7 +192,8 @@
                 {data: 'rut', name: 'rut'},
                 {data: 'fullname', name: 'fullname'}, 
                 
-                {data: 'telefono', name: 'telefono'},                    
+                {data: 'telefono', name: 'telefono'},
+                {data: 'agendamiento', name: 'agendamiento'},                    
                 {data: 'motivo', name: 'motivo'},  
                 {
                     "data": null,
@@ -203,10 +208,10 @@
                 {
                     "data": null,
                     "sortable": false,
-                    "className": "text-center",
+                    "className": "",
                     "searchable": false,                        
                     "render": function (o) {
-                        return '<a type="button" class="btn-small hover cambio_estado" id="gestionar" value="'+o.consulta_id+'" >Gestionar</a>';
+                        return '<a data-toggle="tooltip" title="Gestionar" type="button" class="btn-small hover cambio_estado " id="gestionar" value="'+o.consulta_id+'" ><i class="fa fa-envelope-o" alt="Gestionar" aria-hidden="true"></i></a>';
                     }
                 }
             ]
@@ -218,7 +223,7 @@
                     $(row).addClass( 'bg-danger' );
                     $(row).addClass( 'text-white' );
                 }
-                
+                $(row).addClass( 'small' );
             },               
             processing: true,
             serverSide: true,
@@ -236,7 +241,8 @@
                 {data: 'rut', name: 'rut'},
                 {data: 'fullname', name: 'fullname'}, 
                 
-                {data: 'telefono', name: 'telefono'},                    
+                {data: 'telefono', name: 'telefono'},    
+                {data: 'agendamiento', name: 'agendamiento'},             
                 {data: 'motivo', name: 'motivo'},  
                 {
                     "data": null,
@@ -244,17 +250,26 @@
                     "className": "text-center",
                     "searchable": false,                        
                     "render": function (o) {
+                           if(o.activo == 1)
+                           {
+                           var ficha    = '<a  type="button" data-toggle="tooltip" title="Ficha MET" id="ficha" class="btn-small hover" href="{{url("ficha_met")}}/'+o.consulta_id+'" target="_blank"><i class="fa fa-file-text-o" aria-hidden="true"></i></a>';   
+                           }
+                           else
+                           {
+                                var ficha = '';
+                           }
+                           var detalles = '<a  type="button" id="detalles" data-toggle="tooltip" title="Detalles" class="btn-small hover" value="'+o.consulta_id+'"><i class="fa fa-search" aria-hidden="true"  ></i></a>'; 
 
-                            return '<a type="button" id="detalles" class="btn-small hover" value="'+o.consulta_id+'"><i class="fa fa-search" aria-hidden="true"  ></i></a>';    
+                           return ficha+' '+detalles;   
                     }
                 },                
                 {
                     "data": null,
                     "sortable": false,
-                    "className": "text-center",
+                    "className": "",
                     "searchable": false,                        
                     "render": function (o) {
-                        return '<a type="button" class="btn-small hover cambio_estado" id="cerrar" value="'+o.consulta_id+'" >Cerrar</a> ';
+                        return '<a data-toggle="tooltip" title="Cerrar" type="button" class="btn-small hover cambio_estado " id="cerrar" value="'+o.consulta_id+'" ><i class="fa fa-lock" alt="Cerrar" aria-hidden="true"></i></a> ';
                     }
                 }
             ]
@@ -266,6 +281,7 @@
                     $(row).addClass( 'bg-danger' );
                     $(row).addClass( 'text-white' );
                 }
+                $(row).addClass( 'small' );
                 
             },               
             processing: true,
@@ -284,7 +300,7 @@
                 {data: 'rut', name: 'rut'},
                 {data: 'fullname', name: 'fullname'}, 
                 
-                {data: 'telefono', name: 'telefono'},                    
+                {data: 'telefono', name: 'telefono'},            
                 {data: 'motivo', name: 'motivo'},  
                 {
                     "data": null,
@@ -294,7 +310,17 @@
                     "render": function (o) {
 
 
-                            return '<a type="button" id="detalles" class="btn-small hover" value="'+o.consulta_id+'"><i class="fa fa-search" aria-hidden="true"  ></i></a>';   
+                           if(o.activo == 1)
+                           {
+                           var ficha    = '<a  type="button" data-toggle="tooltip" title="Ficha MET" id="ficha" class="btn-small hover" href="{{url("ficha_met")}}/'+o.consulta_id+'" target="_blank"><i class="fa fa-file-text-o" aria-hidden="true"></i></a>';   
+                           }
+                           else
+                           {
+                                var ficha = '';
+                           }
+                           var detalles = '<a  type="button" id="detalles" data-toggle="tooltip" title="Detalles" class="btn-small hover" value="'+o.consulta_id+'"><i class="fa fa-search" aria-hidden="true"  ></i></a>'; 
+
+                           return ficha+' '+detalles;   
                     }
                 },    
                 {
@@ -350,6 +376,10 @@
           window.location.href = uri + base64(format(template, ctx))
         }
       })()
+   
+        $('.datatables').on('draw.dt', function () {
+                    $('[data-toggle="tooltip"]').tooltip();
+        });        
     </script>
 
     @include('assets.modal_acciones')

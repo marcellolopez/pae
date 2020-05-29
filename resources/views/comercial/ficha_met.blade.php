@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="container">
                 <br>
-                <form class="" method="POST" action="{{ route('ficha_met.update', $paciente->id) }}">
+                <form class="" method="POST" action="{{ route('ficha_met.update', $paciente->consulta_id) }}">
                     @csrf @method('PATCH')
                     <div class="card ">
                         <div class="card-header bg-primary text-white">
@@ -44,9 +44,9 @@
                                                     </ul>
                                                 </div>
                                                 @endif
-                                                @if (session('info'))
-                                                    <div class="alert  alert-info alert-dismissible fade show" role="alert">
-                                                        {{ session('info') }}
+                                                @if (session('success'))
+                                                    <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                                                        {{ session('success') }}
                                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -57,22 +57,26 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label class="control-label" for="rut">RUT *</label>
+                                                    <label class="control-label" for="rut">RUT</label>
                                                     <input id="rut" type="rut"  class="form-control{{ $errors->has('rut') ? ' is-invalid' : '' }}" name="rut" value="{{ old('rut',$rut) }}" data-toggle="popover" title="" data-content="Debe ingresar el RUT sin puntos, con dígito verificador y con guion"  disabled>
                                                 </div>
                                                 <div class="form-group ">
-                                                    <label class="control-label"  for="nombres">Nombres *</label>
+                                                    <label class="control-label"  for="nombres">Nombres</label>
                                                     
                                                     <input id="nombres" type="text" class=" form-control" name="nombres" value="{{ old('nombres', $paciente->nombres) }}" placeholder="Nombres" disabled>
                                                 </div>
                                                 <div class="form-group ">
-                                                    <label class="control-label" for="apellidoPaterno">Apellido Paterno *</label>                                        
+                                                    <label class="control-label" for="apellidoPaterno">Apellido Paterno</label>                                        
                                                     <input id="apellidoPaterno" type="text" class=" form-control" name="apellidoPaterno" value="{{ old('apellidoPaterno', $paciente->apellidoPaterno) }}" placeholder="Apellido Paterno" disabled >
                                                 </div>
                                                 <div class="form-group ">
-                                                    <label class="control-label" for="apellidoMaterno">Apellido Materno *</label>  
+                                                    <label class="control-label" for="apellidoMaterno">Apellido Materno</label>  
                                                     <input id="apellidoMaterno" type="text" class=" form-control" name="apellidoMaterno" value="{{ old('apellidoMaterno', $paciente->apellidoMaterno) }}" placeholder="Apellido Materno" disabled >
                                                 </div>
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="isapre">Isapre</label>  
+                                                    <input id="isapre" type="text" class=" form-control" name="isapre" value="{{ old('isapre', $paciente->isapre) }}" disabled >
+                                                </div>                                                
                                             </div>
                                             <div class="col-6">                        
                                                 <div class="form-group ">
@@ -80,45 +84,65 @@
                                                     <div class="form-control">
                                                         <div class="form-check-inline">
                                                           <label class="form-check-label">
-                                                            <input type="radio" value="M" id="sexo" name="sexo" required>  Masculino
+                                                            <input {{ $paciente->sexo == 'M' ? 'checked' : '' }} type="radio" value="M" id="sexo" name="sexo" required>  Masculino
                                                           </label>
                                                         </div>
                                                         <div class="form-check-inline">
                                                           <label class="form-check-label">
-                                                            <input type="radio" value="F" id="sexo" name="sexo" required> Femenino
+                                                            <input {{ $paciente->sexo == 'F' ? 'checked' : '' }}  type="radio" value="F" id="sexo" name="sexo" required> Femenino
                                                           </label>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group ">
-                                                    <label class="control-label" for="comuna">Comuna *</label>
-                                                    <select  class=" form-control{{ $errors->has('comuna') ? ' is-invalid' : '' }}" name="comuna" >
+                                                    <label class="control-label" for="edad">Edad *</label>
+                                                    <input id="edad" type="number" class=" form-control" name="edad" value="{{ old('edad', $paciente->edad) }}"   min="1" max="100" required>
+                                                </div>                                                
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="region">Región *</label>
+                                                    <select  class=" form-control{{ $errors->has('region') ? ' is-invalid' : '' }}" id="region" name="region" required>
+                                                        @if($region == null)
+                                                        <option value="">Seleccione región</option>
+                                                        @foreach($regiones as $region)
+                                                        <option value="{{$region->id}}">{{$region->region}}</option>
+                                                        @endforeach
+                                                        @else
+                                                        <option value="">{{$region->region}}</option>
+                                                        @endif
                                                     </select>                            
                                                 </div>        
                                                 <div class="form-group ">
-                                                    <label class="control-label" for="isapre">Isapre *</label>
-                                                    <select  class=" form-control{{ $errors->has('isapre') ? ' is-invalid' : '' }}" name="isapre" required>
-                                                        @if($paciente->id === null)
-                                                        <option value="x" selected>SELECCIONE SU SEGURO DE SALUD</option>
+                                                    <label class="control-label" for="comuna">Comuna *</label>
+
+                                                    <select  class=" form-control{{ $errors->has('comuna') ? ' is-invalid' : '' }}" id="comuna" name="comuna" required>
+                                                        @if($comuna == null)
+                                                        <option value="">Seleccione región</option>
                                                         @else
-                                                        <option value="x">SELECCIONE SU SEGURO DE SALUD</option>
-                                                        @endif
-                                                        @foreach($isapres as $isapre)
-                                                            @if($paciente->isapre == $isapre->id)
-                                                            <option value="{{ $isapre->id }}" selected>{{ strtoupper($isapre->isapre) }}</option>
-                                                            @else
-                                                            <option value="{{ $isapre->id }}">{{ strtoupper($isapre->isapre) }}</option>
-                                                            @endif
-                                                        @endforeach                                                    
+                                                        <option value="">{{$comuna->comuna}}</option>
+                                                        @endif                                                        
                                                     </select>                            
-                                                </div>   
+                                                </div>                                                    
+           
                                                 <div class="form-group ">
                                                     <label class="control-label" for="ubicacion_actual">Ubicación actual *</label>
-                                                    <select  class=" form-control{{ $errors->has('ubicacion_actual') ? ' is-invalid' : '' }}" name="ubicacion_actual" >
-                                                    </select>                            
-                                                </div>                                                               
+                                                    <input id="ubicacion_actual" type="text" class=" form-control" name="ubicacion_actual" value="{{ old('ubicacion_actual', $paciente->ubicacion_actual) }}"  >
+                                                </div>                                                                  
                                             </div>
+                                            <div class="col-12">
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="comentario">Motivo Consulta </label>
+                                                    <input id="motivo_consulta" type="text" class=" form-control" name="motivo_consulta" value="{{ old('motivo_consulta', $paciente->motivo) }}" placeholder="" disabled >                      
+                                                </div>                                         
+                                            </div>
+                                            <div class="col-12">                              
 
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="comentario">Comentario </label>
+                                                    <textarea id="comentario"  class=" form-control{{ $errors->has('comentario') ? ' is-invalid' : '' }}" name="comentario" value="" placeholder="" rows="3" disabled>{{ old('comentario', $paciente->comentario) }}</textarea>
+
+                                                </div>                                           
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -140,16 +164,29 @@
                          
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="form-group ">
-                                                    <label class="control-label" for="comentario">Motivo Consulta </label>
-                                                    <input id="motivo_consulta" type="text" class=" form-control" name="motivo_consulta" value="{{ old('motivo_consulta', $paciente->motivo) }}" placeholder="" disabled >                      
-                                                </div>                                         
+                                                <div class="form-group">
+                                                  <label for="sel1">Motivo Consulta</label>
+                                                  <select  class="form-control" id="motivo_consulta_profesional" name="motivo_consulta_profesional">
+                                                    <option value="">Seleccione motivo</option>
+                                                    @foreach($motivos_profesional as $motivo)
+                                                    <option value="{{$motivo->id}}" {{ $paciente->motivo_consultas_profesionales_id == $motivo->id ? 'selected' : '' }}>{{$motivo->motivo}}</option>
+                                                    @endforeach
+                                                  </select>
+                                                </div>                                       
                                             </div>
+                                
+                                            <div class="col-12">                              
+
+                                                <div class="form-group otros_profesional">
+                                                    <label class="control-label" for="otros_profesional">Explique brevemente</label>
+                                                    <textarea id="otros_profesional"  class=" form-control{{ $errors->has('otros_profesional') ? ' is-invalid' : '' }}" name="otros_profesional" value="" placeholder=" " rows="3" >{{ old('otros_profesional', $paciente->otros_profesional) }}</textarea>
+                                                </div>         
+                                            </div>   
                                             <div class="col-12">                              
 
                                                 <div class="form-group ">
-                                                    <label class="control-label" for="comentario">Comentario </label>
-                                                    <textarea id="comentario"  class=" form-control{{ $errors->has('comentario') ? ' is-invalid' : '' }}" name="comentario" value="" placeholder="" rows="3" disabled>{{ old('comentario', $paciente->comentario) }}</textarea>
+                                                    <label class="control-label" for="comentario_profesional">Comentario </label>
+                                                    <textarea id="comentario_profesional"  class=" form-control{{ $errors->has('comentario_profesional') ? ' is-invalid' : '' }}" name="comentario_profesional" value="" placeholder="" rows="3" required>{{ old('comentario_profesional', $paciente->comentario_profesional) }}</textarea>
 
                                                 </div>                                           
 
@@ -183,7 +220,7 @@
 
                                                 <div class="form-group ">
                                                     <label class="control-label" for="explicacion">Explicación </label>
-                                                    <textarea id="explicacion"  class=" form-control{{ $errors->has('explicacion') ? ' is-invalid' : '' }}" name="explicacion" value="" placeholder="" rows="3" >{{ old('explicacion') }}</textarea>
+                                                    <textarea id="explicacion"  class=" form-control{{ $errors->has('explicacion') ? ' is-invalid' : '' }}" name="explicacion" value="" placeholder="" rows="3" >{{ old('explicacion', $paciente->explicacion_foco) }}</textarea>
 
                                                 </div>                                           
 
@@ -220,7 +257,7 @@
 
                                                 <div class="form-group ">
                                                     <label class="control-label" for="consideraciones">Consideraciones</label>
-                                                    <textarea id="consideraciones"  class=" form-control{{ $errors->has('consideraciones') ? ' is-invalid' : '' }}" name="consideraciones" value="" placeholder=" " rows="3" required>{{ old('consideraciones') }}</textarea>
+                                                    <textarea id="consideraciones"  class=" form-control{{ $errors->has('consideraciones') ? ' is-invalid' : '' }}" name="consideraciones" value="" placeholder=" " rows="3" required>{{ old('consideraciones', $paciente->consideraciones) }}</textarea>
 
                                                 </div>                                           
 
@@ -234,12 +271,12 @@
                                                         <div class="form-control">
                                                             <div class="form-check-inline">
                                                               <label class="form-check-label">
-                                                                <input type="radio" class="" name="acepta_mesa" required> Sí
+                                                                <input value="true" type="radio" class="" name="acepta_mesa" required {{ $paciente->confirma_mesa_ayuda == '1' ? 'checked' : '' }}> Sí
                                                               </label>
                                                             </div>
                                                             <div class="form-check-inline">
                                                               <label class="form-check-label">
-                                                                <input type="radio" class="" name="acepta_mesa" required> No
+                                                                <input value="false" type="radio" class="" name="acepta_mesa" required {{ $paciente->confirma_mesa_ayuda == '0' ? 'checked' : '' }}> No
                                                               </label>
                                                             </div>
                                                         </div>
@@ -250,6 +287,10 @@
                                                     <div class="form-group ">
                                                         <label class="control-label" for="especialidad">Especialidad *</label>
                                                         <select  class=" form-control{{ $errors->has('especialidad') ? ' is-invalid' : '' }}" name="especialidad">
+                                                        <option value="">Seleccione Especialidad</option>
+                                                        @foreach($especialidades as $especialidad)
+                                                        <option value="{{$especialidad->id}}"  {{ $paciente->especialidad_id == $especialidad->id ? 'selected' : '' }}>{{$especialidad->especialidad}}</option>
+                                                        @endforeach                                                            
                                                     </select>    
                                                     </div>    
                                                 </div> 
@@ -282,14 +323,11 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                   <label for="sel1">Seleccione la condición de cierre de caso</label>
-                                                  <select multiple class="form-control" id="condicion_cierre" style="height: 100%;" size="7.5">
-                                                    <option>Alta Clínica: Cierre del caso por tener logrados los objetivos terapéuticos</option>
-                                                    <option>Abandono: Paciente opta por no recibir la orientación</option>
-                                                    <option>Derivación a GES/AUGE: Se deriva a red para seguir tratamiento por tener un problema de salud GES/AUGE</option>
-                                                    <option>Derivación a Red privada: Se deriva a red privada para seguir tratamiento según la previsión de salud del sujeto</option>
-                                                    <option>Cierre administrativo: No se puede contactar</option>
-                                                    <option>Requiere un 2do llamado de seguimiento</option>
-                                                    <option value="7">Otros</option>
+                                                  <select  class="form-control" id="condicion_cierre" style="height: 100%;" size="7.5">
+              
+                                                    @foreach($condiciones_cierre as $condicion)
+                                                    <option value="{{$condicion->id}}" {{ $paciente->cierre_caso_id == $condicion->id ? 'selected' : '' }}>{{$condicion->condicion}}</option>
+                                                    @endforeach
                                                   </select>
                                                 </div>                                       
                                             </div>
@@ -298,9 +336,22 @@
 
                                                 <div class="form-group otros">
                                                     <label class="control-label" for="otros">Explique brevemente</label>
-                                                    <textarea id="otros"  class=" form-control{{ $errors->has('otros') ? ' is-invalid' : '' }}" name="otros" value="" placeholder=" " rows="3" >{{ old('otros') }}</textarea>
+                                                    <textarea id="otros"  class=" form-control{{ $errors->has('otros') ? ' is-invalid' : '' }}" name="otros" value="" placeholder=" " rows="3" >{{ old('otros', $paciente->otros) }}</textarea>
                                                 </div>         
-                                            </div>         
+                                            </div>   
+                                            <div class="col-12">
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="responsable_cierre">Responsable de cierre *</label>
+
+                                                    <select  class=" form-control{{ $errors->has('responsable_cierre') ? ' is-invalid' : '' }}" id="responsable_cierre" name="responsable_cierre" required>
+                                                        <option value="">Seleccione responsable</option>
+                                                        @foreach($responsables as $responsable)
+                                                        <option value="{{$responsable->id}}" {{ $paciente->responsable_cierre_id == $responsable->id ? 'selected' : '' }}>{{$responsable->responsable}}</option>
+                                                        @endforeach
+                                                    </select>                            
+                                                </div>                                                   
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -334,7 +385,41 @@
 
         $(document).ready(function(){
             $('.otros').hide(500);
+            $('.otros_profesional').hide(500);
+            if ('{{$paciente->cierre_caso_id}}' != '') 
+            {
+                $(':input').prop("disabled", true);
+                $('#registrar').hide();
+            }
         });  
+        $(document).on('change', '#region', function(){
+            var val  = $(this).val();
+
+            $.ajax({
+                data: {'val':val, "_token": "{{ csrf_token() }}"},
+                url:'{{ url('cargar_comunas') }}',
+                type: "POST",
+                dataType: 'json',
+                success: function (response) {
+                $('#comuna').empty();
+                $('#comuna').append('<option value="">Seleccione comuna</option>')
+                $.each(response,function(id, data) {
+
+                        $('#comuna')
+                         .append($("<option></option>")
+                                    .attr("value",id)
+                                    .text(data['comuna'])); 
+        
+            });
+
+              },
+              error: function (data) {
+                console.log('Error:', data);
+                $('#comuna').empty();
+                $('#comuna').append('<option value="">Seleccione región</option>')
+              }
+            });
+        });        
             $("#condicion_cierre").change(function(){
                 var select = $(this).children("option:selected").val();
                 if(select == 7)
@@ -346,6 +431,17 @@
                     $('.otros').hide(500);
                 }
             });
+            $("#motivo_consulta_profesional").change(function(){
+                var select = $(this).children("option:selected").val();
+                if(select == 12)
+                {
+                    $('.otros_profesional').show(500);
+                }
+                else
+                {
+                    $('.otros_profesional').hide(500);
+                }
+            });
             jQuery(document).ready(function(){
                 $('#registrar').click(function(){
                     var collapse_id = null;
@@ -353,13 +449,8 @@
                         if ($(this).is(":invalid")) 
                         {
                            collapse_id = '#'+$(this).parents('.collapse').attr("id");
-                           input_id = '#'+$(this).attr("id");
-                           
-                           
-                        }
-
-                       
-                 
+                           input_id = '#'+$(this).attr("id");                                          
+                        }                 
                     });     
                     
                     $(collapse_id).collapse('show');

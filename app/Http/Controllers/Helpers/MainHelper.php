@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Entities\Consulta;
 use App\Entities\Isapre;
+use App\Entities\Bloque;
+use App\Entities\AgendamientoPaciente;
 use DB;
 use Carbon\Carbon;
 
@@ -44,13 +46,33 @@ class MainHelper extends Controller
             'consultas.fecha_gestionado',
             'consultas.fecha_cerrado',
             'consultas.nombre_emergencia as contacto_emergencia',
-            'consultas.telefono_emergencia as telefono_emergencia'
+            'consultas.telefono_emergencia as telefono_emergencia',
+            'pacientes.sexo',
+            'pacientes.edad',
+            'pacientes.comuna_id',
+            'pacientes.ubicacion_actual',
+            'consultas.explicacion_foco',
+            'consultas.consideraciones',
+            'consultas.confirma_mesa_ayuda',
+            'consultas.especialidad_id',
+            'consultas.cierre_caso_id',
+            'consultas.responsable_cierre_id',
+            'consultas.motivo_consultas_profesionales_id',
+            'consultas.otros_profesional',
+            'consultas.comentario_profesional',
+            DB::raw("(
+            CASE 
+                WHEN registroisapre.ISAPRE = 1 THEN 'Banmedica'
+                ELSE 'Vida tres'
+            END) AS isapre")
 
         )
         ->join('motivo_consultas', 'consultas.motivo_consulta_id', '=', 'motivo_consultas.id')
         ->join('estados_cierres', 'consultas.estado_cierre_id', '=', 'estados_cierres.id')
         ->join('pacientes', 'consultas.paciente_id', '=', 'pacientes.id')
+        ->join('registroisapre', 'pacientes.rut', '=', 'registroisapre.RUT_AFILIADO')
         ->where('consultas.id', $consulta_id)
+        
         ->first();      
 
         return $consulta;  
@@ -69,7 +91,10 @@ class MainHelper extends Controller
         while ( $cont < 7) {
 
             $dia = $actual->isoFormat('dddd');
-            if($dia != 'domingo')
+
+            $feriado = DB::table('feriado')->where('fecha', $actual->toDateString())->count();
+       
+            if($dia != 'domingo'  && $feriado == 0)
             {
                 $array[$cont]['value'] = $actual->toDateString();
                 $array[$cont]['fecha'] = ucfirst($dia).', '.$actual->day.' de '.$actual->isoFormat('MMMM');
@@ -82,47 +107,104 @@ class MainHelper extends Controller
 
     public static function bloques($fecha)
     {
+
         $dia = new Carbon($fecha);  
         $actual = now()->format('Y-m-d');
-        $hora = now()->format('H');
+        $hora = now()->format('Hi');
         $hoy = ($fecha == $actual);
         $cont = 0;
-     
         if($hoy == true)
         {
-
             if($dia->isoFormat('dddd') != 'sábado' || $fecha == null)
             {
+                $bloques = Bloque::where('dias','!=','sábado')->get();
 
-                if($hora < 11){$array[$cont] = "8:00  a 11:00 Hrs (20 cupos restantes)"; $cont++;}
-                if($hora < 14){$array[$cont] = "11:00 a 14:00 Hrs (20 cupos restantes)"; $cont++;}
-                if($hora < 17){$array[$cont] = "14:00 a 17:00 Hrs (20 cupos restantes)"; $cont++;}
-                if($hora < 20){$array[$cont] = "17:00 a 20:00 Hrs (20 cupos restantes)"; $cont++;}
 
+                foreach ($bloques as $bloque) {
+                            $agendamiento_total = AgendamientoPaciente::whereDate('fecha',$dia->toDateString())
+                                ->where('bloque_id',$bloque->id)
+                                ->count();   
+                            $cupos = $bloque->cupos - $agendamiento_total;                                   
+                    if($hora < $bloque->hora_fin - 1 - 1)
+                        {
+                            
+
+                            if($cupos > 0)
+                            {
+                                $array[$bloque->id]['bloque'] = $bloque->bloque;
+                                $array[$bloque->id]['id'] = $bloque->id;
+                                $array[$bloque->id]['tachado'] = false;
+
+                            }
+                        }
+                        else
+                        {
+                                $array[$bloque->id]['bloque'] = $bloque->bloque;
+                                $array[$bloque->id]['id'] = $bloque->id;
+                                $array[$bloque->id]['tachado'] = true;                            
+                        }
+               
+                }
             }
             else
             {
-                if($hora < 14){$array[$cont] = "9:00  a 14:00 Hrs (20 cupos restantes)";}
 
+                $bloques = Bloque::where('dias','sábado')->get();
+                foreach ($bloques as $bloque) {
+                    $hora_fin = new Carbon($bloque->hora_fin);
+                    $agendamiento_total = AgendamientoPaciente::whereDate('fecha',$dia->toDateString())
+                        ->where('bloque_id',$bloque->id)
+                        ->count();                        
+                    if($hora < $bloque->hora_fin - 1){
+                        $cupos = $bloque->cupos - $agendamiento_total;
+                        if($cupos > 0)
+                        {
+                            $array[$bloque->id]['bloque'] = $bloque->bloque;
+                            $array[$bloque->id]['id'] = $bloque->id;
+                            $array[$bloque->id]['tachado'] = false;
+
+                        }
+                    }    
+
+                }
             } 
-   
         }  
         else
         {
 
             if($dia->isoFormat('dddd') != 'sábado' || $fecha == null)
             {
-                
-                $array[1] = "8:00  a 11:00 Hrs (20 cupos restantes)";
-                $array[2] = "11:00 a 14:00 Hrs (20 cupos restantes)";
-                $array[3] = "14:00 a 17:00 Hrs (20 cupos restantes)";
-                $array[4] = "17:00 a 20:00 Hrs (20 cupos restantes)";
+                $bloques = Bloque::where('dias','!=','sábado')->get();
+                foreach ($bloques as $bloque) {
+                    $agendamiento_total = AgendamientoPaciente::whereDate('fecha',$dia->toDateString())
+                        ->where('bloque_id',$bloque->id)
+                        ->count();    
+                    $cupos = $bloque->cupos - $agendamiento_total;
+                    if($cupos > 0)
+                    {
+                        $array[$bloque->id]['bloque'] = $bloque->bloque;
+                        $array[$bloque->id]['id'] = $bloque->id;
+                        $array[$bloque->id]['tachado'] = false;
 
+                    }
+                }
             }
             else
             {
-                $array[1] = "9:00  a 14:00 Hrs (20 cupos restantes)";
+                $bloques = Bloque::where('dias','sábado')->get();
+                foreach ($bloques as $bloque) {
+                    $agendamiento_total = AgendamientoPaciente::whereDate('fecha',$dia->toDateString())
+                        ->where('bloque_id',$bloque->id)
+                        ->count();                           
+                    $cupos = $bloque->cupos - $agendamiento_total; 
+                    if($cupos > 0)
+                    {
+                       $array[$bloque->id]['bloque'] = $bloque->bloque;
+                       $array[$bloque->id]['id'] = $bloque->id;
+                       $array[$bloque->id]['tachado'] = false;
 
+                    }
+                }
             }      
         }  
 

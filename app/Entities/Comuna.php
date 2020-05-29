@@ -4,7 +4,7 @@ namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BloqueHorario extends Model
+class Comuna extends Model
 {
-    //
+    protected $table = 'comunas';
 }

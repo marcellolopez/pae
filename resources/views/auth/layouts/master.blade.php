@@ -37,4 +37,5 @@
 <script src="{{asset('js/regex.js')}}"></script>
 
 @yield('jsScripts')
+@yield('cssCustom')
 @include('assets.terminos_condiciones')

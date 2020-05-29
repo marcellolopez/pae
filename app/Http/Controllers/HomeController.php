@@ -44,8 +44,6 @@ class HomeController extends Controller
 
     }
 
-
-
     public function mi_historial()
     {
         $pacientes = Paciente::with('motivo_consulta')->paginate(10);
@@ -266,12 +264,15 @@ class HomeController extends Controller
             'consultas.fecha_gestionado',
             'consultas.fecha_cerrado',
             'consultas.nombre_emergencia as contacto_emergencia',
-            'consultas.telefono_emergencia as telefono_emergencia'
+            'consultas.telefono_emergencia as telefono_emergencia',
+            DB::raw("CONCAT(DATE_FORMAT(agendamiento_pacientes.fecha, '%d-%m-%Y'),' ',bloques.bloque) AS agendamiento")
 
         )
         ->join('motivo_consultas', 'consultas.motivo_consulta_id', '=', 'motivo_consultas.id')
         ->join('estados_cierres', 'consultas.estado_cierre_id', '=', 'estados_cierres.id')
         ->join('pacientes', 'consultas.paciente_id', '=', 'pacientes.id')
+        ->join('agendamiento_pacientes', 'agendamiento_pacientes.consulta_id', '=', 'consultas.id')
+        ->join('bloques', 'agendamiento_pacientes.bloque_id', '=', 'bloques.id')        
         ->where('consultas.estado_id', $gestion);
         if(Auth::user()->roles[0]->id == 1)
         {
@@ -342,6 +343,7 @@ class HomeController extends Controller
             'pacientes.activo as activo',
             'pacientes.email as email',
             'pacientes.rut as rut',
+            'pacientes.edad as edad',
             'motivo_consultas.motivo as motivo',
             'consultas.motivo_consulta_id as motivo_consulta_id',
             'consultas.comentario as comentario',
@@ -355,12 +357,15 @@ class HomeController extends Controller
             'consultas.fecha_cerrado',
             'consultas.estado_id',
             'consultas.nombre_emergencia as contacto_emergencia',
-            'consultas.telefono_emergencia as telefono_emergencia'
-
+            'consultas.telefono_emergencia as telefono_emergencia',
+            DB::raw('DATE_FORMAT(agendamiento_pacientes.fecha, "%d-%m-%Y") as fecha_agendamiento'),
+            'bloques.bloque'
         )
         ->join('motivo_consultas', 'consultas.motivo_consulta_id', '=', 'motivo_consultas.id')
         ->join('estados_cierres', 'consultas.estado_cierre_id', '=', 'estados_cierres.id')
         ->join('pacientes', 'consultas.paciente_id', '=', 'pacientes.id')
+        ->join('agendamiento_pacientes', 'agendamiento_pacientes.consulta_id', '=', 'consultas.id')
+        ->join('bloques', 'agendamiento_pacientes.bloque_id', '=', 'bloques.id')
         ->where('consultas.id', $request->consulta_id);
 
         $paciente = $consulta->first();  
@@ -391,11 +396,15 @@ class HomeController extends Controller
             'consultas.estado_id',
             'consultas.nombre_emergencia as contacto_emergencia',
             'consultas.telefono_emergencia as telefono_emergencia',
-            'responsables.responsable as nombre_responsable')
+            'responsables.responsable as nombre_responsable',
+            DB::raw('DATE_FORMAT(agendamiento_pacientes.fecha, "%d-%m-%Y") as fecha_agendamiento'),
+            'bloques.bloque')
         ->join('motivo_consultas', 'consultas.motivo_consulta_id', '=', 'motivo_consultas.id')
         ->join('estados_cierres', 'consultas.estado_cierre_id', '=', 'estados_cierres.id')
         ->join('pacientes', 'consultas.paciente_id', '=', 'pacientes.id')
         ->join('responsables', 'consultas.responsable_id', '=', 'responsables.id')
+        ->join('agendamiento_pacientes', 'agendamiento_pacientes.consulta_id', '=', 'consultas.id')
+        ->join('bloques', 'agendamiento_pacientes.bloque_id', '=', 'bloques.id')
         ->where('consultas.id', $request->consulta_id);
         $paciente = $consulta->first();            
 
@@ -403,6 +412,7 @@ class HomeController extends Controller
 
           
         }
+
         return view('assets.detalles',compact('paciente'));
     }
 
